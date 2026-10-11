@@ -1,0 +1,151 @@
+"""Independent validation of phase files and matched observable comparisons."""
+import csv,json,math
+from pathlib import Path
+from cloud_policy import ROOT,verify_audited_sources
+from extension_state import diagnostic_failure,sha
+from refinement_review import fit_local_peak,compare_fitted_local_peaks
+
+def rows(path):
+    with Path(path).open() as f:return list(csv.DictReader(f))
+
+def validate(directory,N,target,log_dt,*,current_driver=True):
+    directory=Path(directory);m=json.loads((directory/"run.json").read_text())
+    if m["source_sha256"]!=verify_audited_sources() or m["parameters"]["N"]!=N:
+        raise ValueError("phase core/grid mismatch")
+    if current_driver and m["driver_sha256"]!=sha(ROOT/"scripts/ns_extension.py"):
+        raise ValueError("phase wrapper mismatch")
+    if m["status"]!="bounded_complete" or m["stop_reason"]!="max_simulated_time" or abs(m["t"]-target)>1e-12:
+        raise ValueError("required phase did not reach its accepted endpoint")
+    ds=rows(directory/"diagnostics.csv");bs=rows(directory/"enstrophy.csv")
+    if not ds or [r["t"] for r in ds]!=[r["t"] for r in bs]:raise ValueError("diagnostic times differ")
+    spectra={}
+    for row in rows(directory/"spectra.csv"):
+        t=round(float(row["t"]),12);k=int(row["shell_k"]);v=float(row["E_shell_mean_density"])
+        if not math.isfinite(v) or v<0 or k in spectra.setdefault(t,{}):raise ValueError("invalid shell")
+        spectra[t][k]=v
+    shells=set(range(int(math.sqrt(3)*(N//2)+.5)+1))
+    if set(spectra)!={round(float(r["t"]),12) for r in ds} or any(set(v)!=shells for v in spectra.values()):
+        raise ValueError("missing full spectra")
+    gate=json.loads((ROOT/"configs/h100_acceptance.json").read_text())
+    E0=m["restart"]["metadata"]["E0"] if m.get("restart") else float(ds[0]["E"])
+    previous=None
+    for row,raw in zip(ds,bs):
+        row={k:float(v) if v!="" else "" for k,v in row.items()}
+        budget={k:float(raw[k]) for k in ("production","grad_omega_sq","dZdt_rhs","residual")}
+        bins=[spectra[round(row["t"],12)][k] for k in sorted(shells)]
+        failure=diagnostic_failure(row,budget,bins,previous,E0,m["parameters"]["nu"],gate)
+        if failure:raise ValueError("independent gate: "+failure)
+        if previous and abs(row["t"]-previous["t"]-log_dt)>1e-11:raise ValueError("missing event")
+        previous=row
+    if current_driver:
+        ip=rows(directory/"interpolated_vorticity.csv")
+        if [r["t"] for r in ip]!=[r["t"] for r in ds]:raise ValueError("missing per-event interpolation")
+        for d,v in zip(ds,ip):
+            if abs(float(d["wmax"])-float(v["sampled_wmax"]))/max(float(d["wmax"]),1e-30)>2e-11:
+                raise ValueError("grid maximum mismatch")
+            if not all(math.isfinite(float(v[k])) for k in v if k not in ("estimator_stable",)):
+                raise ValueError("nonfinite interpolation")
+        for entry in m["checkpoint_history"]:
+            archive=directory/"checkpoint_metadata"/(Path(entry["path"]).name+".json")
+            if sha(archive)!=entry["metadata_sha256"]:raise ValueError("checkpoint metadata missing")
+    for entry in m["checkpoint_history"]:
+        if entry["retained"]:
+            p=directory/entry["path"]
+            # Small snapshots contain metadata but not arrays. Full validation
+            # at the worker/controller backend must additionally hash arrays.
+            if (p/"checkpoint.json").exists() and sha(p/"checkpoint.json")!=entry["metadata_sha256"]:
+                raise ValueError("checkpoint metadata mismatch")
+            for n,h in entry["files"].items():
+                if (p/n).exists() and sha(p/n)!=h:raise ValueError("checkpoint field mismatch")
+    return dict(manifest=m,rows=ds,budgets=bs,spectra=spectra)
+
+def comparison(left,right,start,end,tolerance,*,temporal=False):
+    a={round(float(r["t"]),12):r for r in left["rows"]}
+    b={round(float(r["t"]),12):r for r in right["rows"]}
+    keys=sorted(t for t in a if start-1e-12<=t<=end+1e-12)
+    if keys!=sorted(t for t in b if start-1e-12<=t<=end+1e-12) or not keys or abs(keys[0]-start)>1e-12 or abs(keys[-1]-end)>1e-12:
+        raise ValueError("required matched window incomplete")
+    ba={round(float(r["t"]),12):r for r in left["budgets"]}
+    bb={round(float(r["t"]),12):r for r in right["budgets"]}
+    errors={k:0. for k in ("E","Z","wmax","bkm","net_scaled","spectrum_L1_over_E")}
+    for t in keys:
+        for k in ("E","Z","wmax","bkm"):
+            x,y=float(a[t][k]),float(b[t][k])
+            errors[k]=max(errors[k],abs(x-y)/max(abs(x),abs(y),1e-14))
+        scale=max(abs(float(ba[t]["production"]))+abs(float(ba[t]["viscous_loss"])),
+                  abs(float(bb[t]["production"]))+abs(float(bb[t]["viscous_loss"])),1e-14)
+        errors["net_scaled"]=max(errors["net_scaled"],abs(float(ba[t]["net_production"])-float(bb[t]["net_production"]))/scale)
+        shells=set(left["spectra"][t])|set(right["spectra"][t])
+        se=sum(abs(left["spectra"][t].get(k,0)-right["spectra"][t].get(k,0)) for k in shells)/max(float(a[t]["E"]),float(b[t]["E"]),1e-30)
+        errors["spectrum_L1_over_E"]=max(errors["spectrum_L1_over_E"],se)
+    result=dict(start_t=start,end_t=end,matched_events=len(keys),errors=errors)
+    if temporal:
+        coarse_steps=int(a[keys[-1]]["step"])-int(a[keys[0]]["step"])
+        fine_steps=int(b[keys[-1]]["step"])-int(b[keys[0]]["step"])
+        ratio=fine_steps/max(coarse_steps,1)
+        result.update(effective_step_ratio=ratio,status="passed" if max(errors.values())<=tolerance and ratio>=1.9 else "failed",
+                      scope="local continuation only; inherited prefix time error is common")
+    else:
+        primary=max(errors["Z"],errors["net_scaled"])
+        result.update(status="consistent_at_declared_tolerance" if primary<=tolerance else
+                      "material_discretization_sensitivity" if primary>=.01 else "intermediate_sensitivity",
+                      scope="two-grid observable comparison; no resolution certificate or convergence order")
+    return result
+
+def checkpoint_at(directory,t,require_arrays=True):
+    d=Path(directory);m=json.loads((d/"run.json").read_text())
+    candidates=[e for e in m["checkpoint_history"] if e["retained"] and abs(e["t"]-t)<1e-12]
+    if not candidates:raise ValueError("required checkpoint absent")
+    entry=next((e for e in candidates if e["kind"]=="regular"),candidates[0]);path=d/entry["path"]
+    if sha(path/"checkpoint.json")!=entry["metadata_sha256"] or any((require_arrays or (path/n).exists()) and sha(path/n)!=h for n,h in entry["files"].items()):
+        raise ValueError("checkpoint checksum mismatch")
+    return path
+
+def historical_reference():
+    """Validate the accepted N512 prefix, excluding its first failing event."""
+    d=ROOT/"artifacts/cloud-preparation/2026-10-10/enstrophy_extension_002/results/coarse"
+    m=json.loads((d/"run.json").read_text())
+    if m["source_sha256"]!=verify_audited_sources() or m["status"]!="gate_trip" or abs(m["last_accepted"]["t"]-1.1)>1e-12:
+        raise ValueError("historical accepted N512 prefix does not match reviewed evidence")
+    reference=json.loads((ROOT/"configs/n512_interpolated_peak_reference.json").read_text())
+    if any(sha(d/n)!=h for n,h in reference["historical_small_files_sha256"].items()):
+        raise ValueError("historical accepted evidence hashes changed")
+    ds=[r for r in rows(d/"diagnostics.csv") if float(r["t"])<=1.1+1e-12]
+    bs=[r for r in rows(d/"enstrophy.csv") if float(r["t"])<=1.1+1e-12]
+    spectra={}
+    for r in rows(d/"spectra.csv"):
+        if float(r["t"])<=1.1+1e-12:
+            spectra.setdefault(round(float(r["t"]),12),{})[int(r["shell_k"])]=float(r["E_shell_mean_density"])
+    if len(ds)!=111 or [r["t"] for r in ds]!=[r["t"] for r in bs]:
+        raise ValueError("historical prefix missing events")
+    gate=json.loads((ROOT/"configs/h100_acceptance.json").read_text())
+    previous=None
+    for raw,b in zip(ds,bs):
+        r={k:float(v) if v!="" else "" for k,v in raw.items()}
+        bins=spectra[round(r["t"],12)]
+        if set(bins)!=set(range(int(math.sqrt(3)*256+.5)+1)):
+            raise ValueError("historical full spectra missing")
+        budget={k:float(b[k]) for k in ("production","grad_omega_sq","dZdt_rhs","residual")}
+        failure=diagnostic_failure(r,budget,[bins[k] for k in sorted(bins)],previous,float(ds[0]["E"]),.0005,gate)
+        if failure:raise ValueError("historical accepted prefix gate failed")
+        previous=r
+    return dict(manifest=m,rows=ds,budgets=bs,spectra=spectra)
+
+def matched_peak_comparison(coarse,reference):
+    from spectral_peak import METHOD
+    if reference["status"]!="passed" or reference["method"]!=METHOD or reference["estimator_sha256"]!=sha(ROOT/"scripts/spectral_peak.py"):
+        raise ValueError("predeclared interpolated peak reference mismatch")
+    actual={round(float(r["t"]),12):r for r in rows(Path(coarse)/"interpolated_vorticity.csv")}
+    comparisons=[]
+    for r in reference["checkpoints"]:
+        value=actual.get(round(r["t"],12))
+        if value is None:raise ValueError("matched peak event absent")
+        a,b=r["peak"]["fourier_refined_peak_estimate"],float(value["fourier_refined_peak_estimate"])
+        stable=value["estimator_stable"]=="True" and r["peak"]["estimator_stable"]
+        error=abs(a-b)/max(a,b,1e-30)
+        comparisons.append(dict(t=r["t"],N512=a,N640=b,relative_difference=error,
+             status="inconclusive_estimator" if not stable else "consistent" if error<=.001 else "discretization_sensitive",
+             N512_sampling_bias=r["peak"]["sampling_bias_fraction"],
+             N640_sampling_bias=float(value["sampling_bias_fraction"])))
+    return dict(points=comparisons,tolerance=.001,
+                scope="matched Fourier local peak estimates with declared seed/search checks; not a certified global supremum")

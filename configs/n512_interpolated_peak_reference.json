@@ -1,0 +1,411 @@
+{
+  "source_sha256": {
+    "ns_fast_v3.py": "ab9eebda2750c7be019d3c2f54fe7aa5f2be98a0276a55260e35a81989b34842",
+    "ns_fast_v2.py": "6f01107b931b80231e27336faeae94b51916d91861473f46e85aedbba0bdaf5d"
+  },
+  "method": {
+    "name": "separable Fourier local search",
+    "seeds": 8,
+    "expanded_seeds": 16,
+    "patch_points": 5,
+    "initial_radius_grid_cells": 4,
+    "levels": 9,
+    "stability_tolerance": 1e-05,
+    "scope": "local peak estimate; seed and search sensitivity are not rigorous error bounds"
+  },
+  "estimator_sha256": "e29ad95b72cafc45b9dd0948758ccdea042c3c00c5227e7c20fbdf4f3dbbacff",
+  "torch": "2.13.0+cu130",
+  "cuda": "13.0",
+  "scope": "Fourier local peak estimates at accepted matched checkpoints only; no historical t=.89 field exists",
+  "checkpoints": [
+    {
+      "t": 1.0,
+      "checkpoint_metadata_sha256": "9b386c3265edbfdcf6826db2de15ae1a3a3fd546f76dace16cd87ab621ffe4d2",
+      "component_sha256": {
+        "U0.npy": "e0359c038aaceeb370c8d549a088c144a8e79a4b542e6e2aabb189ea52a69645",
+        "U1.npy": "54916e930160c88552b0be5f6b07d6c4dda2e6e4196d8a44b0698c6f86f96360",
+        "U2.npy": "7a4b8def6bb9484ecf54aac0a19a252262a15da61e06d99a3c83fb1363954dd6"
+      },
+      "peak": {
+        "sampled_wmax": 88.91257100922576,
+        "fourier_refined_peak_estimate": 89.74488311828893,
+        "sampling_bias_fraction": 0.009274201270797044,
+        "location": [
+          2.8403571763687503,
+          3.141592653589793,
+          4.4090442795803035
+        ],
+        "seed_expansion_relative_change": 0.0,
+        "last_level_relative_increment": 0.0,
+        "estimator_stable": true,
+        "method": {
+          "name": "separable Fourier local search",
+          "seeds": 8,
+          "expanded_seeds": 16,
+          "patch_points": 5,
+          "initial_radius_grid_cells": 4,
+          "levels": 9,
+          "stability_tolerance": 1e-05,
+          "scope": "local peak estimate; seed and search sensitivity are not rigorous error bounds"
+        },
+        "candidates": [
+          {
+            "value": 89.52053756857602,
+            "location": [
+              2.84237052615285,
+              3.1908717864006193,
+              4.406743308398476
+            ],
+            "last_level_relative_increment": 2.236268833336601e-05
+          },
+          {
+            "value": 89.52053756857592,
+            "location": [
+              2.84237052615285,
+              3.092313520778967,
+              4.406743308398476
+            ],
+            "last_level_relative_increment": 2.2362688332413573e-05
+          },
+          {
+            "value": 89.52053756857592,
+            "location": [
+              0.2992221274369429,
+              3.1908717864006193,
+              4.406743308398476
+            ],
+            "last_level_relative_increment": 2.2362688332889805e-05
+          },
+          {
+            "value": 89.52053756857595,
+            "location": [
+              0.2992221274369429,
+              3.092313520778967,
+              4.406743308398476
+            ],
+            "last_level_relative_increment": 2.2362688333048543e-05
+          },
+          {
+            "value": 89.74488311828893,
+            "location": [
+              2.8403571763687503,
+              3.141592653589793,
+              4.4090442795803035
+            ],
+            "last_level_relative_increment": 0.0
+          },
+          {
+            "value": 89.74488311828881,
+            "location": [
+              0.3012354772210429,
+              3.141592653589793,
+              4.4090442795803035
+            ],
+            "last_level_relative_increment": 0.0
+          },
+          {
+            "value": 89.07561919724708,
+            "location": [
+              0.29519542786874314,
+              3.0554979818697117,
+              4.4019496184363325
+            ],
+            "last_level_relative_increment": 3.375083845648266e-05
+          },
+          {
+            "value": 89.07561919724711,
+            "location": [
+              0.29519542786874314,
+              3.2276873253098746,
+              4.4019496184363325
+            ],
+            "last_level_relative_increment": 3.3750838456323116e-05
+          },
+          {
+            "value": 89.07561919724705,
+            "location": [
+              2.84639722572105,
+              3.0554979818697117,
+              4.4019496184363325
+            ],
+            "last_level_relative_increment": 3.375083845584452e-05
+          },
+          {
+            "value": 89.07561919724711,
+            "location": [
+              2.84639722572105,
+              3.2276873253098746,
+              4.4019496184363325
+            ],
+            "last_level_relative_increment": 3.375083845664219e-05
+          },
+          {
+            "value": 87.40847405870711,
+            "location": [
+              0.28148547457701517,
+              3.2951824799768428,
+              4.386034567762021
+            ],
+            "last_level_relative_increment": 6.849480033944324e-05
+          },
+          {
+            "value": 87.40847405870704,
+            "location": [
+              2.860107179012778,
+              3.2951824799768428,
+              4.386034567762021
+            ],
+            "last_level_relative_increment": 6.849480034074394e-05
+          },
+          {
+            "value": 87.40847405870714,
+            "location": [
+              0.28148547457701517,
+              2.9880028272027435,
+              4.386034567762021
+            ],
+            "last_level_relative_increment": 6.849480034188192e-05
+          },
+          {
+            "value": 87.40847405870697,
+            "location": [
+              2.860107179012778,
+              2.9880028272027435,
+              4.386034567762021
+            ],
+            "last_level_relative_increment": 6.849480034155689e-05
+          },
+          {
+            "value": 84.77170785063406,
+            "location": [
+              0.29586654446344307,
+              3.358075692280154,
+              4.3574641755876495
+            ],
+            "last_level_relative_increment": 3.2666649849458114e-06
+          },
+          {
+            "value": 84.77170785063404,
+            "location": [
+              2.84572610912635,
+              3.358075692280154,
+              4.3574641755876495
+            ],
+            "last_level_relative_increment": 3.266664986286906e-06
+          }
+        ]
+      },
+      "memory": {
+        "peak_allocated_GB": 8.14770432,
+        "peak_reserved_GB": 8.160018432,
+        "free_GB": 24.13297664,
+        "total_GB": 34.19045888,
+        "gpu": "NVIDIA GeForce RTX 5090"
+      },
+      "wall_s": 10.423981606960297,
+      "driver": {
+        "peak_driver_used_fraction": 0.4149722452234183,
+        "sampling_interval_s": 0.25,
+        "limitation": "periodic samples do not bound transients between samples"
+      }
+    },
+    {
+      "t": 1.1,
+      "checkpoint_metadata_sha256": "ae473fab7d2f657255a669e0048bd936de3b7ee26f96925dfc9fc290ee0e61d0",
+      "component_sha256": {
+        "U0.npy": "edc8d35099e671bf4fcb68e0335a08ae70617ed0838afff5f8fa76b84f43ed84",
+        "U1.npy": "ba7afdfdaef08e6497a51afe6e2acb85483fbc821d67e3a798f3bac47695f8cd",
+        "U2.npy": "9d7ac6329aa71f07ed69a3220134396aad57e96e81486b5d015a00fe220e5b3e"
+      },
+      "peak": {
+        "sampled_wmax": 80.6377163476747,
+        "fourier_refined_peak_estimate": 80.75851307043025,
+        "sampling_bias_fraction": 0.0014957769548110567,
+        "location": [
+          2.878802569865134,
+          3.2808014100904144,
+          4.480086764819258
+        ],
+        "seed_expansion_relative_change": 0.0,
+        "last_level_relative_increment": 2.237627950353095e-06,
+        "estimator_stable": true,
+        "method": {
+          "name": "separable Fourier local search",
+          "seeds": 8,
+          "expanded_seeds": 16,
+          "patch_points": 5,
+          "initial_radius_grid_cells": 4,
+          "levels": 9,
+          "stability_tolerance": 1e-05,
+          "scope": "local peak estimate; seed and search sensitivity are not rigorous error bounds"
+        },
+        "candidates": [
+          {
+            "value": 80.75851307043025,
+            "location": [
+              2.878802569865134,
+              3.2808014100904144,
+              4.480086764819258
+            ],
+            "last_level_relative_increment": 2.237627950353095e-06
+          },
+          {
+            "value": 80.7585130704302,
+            "location": [
+              2.878802569865134,
+              3.002383897089172,
+              4.480086764819258
+            ],
+            "last_level_relative_increment": 2.2376279512329326e-06
+          },
+          {
+            "value": 80.75851307043021,
+            "location": [
+              0.2627900837246589,
+              3.2808014100904144,
+              4.480086764819258
+            ],
+            "last_level_relative_increment": 2.2376279508809976e-06
+          },
+          {
+            "value": 80.75851307043018,
+            "location": [
+              0.2627900837246589,
+              3.002383897089172,
+              4.480086764819258
+            ],
+            "last_level_relative_increment": 2.2376279501771293e-06
+          },
+          {
+            "value": 80.59022210563026,
+            "location": [
+              0.27324032784212976,
+              3.0558814770666825,
+              4.489961766141271
+            ],
+            "last_level_relative_increment": 8.711737192126713e-06
+          },
+          {
+            "value": 80.59022210563023,
+            "location": [
+              0.27324032784212976,
+              3.227303830112904,
+              4.489961766141271
+            ],
+            "last_level_relative_increment": 8.711737191950381e-06
+          },
+          {
+            "value": 80.59022210563018,
+            "location": [
+              2.868352325747663,
+              3.0558814770666825,
+              4.489961766141271
+            ],
+            "last_level_relative_increment": 8.711737191421384e-06
+          },
+          {
+            "value": 80.59022210563015,
+            "location": [
+              2.868352325747663,
+              3.227303830112904,
+              4.489961766141271
+            ],
+            "last_level_relative_increment": 8.711737192479394e-06
+          },
+          {
+            "value": 80.56616735484717,
+            "location": [
+              0.24409469287230262,
+              3.338133942037641,
+              4.463404723751001
+            ],
+            "last_level_relative_increment": 6.678452510282318e-06
+          },
+          {
+            "value": 80.56616735484715,
+            "location": [
+              0.24409469287230262,
+              2.9450513651419454,
+              4.463404723751001
+            ],
+            "last_level_relative_increment": 6.678452510635095e-06
+          },
+          {
+            "value": 80.56616735484727,
+            "location": [
+              2.89749796071749,
+              2.9450513651419454,
+              4.463404723751001
+            ],
+            "last_level_relative_increment": 6.678452511164247e-06
+          },
+          {
+            "value": 80.56616735484725,
+            "location": [
+              2.89749796071749,
+              3.338133942037641,
+              4.463404723751001
+            ],
+            "last_level_relative_increment": 6.6784525101059236e-06
+          },
+          {
+            "value": 80.46303328981224,
+            "location": [
+              0.2785133868004867,
+              3.1797504256884483,
+              4.494563708504928
+            ],
+            "last_level_relative_increment": 2.899735979221743e-06
+          },
+          {
+            "value": 80.46303328981209,
+            "location": [
+              0.2785133868004867,
+              3.103434881491138,
+              4.494563708504928
+            ],
+            "last_level_relative_increment": 2.899735978868522e-06
+          },
+          {
+            "value": 80.46303328981188,
+            "location": [
+              2.863079266789307,
+              3.1797504256884483,
+              4.494563708504928
+            ],
+            "last_level_relative_increment": 2.8997359765725545e-06
+          },
+          {
+            "value": 80.46303328981205,
+            "location": [
+              2.863079266789307,
+              3.103434881491138,
+              4.494563708504928
+            ],
+            "last_level_relative_increment": 2.8997359801048174e-06
+          }
+        ]
+      },
+      "memory": {
+        "peak_allocated_GB": 8.181258752,
+        "peak_reserved_GB": 8.201961472,
+        "free_GB": 24.0910336,
+        "total_GB": 34.19045888,
+        "gpu": "NVIDIA GeForce RTX 5090"
+      },
+      "wall_s": 8.92007473798003,
+      "driver": {
+        "peak_driver_used_fraction": 0.4161989756800687,
+        "sampling_interval_s": 0.25,
+        "limitation": "periodic samples do not bound transients between samples"
+      }
+    }
+  ],
+  "status": "passed",
+  "historical_small_files_sha256": {
+    "diagnostics.csv": "0d4ec78b5d14ef0e13725632c894148b03f8062702e18d4342d6be1da3f06d0c",
+    "enstrophy.csv": "6b8b28fa9bd23073ef85aa275e40a3467dc0a6732f19f078fa1d334b8938dc1b",
+    "spectra.csv": "bf2f56e8d9799aa966d615ce0587f3ffd29b7872b869c3660fd3ca700047c1c5",
+    "run.json": "2dddec18a0254cb36996eb6f6d6a68c1fb63f07b1b8e5a4f32d8190c0ca0c4a0"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "project": "SpectraNS-3D",
+  "currency": "USD",
+  "total_ceiling_usd": 30,
+  "prior_spend_usd": 0,
+  "reported_prior_spend_approx_usd": 0,
+  "reported_credit_balance_usd": 0,
+  "verified_prior_spend": false,
+  "verified_as_of_utc": null,
+  "evidence": [],
+  "pending_charges_upper_bound_usd": 0,
+  "other_committed_project_spend_usd": 0,
+  "project_instance_ids": [],
+  "project_instance_list_complete": false,
+  "proposed_smoke_all_in_cap_usd": 1.5,
+  "new_billable_instances_authorized": false,
+  "notes": [
+    "Copy this template to ignored configs/project_budget.json for your own campaign. Record exact project attribution and fresh provider billing; credit/top-ups are not expenditure. Template does not authorize execution."
+  ],
+  "autonomous_authorization": {
+    "authorized": false,
+    "exclusive_additional_cap_usd": 0,
+    "total_project_ceiling_usd": 30,
+    "user_instruction": "No authorization supplied."
+  }
+}

@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spectrans-3d"
+version = "0.1.0"
+description = "Validation-first pseudo-spectral 3D incompressible Navier-Stokes experiments"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["torch==2.13.0", "numpy==2.5.1"]
+
+[project.optional-dependencies]
+test = ["pytest==9.1.1"]
+
+[project.scripts]
+spectrans-3d = "ns_fast_v3:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+py-modules = ["ns_fast_v2", "ns_fast_v3", "analyze_runs"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "scripts"]

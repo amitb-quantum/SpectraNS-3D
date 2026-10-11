@@ -1,0 +1,64 @@
+# Local environments and Python build/cache files
+.conda/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+
+# Raw user archives / historical metadata and generated run artifacts
+/data/original/
+/artifacts/*
+!/artifacts/README.md
+*.npz
+*.log
+
+# Local credentials / editor state
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+
+# Research fields, source bundles and interrupted transfer files
+*.npy
+*.pt
+*.pth
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.part
+*.tmp
+.ssh/
+.config/
+
+# The live spending ledger contains account-specific financial history.
+/configs/project_budget.json
+
+# Four exact small historical inputs are required by clean-clone tests.
+!/artifacts/cloud-preparation/
+/artifacts/cloud-preparation/*
+!/artifacts/cloud-preparation/2026-10-10/
+/artifacts/cloud-preparation/2026-10-10/*
+!/artifacts/cloud-preparation/2026-10-10/enstrophy_extension_002/
+/artifacts/cloud-preparation/2026-10-10/enstrophy_extension_002/*
+!/artifacts/cloud-preparation/2026-10-10/enstrophy_extension_002/results/
+/artifacts/cloud-preparation/2026-10-10/enstrophy_extension_002/results/*
+!/artifacts/cloud-preparation/2026-10-10/enstrophy_extension_002/results/coarse/
+/artifacts/cloud-preparation/2026-10-10/enstrophy_extension_002/results/coarse/*
+!/artifacts/cloud-preparation/2026-10-10/enstrophy_extension_002/results/coarse/diagnostics.csv
+!/artifacts/cloud-preparation/2026-10-10/enstrophy_extension_002/results/coarse/enstrophy.csv
+!/artifacts/cloud-preparation/2026-10-10/enstrophy_extension_002/results/coarse/spectra.csv
+!/artifacts/cloud-preparation/2026-10-10/enstrophy_extension_002/results/coarse/run.json

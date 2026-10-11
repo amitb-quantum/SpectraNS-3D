@@ -1,0 +1,250 @@
+{
+  "status": "gate_trip",
+  "start_t": 0.0,
+  "t": 1.11,
+  "steps": 2281,
+  "initial_step": 0,
+  "source_sha256": {
+    "ns_fast_v3.py": "ab9eebda2750c7be019d3c2f54fe7aa5f2be98a0276a55260e35a81989b34842",
+    "ns_fast_v2.py": "6f01107b931b80231e27336faeae94b51916d91861473f46e85aedbba0bdaf5d"
+  },
+  "driver_sha256": "961d3575492480ec778fb6e6b44613af1caa746d02d486c852cbfb5c84b22734",
+  "parameters": {
+    "N": 512,
+    "nu": 0.0005,
+    "device": "cuda:0",
+    "case": "tubes",
+    "scheme": "lsrk4",
+    "fp64": true,
+    "cfl": 0.2,
+    "max_dt": 0.0005,
+    "target_t": 3.0,
+    "log_dt": 0.01,
+    "checkpoint_dt": 0.1,
+    "checkpoint_enabled": true,
+    "turnover_enabled": true,
+    "high_shell_min_k": 128
+  },
+  "restart": null,
+  "torch": "2.13.0+cu130",
+  "cuda": "13.0",
+  "numpy": "2.5.1",
+  "python": "3.12.13 | packaged by conda-forge | (main, Mar  5 2026, 16:50:00) [GCC 14.3.0]",
+  "physical_conventions": {
+    "domain": 6.283185307179586,
+    "dealias": "strict spherical |k|<N/3",
+    "initial_tubes": {
+      "gamma": 5.0,
+      "a": 0.25,
+      "sep": 0.6,
+      "pert": 0.35
+    }
+  },
+  "last_accepted": {
+    "step": 2260,
+    "t": 1.1,
+    "dt": 1.1102230246251565e-15,
+    "E": 0.06493446733460245,
+    "Z": 1.9485521793944034,
+    "eps": 0.0019485521793944035,
+    "dEdt_fd": -0.0019398709769219407,
+    "budget_resid_rel": -1.5840822391160919e-06,
+    "wmax": 80.6377163476747,
+    "bkm": 63.29017763174779,
+    "tail_ratio": 9.365160241563829e-07,
+    "div_max": 2.316898453435922e-14,
+    "wall_s": 1499.4606421408243,
+    "peak_mem_GB": 23.201061376
+  },
+  "turnover": null,
+  "stop_reason": "tail_ratio",
+  "failing_sample": {
+    "step": 2281,
+    "t": 1.11,
+    "dt": 1.1102230246251565e-15,
+    "E": 0.06491489518355846,
+    "Z": 1.965865680106891,
+    "eps": 0.001965865680106891,
+    "dEdt_fd": -0.001957215104399222,
+    "budget_resid_rel": -3.154823422630949e-06,
+    "wmax": 79.50399461217036,
+    "bkm": 64.09088618654701,
+    "tail_ratio": 1.0173452870273713e-06,
+    "div_max": 2.3459888534058287e-14,
+    "wall_s": 1522.213750084862,
+    "peak_mem_GB": 23.201061376
+  },
+  "terminal_checkpoint": {
+    "path": "checkpoints/terminal_t1.11000000",
+    "kind": "terminal",
+    "t": 1.11,
+    "retained": true,
+    "metadata_sha256": "bc5244b4d6048d03533fddff82d3986d63048732f4b35e1ddd0c2b7a4b982194",
+    "files": {
+      "U0.npy": "555f2b9dc2e708d007181ec845626229a4aa8dd087e18405d526b951bae815b2",
+      "U1.npy": "cdd8facf3cd51c47bd6bddadb99a17e91a2c6bf8d73d0000221376033329a30e",
+      "U2.npy": "156d9e6f75ab8bb46da079f4399dcef01960b61c369f4c6a424f8d62625f40f1"
+    }
+  },
+  "wall_s": 1531.7038247357123,
+  "memory": {
+    "peak_allocated_GB": 23.201061376,
+    "peak_reserved_GB": 24.308088832,
+    "free_GB": 60.05424128,
+    "total_GB": 85.019590656,
+    "gpu": "NVIDIA H100 80GB HBM3"
+  },
+  "checkpoint_history": [
+    {
+      "path": "checkpoints/regular_t0.10000000",
+      "kind": "regular",
+      "t": 0.1,
+      "retained": false,
+      "metadata_sha256": "f033b9f1ebd6dac427730c8189d5fc5ccd92ffc49051bd7a2a4b535f1731f283",
+      "files": {
+        "U0.npy": "9390cad9ec0e171f5b83a30fdad5d1ac34d055b6c1ce1ac25dcf9ab69f2a6eee",
+        "U1.npy": "9656d8ed369a2552adfeba9173e6b807d992cdddef0579039718bfd95e9120f8",
+        "U2.npy": "0d5851233824b8bcfa08f5dd793ac7761d7fce5f1f01e0820b421169c73a9224"
+      }
+    },
+    {
+      "path": "checkpoints/regular_t0.20000000",
+      "kind": "regular",
+      "t": 0.2,
+      "retained": false,
+      "metadata_sha256": "385b9bfaf5cab47972d88f96a46dc95222c965b8f3f7bcbdf24fa7dbfb51293f",
+      "files": {
+        "U0.npy": "9df780558ba53ecd84c27ca3b89ea7d75eccf16ae3cb202056be40f8af79c4e5",
+        "U1.npy": "09b90c6ec3f28edf178d0f401166e8df51d330da4003cafd59567ae547ced66b",
+        "U2.npy": "766560cdb036c092dd70071b9aec0b75f4573fb4d7baa0199c95b8dcc29cdd63"
+      }
+    },
+    {
+      "path": "checkpoints/regular_t0.30000000",
+      "kind": "regular",
+      "t": 0.3,
+      "retained": false,
+      "metadata_sha256": "a7c3a410daa9438086c48f2a78ccde1a771ac2671488393a48f4e298d7aa7e1f",
+      "files": {
+        "U0.npy": "464840f91e535d86c2c5f95ddb08ab94c1adca0888ac1de7806a018b62e0aed5",
+        "U1.npy": "9c3a5045504024a1767edeb01e169e3498c30046317be872262890de4bc002d9",
+        "U2.npy": "488189bd4bdcc610c732feebaf577635c8050df0835afff452d346f36e2d9abe"
+      }
+    },
+    {
+      "path": "checkpoints/regular_t0.40000000",
+      "kind": "regular",
+      "t": 0.4,
+      "retained": false,
+      "metadata_sha256": "4533a73761d6c58c2527214d3f78f1ef14aea9144c5ef436f8f1791d47755524",
+      "files": {
+        "U0.npy": "ba7554570e34beb2171352c24e1fdfda0d5998c4fcb3f531d036bce786e058f1",
+        "U1.npy": "5c64735a309adc2dea3e6f461f45b6dd233c6f9305a4bba045a13d2be9aa8812",
+        "U2.npy": "2e96b9935cfc5b7f40d43036c579f09ed389d0af970e04ec269d1842980c9be9"
+      }
+    },
+    {
+      "path": "checkpoints/regular_t0.50000000",
+      "kind": "regular",
+      "t": 0.5,
+      "retained": false,
+      "metadata_sha256": "bf146237d5fc04bf2b4c420cef1b4f85a277c4eda380e8611feef03d68a02460",
+      "files": {
+        "U0.npy": "cf30c7d85b7a71534cb1db0f4596606447f8963294f1fd27a9c2d1c76164514b",
+        "U1.npy": "b4fdb26a50bf3ae4c6b8aa2b0f522d313f1ed0083ef25fe52808bf75a3472ce7",
+        "U2.npy": "78845c93f7049b422737a169556f30a4f338ffe345e6be4a0618f1d054b601e5"
+      }
+    },
+    {
+      "path": "checkpoints/regular_t0.60000000",
+      "kind": "regular",
+      "t": 0.6,
+      "retained": false,
+      "metadata_sha256": "af81765591534d96efb3a27571891e5cb386e6b278a3686e7783703ac0fdf873",
+      "files": {
+        "U0.npy": "55f6ea963d4f90a688a9c2d94bf981427afd99ce92af03bd3b76178ee91604f3",
+        "U1.npy": "a2e5236583f8ec707589b75e2830f92aaf46747d9f2fef426413c8a19ae6bd88",
+        "U2.npy": "b22273c2012a23e1f9701319715649d2bd09df7a207cd7e376418922d7b3b5d1"
+      }
+    },
+    {
+      "path": "checkpoints/regular_t0.70000000",
+      "kind": "regular",
+      "t": 0.7000000000000001,
+      "retained": false,
+      "metadata_sha256": "c5d2d2fb29e5104d6af628ebfbb35375d09e4fa93389315acd242ca4996101ba",
+      "files": {
+        "U0.npy": "ee1d45c3bbe7ad8fc8a5a864cafd57453dc0eec179be3305806b17e06396198b",
+        "U1.npy": "46862acc8ceb58a7eb6a3d7d94a409583b2884c4f81088092d9db4a77595d3d5",
+        "U2.npy": "2dded094d6303849d28a41218909470a3e6cb958642f6acdcb31dc8279444d73"
+      }
+    },
+    {
+      "path": "checkpoints/regular_t0.80000000",
+      "kind": "regular",
+      "t": 0.8,
+      "retained": false,
+      "metadata_sha256": "cd88b67ef23112d4fd18d84070538b08fdf7c104053da9c4afae9edc2aac1c55",
+      "files": {
+        "U0.npy": "21a4694f1c7f7fc9b9e72606f7d03a0c49ab457dc309fcf02423a64846bc3bda",
+        "U1.npy": "6e612f68d6c31569f969cac4f93072b91b40a7589528cd5588b557930d29c18b",
+        "U2.npy": "a7b4244f662514fb12118326b76ac8270e9be0732c6fbd9c5dbfcea65c968525"
+      }
+    },
+    {
+      "path": "checkpoints/regular_t0.90000000",
+      "kind": "regular",
+      "t": 0.9,
+      "retained": false,
+      "metadata_sha256": "b2427496e8500f591758b45e526d2d4affdc8c58ca064c112fb3f076b3fad690",
+      "files": {
+        "U0.npy": "c9651a9f1b81d1f7fed5591ef5f353bd24905d02ea1ae908697fd51363780f70",
+        "U1.npy": "6775ae18951d94e735daec0356a0713e2a2d74df1c869560cf6ff863a3f733e0",
+        "U2.npy": "51b65511e4bf24eef9c8670ee53163fd88a83d54bc8dc8feb803784cd8295a12"
+      }
+    },
+    {
+      "path": "checkpoints/regular_t1.00000000",
+      "kind": "regular",
+      "t": 1.0,
+      "retained": true,
+      "metadata_sha256": "9b386c3265edbfdcf6826db2de15ae1a3a3fd546f76dace16cd87ab621ffe4d2",
+      "files": {
+        "U0.npy": "e0359c038aaceeb370c8d549a088c144a8e79a4b542e6e2aabb189ea52a69645",
+        "U1.npy": "54916e930160c88552b0be5f6b07d6c4dda2e6e4196d8a44b0698c6f86f96360",
+        "U2.npy": "7a4b8def6bb9484ecf54aac0a19a252262a15da61e06d99a3c83fb1363954dd6"
+      }
+    },
+    {
+      "path": "checkpoints/regular_t1.10000000",
+      "kind": "regular",
+      "t": 1.1,
+      "retained": true,
+      "metadata_sha256": "ae473fab7d2f657255a669e0048bd936de3b7ee26f96925dfc9fc290ee0e61d0",
+      "files": {
+        "U0.npy": "edc8d35099e671bf4fcb68e0335a08ae70617ed0838afff5f8fa76b84f43ed84",
+        "U1.npy": "ba7afdfdaef08e6497a51afe6e2acb85483fbc821d67e3a798f3bac47695f8cd",
+        "U2.npy": "9d7ac6329aa71f07ed69a3220134396aad57e96e81486b5d015a00fe220e5b3e"
+      }
+    },
+    {
+      "path": "checkpoints/terminal_t1.11000000",
+      "kind": "terminal",
+      "t": 1.11,
+      "retained": true,
+      "metadata_sha256": "bc5244b4d6048d03533fddff82d3986d63048732f4b35e1ddd0c2b7a4b982194",
+      "files": {
+        "U0.npy": "555f2b9dc2e708d007181ec845626229a4aa8dd087e18405d526b951bae815b2",
+        "U1.npy": "cdd8facf3cd51c47bd6bddadb99a17e91a2c6bf8d73d0000221376033329a30e",
+        "U2.npy": "156d9e6f75ab8bb46da079f4399dcef01960b61c369f4c6a424f8d62625f40f1"
+      }
+    }
+  ],
+  "achieved_steps": 2281,
+  "dt_statistics": {
+    "min": 9.992007221626409e-16,
+    "max": 0.0005,
+    "cfl_limited_steps": 0,
+    "event_limited_steps": 61
+  }
+}

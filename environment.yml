@@ -1,0 +1,11 @@
+name: spectrans-3d
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.12.13
+  - pip=26.1.2
+  - setuptools=83.0.0
+  - wheel=0.47.0
+  - pip:
+      - -r requirements-linux-64.lock

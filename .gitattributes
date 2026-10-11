@@ -1,0 +1,15 @@
+* text=auto eol=lf
+*.py text eol=lf
+*.sh text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.csv text eol=lf
+*.zip binary
+*.tgz binary
+*.npz binary
+
+
+# Exact historical bytes are bound to their recorded SHA256 values.
+artifacts/cloud-preparation/2026-10-10/enstrophy_extension_002/results/coarse/*.csv -text
+configs/original_manifest.json -text
+tests/fixtures/ns_fast_original.py -text

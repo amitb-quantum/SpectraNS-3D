@@ -1,0 +1,17 @@
+{
+  "cloud_authorized": false,
+  "additional_spend_authorized_usd": 0,
+  "historical_total_ceiling_usd": 30,
+  "prior_spend_exact_usd": null,
+  "planning_rate_usd_per_hour": 2,
+  "rate_and_remaining_budget_must_be_confirmed": true,
+  "stages": [
+    {"rank": 0, "question": "Are supplied artifacts and numerical identities reproducible locally?", "action": "validate_v3.sh; optional local N32/N64 CUDA checks", "resource": "Existing CPU and local GPU", "additional_cloud_cost_usd": 0, "gate": "All tests pass, original hashes unchanged, independent NumPy RHS agrees, expected RK orders, CPU/GPU comparisons in tolerance"},
+    {"rank": 1, "question": "Does the same implementation work on the target H100 runtime?", "action": "launch_h100_smoke.py plan; execute only after actual approval", "resource": "One already provisioned H100; N128 then N256; t=0.05; two ICs and schemes", "proposed_additional_cost_ceiling_usd": 1, "gate": "All tests pass; scalar scheme relative errors <=5e-4; Parseval relative error <=2e-6; divergence <=1e-4; tail <=1e-6; finite diagnostics; no watchdog failures", "status": "not executed"},
+    {"rank": 2, "question": "Does the nu=2.5e-4 tube peak converge in grid and time?", "action": "Recover missing N768 data if possible; otherwise run same-source N512/N768 and halve dt independently at each grid, sample identical times", "resource": "H100; historical N512 ~122 seconds; N768 log ~0.717 seconds per step, full duration unverified", "proposed_additional_cost_ceiling_usd": 3, "gate": "Predeclare peak-window [0,1]; timestep effect <0.5% and grid difference <2% for E,Z,wmax as a screening target; tails <=1e-6; investigate failures, do not fit", "status": "requires approval and H100 smoke pass"},
+    {"rank": 3, "question": "Is N1024 memory headroom credible for the exact configuration?", "action": "N768 LSRK4 at least 5 steps with every requested output exercised; retain v3 manifest", "resource": "H100; current v3 memory unknown; old SSPRK3 peak was 33.8 GB", "proposed_additional_cost_ceiling_usd": 1, "gate": "Same source, GPU model, runtime, scheme, precision, IC and diagnostic configuration; scaled maximum allocated/reserved peak <=80% of current total AND free memory", "status": "not executed"},
+    {"rank": 4, "question": "Does a justified high-resolution run reduce the remaining grid error?", "action": "N1024 only after stage 2/3 evidence and explicit separate go decision", "resource": "H100; historical original N1024 took ~2261 seconds and ~80.09 GB allocated; this is NOT a v3 memory reference", "proposed_additional_cost_ceiling_usd": 3, "gate": "Budget confirmed, v3 memory preflight passes, short smoke then matched-time comparison; no weakening of memory threshold", "status": "conditional, not executed"},
+    {"rank": 5, "question": "Is a physical viscosity-scaling fit justified?", "action": "Only consider after >=3 distinct viscosities pass independent grid/time convergence and matched sampling checks", "resource": "CPU analysis", "additional_cloud_cost_usd": 0, "gate": "Report fit uncertainty and window sensitivity; never infer regularity or reconnection from finite sampled maxima", "status": "withheld"}
+  ],
+  "termination": "No cloud instance created in this task. Any future operator must verify provider-side termination; a subprocess exit is not instance shutdown."
+}

@@ -1,0 +1,20 @@
+{
+  "compute_status": "passed",
+  "reference_status": "passed",
+  "termination_verified": true,
+  "artifact_manifest_verified": true,
+  "source_sha256": {
+    "ns_fast_v3.py": "ab9eebda2750c7be019d3c2f54fe7aa5f2be98a0276a55260e35a81989b34842",
+    "ns_fast_v2.py": "6f01107b931b80231e27336faeae94b51916d91861473f46e85aedbba0bdaf5d"
+  },
+  "completed_runs": 8,
+  "reference_checks": 8,
+  "tests_passed": 76,
+  "previous_instance_id": 55275939,
+  "previous_campaign_sha256": "011d168022446cf5aa23d87a36a7a7d4274b1d79a091b3c3d2ee823f4e90068f",
+  "previous_reference_sha256": "50d4d637ba793700a0bf43accb63c8eab63f1cf583cab937ad9be15035886e57",
+  "artifact_inventory_sha256": "8b21a983a8576841fbe7c2eb64e15dc32508d6020241c587d55cfd6f76af0f82",
+  "previous_controller_sha256": "2839389ad5ca5427a3958e2cee08f2aa4989eccd5a53c897cc03af4b62fd857e",
+  "verified_files": 52,
+  "acceptance_sha256": "da9b6c0bd8bc4515aaf60a16d58a658ef133edd71420ae4c7e3ff74bfe6e04f1"
+}

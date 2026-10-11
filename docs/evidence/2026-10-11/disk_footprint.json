@@ -1,0 +1,19 @@
+{
+  "environment": {
+    "path": "/home/manager/miniforge3/envs/spectrans-3d",
+    "apparent_bytes": 5174156319,
+    "allocated_bytes": 5246185472
+  },
+  "bootstrap_compressed_bytes": 89523334,
+  "runtime": {
+    "requested_disk_GB": 64,
+    "full_state_bytes": 6311117184,
+    "maximum_raw_states": 6,
+    "runtime_bytes_upper": 46186703104,
+    "required_free_bytes": 55424043725,
+    "free_space_margin": 1.2,
+    "scope": "Available space after setup; image and installed packages already occupy disk."
+  },
+  "planning_total_bytes": 51522411910,
+  "planning_total_with_20pct_margin_bytes": 61826894292
+}
