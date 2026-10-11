@@ -57,11 +57,11 @@ With angle brackets denoting the spatial mean and $\omega=\nabla\times u$, we re
 
 | Quantity | Definition or purpose |
 |---|---|
-| Kinetic energy | $E=\tfrac12\langle|u|^2\rangle$ |
-| Enstrophy | $Z=\tfrac12\langle|\omega|^2\rangle$ |
+| Kinetic energy | $E=\tfrac12\langle\lvert u\rvert^2\rangle$ |
+| Enstrophy | $Z=\tfrac12\langle\lvert\omega\rvert^2\rangle$ |
 | Energy dissipation | $\varepsilon=2\nu Z$; unforced energy budget $dE/dt=-\varepsilon$ |
 | Stretching production | $P=\langle\omega\cdot S\omega\rangle$, with (S) the symmetric velocity gradient |
-| Viscous enstrophy loss | $V=\nu\langle|\nabla\omega|^2\rangle$ |
+| Viscous enstrophy loss | $V=\nu\langle\lvert\nabla\omega\rvert^2\rangle$ |
 | Net enstrophy growth | (dZ/dt=P-V) |
 | Peak vorticity | Grid-sampled maximum and, where fields exist, a Fourier-refined local estimate |
 | Spectra and tails | Full shell energy spectra, Parseval checks and high-wavenumber diagnostics |
