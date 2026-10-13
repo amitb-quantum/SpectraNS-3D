@@ -87,7 +87,7 @@ def execute(args):
         chosen=[r for r in raw["offers"] if r["id"]==args.offer_id]
         if len(chosen)!=1:raise ValueError("specified live offer unavailable; no automatic substitution")
         offer=chosen[0];quote=validate_quote(offer);bounds=validate_budget(ledger,quote)
-        write(out/"quote.json",dict(quote,bounds,offer={k:offer[k] for k in SAFE_OFFER if k in offer},
+        write(out/"quote.json",dict(quote,**bounds,offer={k:offer[k] for k in SAFE_OFFER if k in offer},
               image=args.image,environment_sha256=sha(environment),payload_sha256=sha(payload),at_epoch=time.time()))
         # The key never leaves WSL. Only this run's public SSH key is uploaded.
         private=Path.home()/".config/spectrans-3d";private.mkdir(exist_ok=True);private.chmod(0o700)

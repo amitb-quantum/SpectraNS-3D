@@ -113,3 +113,52 @@ def test_provider_guard_imports_without_numerical_runtime():
     command="import runpy,sys;runpy.run_path(sys.argv[1],run_name='guard_import_check');assert 'torch' not in sys.modules;assert 'numpy' not in sys.modules"
     subprocess.run([sys.executable,"-c",command,str(ROOT/"scripts/refinement_guard.py")],
                    check=True,cwd=ROOT,timeout=5)
+
+def test_execute_records_quote_and_bounds_before_any_provisioning(tmp_path,monkeypatch):
+    """Exercise the real launcher up to SSH preparation with no provider mutations."""
+    from types import SimpleNamespace
+    import run_vast_refinement as launcher
+    import vast_readonly, vast_campaign_api, vast_execution_access
+    import reconcile_extension_budget, refinement_assessment
+    from spectral_peak import METHOD
+    (tmp_path/"configs").mkdir();(tmp_path/"scripts").mkdir()
+    estimator=tmp_path/"scripts/spectral_peak.py";estimator.write_text("# test estimator")
+    write(tmp_path/"configs/n512_interpolated_peak_reference.json",
+          dict(status="passed",method=METHOD,estimator_sha256=sha(estimator)))
+    write(tmp_path/"configs/project_budget.json",dict(other_committed_project_spend_usd=0))
+    environment=tmp_path/"environment";environment.write_bytes(b"environment")
+    payload=tmp_path/"payload";payload.write_bytes(b"payload")
+    monkeypatch.setattr(launcher,"ROOT",tmp_path)
+    monkeypatch.setattr(launcher,"verify_audited_sources",lambda: {})
+    monkeypatch.setattr(launcher,"validate_rehearsal",lambda p: {})
+    monkeypatch.setattr(launcher,"validate_assets",lambda a: (environment,payload))
+    monkeypatch.setattr(refinement_assessment,"historical_reference",lambda: {})
+    monkeypatch.setattr(reconcile_extension_budget,"reconcile",lambda p: ledger())
+    monkeypatch.setattr(vast_execution_access,"inspect",lambda: dict(broad_instance_write=True))
+    monkeypatch.setattr(vast_readonly,"read_key",lambda p: "test-only-placeholder")
+    def request(method,path,key,body=None):
+        assert (method,path)==("POST","/api/v0/bundles")
+        return dict(offers=[offer()])
+    monkeypatch.setattr(vast_readonly,"request",request)
+    def forbidden(*args,**kwargs):
+        pytest.fail("provider mutation before verified quote")
+    monkeypatch.setattr(vast_campaign_api,"api",forbidden)
+    class PreparedQuote(Exception):pass
+    out=tmp_path/"job"
+    def ssh_boundary(command,**kwargs):
+        assert command[0]=="ssh-keygen"
+        receipt=json.loads((out/"quote.json").read_text())
+        assert receipt["cap_usd"]==5
+        assert receipt["rate_usd"]==validate_quote(offer())["rate_usd"]
+        assert receipt["project_exposure_usd"]=="24"
+        assert receipt["environment_sha256"]==sha(environment)
+        assert receipt["payload_sha256"]==sha(payload)
+        assert receipt["offer"]["id"]==123
+        assert not (out/"controller_state.json").exists()
+        raise PreparedQuote()
+    monkeypatch.setattr(launcher.subprocess,"run",ssh_boundary)
+    monkeypatch.setattr(launcher.Path,"home",classmethod(lambda cls: tmp_path))
+    (tmp_path/".config").mkdir()
+    args=SimpleNamespace(rehearsal="test",job_dir=str(out),offer_id=123,image="test-image")
+    with pytest.raises(PreparedQuote):
+        launcher.execute(args)
