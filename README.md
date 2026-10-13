@@ -4,7 +4,7 @@
 
 SpectraNS-3D asks which features of an intense flow survive changes in timestep, grid resolution, precision and execution backend—and where the available computation stops supporting a physical conclusion. Its immediate output is an auditable experiment, including unsuccessful and under-resolved runs. Its long-term goal is a reproducible research study of the competition between vortex stretching and viscous smoothing.
 
-**Current status, October 13, 2026:** the solver audit, CPU/H100 backend checks, N512 timestep study and bounded N512 extension are complete. The final budgeted N640 attempt passed 185 H100 tests, eight CPU/H100 references and numerical/memory/restart preflight, but production was refused by the measured lifetime gate. The single attempt is closed with verified GPU termination; no automatic retry is planned. N640 spatial validation remains **unfinished**. See the [campaign outcome](docs/N640_CAMPAIGN_OUTCOME_2026-10-13.md). No numerical result here proves global regularity or finite-time blowup.
+**Current status, October 13, 2026:** the solver audit, CPU/H100 backend checks, N512 timestep study and bounded N512 extension are complete. The earlier N640 attempt passed 185 H100 tests, eight CPU/H100 references and numerical/memory/restart preflight, but production was refused by the measured lifetime gate. That rental is closed with verified GPU termination. The user has authorized one additional USD5 attempt at no more than USD2.25/hour; its192 local tests and eleven controller rehearsals passed, and eligible-offer discovery is in progress. N640 spatial validation remains **unfinished**. See the [campaign outcome](docs/N640_CAMPAIGN_OUTCOME_2026-10-13.md). No numerical result here proves global regularity or finite-time blowup.
 
 Follow the [Plan of Action](docs/PLAN_OF_ACTION.md) for chronological tasks, acceptance criteria, the current decision and the mandatory next-step handoff.
 
@@ -100,7 +100,7 @@ Test counts below refer to the versions present at each campaign, not to repeate
 | Endpoint continuation check | Identical-checkpoint window $1.00\rightarrow1.10$, largest scalar difference about $2.53\times10^{-8}$ | Local continuation error; inherited error at the anchor is shared |
 | Sampling study | Fourier local estimates at (t=1.00/1.10); sampled-peak biases about 0.927%/0.150% | Peak sampling matters; estimates are not certified global suprema |
 | October13 N640 attempt | 185 H100 tests and 8 backend checks passed; numerical/memory/restart preflight passed through0.05 | Production forecast 102.16 min exceeded 94.85 min available; comparison incomplete; GPU termination verified |
-| Current local engineering validation | 185 tests and eleven controller rehearsals, including seven real SIGKILL phases | Selective diagnostics, verified same-grid preflight continuation and failure-path evidence; no completed N640 spatial comparison |
+| Current local engineering validation | 192 tests and eleven controller rehearsals, including seven real SIGKILL phases; extracted payload188 passed,4 CUDA-only skips | Selective diagnostics, verified same-grid preflight continuation and failure-path evidence; no completed N640 spatial comparison |
 
 The N512 observations are scientifically useful but still need spatial refinement:
 
@@ -116,7 +116,7 @@ Read the [H100 report](docs/H100_VALIDATION_2026-10-10.md), [timestep report](do
 
 ## Where we are headed
 
-The remaining scientifically informative experiment, if research is resumed, is **N640 from the original initial condition**, with identical viscosity and a 0.0005 timestep cap. The revised controller preserves its 0–0.05 preflight trajectory and continues from that exact same-grid checkpoint, then verifies and joins the complete 0–1.10 evidence. Fourier peak estimates use a declared subset of events; sampled maxima, budgets, spectra and numerical gates remain at every event. Full checkpoint downloads are disabled by default. See the [October 12 continuation revision](docs/N640_SAMPLING_CONTINUATION_2026-10-12.md). It must protect the comparison through (t=1.10), immediately validate the $1.00\rightarrow1.10$ window at cap 0.00025, and collect/hash-verify the small scientific evidence before any exploration. Reloading N512 fields onto N640 would not establish full-trajectory spatial convergence.
+The currently authorized scientifically informative experiment is **N640 from the original initial condition**, with identical viscosity and a 0.0005 timestep cap. The revised controller preserves its 0–0.05 preflight trajectory and continues from that exact same-grid checkpoint, then verifies and joins the complete 0–1.10 evidence. Fourier peak estimates use a declared subset of events; sampled maxima, budgets, spectra and numerical gates remain at every event. Full checkpoint downloads are disabled by default. See the [October 12 continuation revision](docs/N640_SAMPLING_CONTINUATION_2026-10-12.md). It must protect the comparison through (t=1.10), immediately validate the $1.00\rightarrow1.10$ window at cap 0.00025, and collect/hash-verify the small scientific evidence before any exploration. Reloading N512 fields onto N640 would not establish full-trajectory spatial convergence.
 
 Predeclared comparisons include:
 
@@ -179,7 +179,7 @@ The checked-in tests need no original archives. Four small, hash-bound N512 comp
 
 Cloud discovery is read-only by default. `python scripts/run_vast_refinement.py` prints the N640 plan; it does not provision anything. Billable execution requires explicit execution arguments, valid authorization, fresh complete billing, a live quote, exact source/payload bindings, the complete rehearsal proof and an ownership-bound termination guard. No credential is committed or copied to the GPU.
 
-The current dedicated N640 campaign ceiling is **USD5 all-in** within a **USD30 project ceiling**. The current offer screen is a single H100 with CUDA 13 compatibility, at least 80 GB advertised VRAM, verified reliability at least 0.99, 64 GB disk and at most USD2.60/hour including conservative storage. Actual protected runtime and available disk must pass measured preflight; advertised specifications are insufficient. The live budget ledger is local and ignored by Git. [Budget setup template](configs/project_budget.template.json).
+The current dedicated N640 campaign ceiling is **USD5 all-in** within a **USD30 project ceiling**. The read-only offer screen is a single H100 with CUDA 13 compatibility, at least 80 GB advertised VRAM, verified reliability at least 0.99, 64 GB disk and at most USD2.60/hour including conservative storage. The newly authorized attempt further tightens the fresh GPU-plus-storage quote to **USD2.25/hour** and requires funding for the existing shared-account guard floor. See the [additional-attempt specification](docs/N640_RETRY_SPEC_2026-10-13.md). Actual protected runtime and available disk must pass measured preflight; advertised specifications are insufficient. The live budget ledger is local and ignored by Git. [Budget setup template](configs/project_budget.template.json).
 
 Every research GPU run must retain:
 
@@ -214,4 +214,4 @@ The original supplied source families remain separately identifiable; audited co
 
 No distribution license has been selected. This is a public research repository; a public repository is not itself a license grant. Scientific conclusions are bounded by the validated configurations and accepted intervals described above.
 
-The [closeout procedure](docs/ACCOUNT_COEXISTENCE_AND_CLOSEOUT.md) and [October 13 outcome](docs/N640_CAMPAIGN_OUTCOME_2026-10-13.md) record the closed single attempt. The late-time N640 comparison is incomplete, and the follow-up is paused after publication.
+The [closeout procedure](docs/ACCOUNT_COEXISTENCE_AND_CLOSEOUT.md) and [October 13 outcome](docs/N640_CAMPAIGN_OUTCOME_2026-10-13.md) record the closed single attempt. The late-time N640 comparison is incomplete. One additional attempt is explicitly authorized; the [plan state](docs/PLAN_STATE.json) records its current task and successor.

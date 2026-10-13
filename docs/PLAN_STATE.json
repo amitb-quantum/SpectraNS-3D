@@ -1,21 +1,21 @@
 {
   "schema_version": 1,
   "plan_version": "1.0",
-  "updated_at_pt": "2026-10-13T12:11:35.450866-07:00",
+  "updated_at_pt": "2026-10-13T12:26:19.775863-07:00",
   "project": "SpectraNS-3D",
   "scientific_milestone": "Original-IC N512/N640 comparison through1.10 and local fine-window validation",
   "scientific_status": "unfinished",
   "current_task": "P05",
-  "next_action": "Confirm exact attribution of the new active separate account rental, then complete offer and funding checks.",
+  "next_action": "Find an eligible H100 at no more than USD2.25/hour before13:02:35 PDT; then refresh billing, bind the transport payload and provision the single authorized campaign004.",
   "decision": "one_more_5_usd_attempt_at_2_25_or_less",
-  "automation_status": "PAUSED",
+  "automation_status": "ACTIVE",
   "new_billable_attempt_pending_decision": false,
   "baseline_commit": "d258fcb556e69090454c437454cf7830d897029d",
   "last_budget_snapshot": {
     "conservative_exposure_usd": 20.77874122875802,
     "headroom_usd": 9.221258771241981,
     "total_ceiling_usd": 30,
-    "note": "Dated closure snapshot; fresh billing/shared credit mandatory before provisioning"
+    "note": "Fresh private reconciliation passed after exact separate-job attribution; refresh again before provisioning. Account credit and attribution remain private."
   },
   "proposed_choices": [
     "one_more_5_usd_attempt_at_2_25_or_less",
@@ -61,7 +61,7 @@
       "depends_on": "P03",
       "successor": "P05",
       "reason": "Bind the fresh quote ceiling and guard-floor funding to the pre-create checks.",
-      "result": "192 tests and eleven source-bound CPU/CUDA rehearsals passed; fresh-price/funding controls verified.",
+      "result": "192 local tests, eleven CPU/CUDA rehearsals including seven real SIGKILLs, and extracted payload188 tests with4 CUDA-only skips passed.",
       "evidence": [
         "docs/evidence/2026-10-13/retry_readiness/local_tests.txt",
         "docs/evidence/2026-10-13/retry_readiness/rehearsal.json"
@@ -70,10 +70,10 @@
     {
       "id": "P05",
       "title": "Discover eligible offer and financing",
-      "status": "awaiting_user_attribution",
+      "status": "in_progress",
       "depends_on": "P04",
       "successor": "P06",
-      "result": "No eligible offer in initial search; a newly active account contract requires exact attribution."
+      "result": "Separate rental explicitly attributed by user; fresh financing passed. Latest read-only search at12:21:57 PDT returned no eligible offers. Discovery deadline13:02:35 PDT."
     },
     {
       "id": "P06",
@@ -135,11 +135,8 @@
     "max_hourly_usd": "2.25",
     "maximum_lifetime_seconds": 7200,
     "discovery_deadline_pt": "2026-10-13T13:02:35-07:00",
-    "status": "preparing",
+    "status": "waiting_for_eligible_offer",
     "directory": "artifacts/cloud-preparation/2026-10-13/n640_campaign_004"
   },
-  "blocker": {
-    "kind": "account_attribution_required",
-    "detail": "A newly active account contract differs from the previously attributed exact identity. Clarification requested immediately; no foreign mutation permitted."
-  }
+  "blocker": null
 }
