@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "plan_version": "1.0",
-  "updated_at_pt": "2026-10-13T16:30:13.005198-07:00",
+  "updated_at_pt": "2026-10-13T16:43:20.012856-07:00",
   "project": "SpectraNS-3D",
   "scientific_milestone": "Original-IC N512/N640 comparison through1.10 and local fine-window validation",
-  "scientific_status": "unfinished",
-  "current_task": "P08",
-  "next_action": "Finish protected fine1.00\u20131.10 check, independently assess matched N512/N640 observations and verify protected small evidence locally before optional exploration.",
+  "scientific_status": "two_grid_assessment_complete_resolution_not_certified",
+  "current_task": "P10",
+  "next_action": "Finish or bound optional exploration, destroy only owned instance55821344, verify absence and reconcile billing; then publish final scientific interpretation and evidence.",
   "decision": "one_more_5_usd_attempt_at_2_25_or_less_discovery_extended",
   "automation_status": "ACTIVE",
   "new_billable_attempt_pending_decision": false,
@@ -101,24 +101,26 @@
     {
       "id": "P08",
       "title": "Run protected fine timestep window",
-      "status": "in_progress",
+      "status": "completed",
       "depends_on": "P07",
       "successor": "P09",
-      "result": "Fine cap0.00025 continuation from the exact N6401.00 anchor is running. Local-temporal result and protected receipt still pending."
+      "result": "Local1.00\u20131.10 temporal check passed: eleven matched events,200 coarse versus400 fine steps, largest observed difference1.42533e-8."
     },
     {
       "id": "P09",
       "title": "Independently classify spatial evidence",
-      "status": "pending",
+      "status": "completed",
       "depends_on": "P08",
-      "successor": "P10"
+      "successor": "P10",
+      "result": "Protected manifest hashes and frozen numerical/memory gates independently verified.111 matched spatial events: Z0.05997%; scaled net0.181614% intermediate sensitivity; stable Fourier local peaks0.483900% at1.00 and0.009107% at1.10. No spatial-convergence certificate."
     },
     {
       "id": "P10",
       "title": "Close and reconcile the rental",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": "P09",
-      "successor": "P11"
+      "successor": "P11",
+      "result": "Protected evidence is local and immutable. Optional single-grid exploration is running; verified owned-instance closure and billing pending."
     },
     {
       "id": "P11",
@@ -145,7 +147,7 @@
     "max_hourly_usd": "2.25",
     "maximum_lifetime_seconds": 7200,
     "discovery_deadline_pt": "2026-10-13T15:29:11-07:00",
-    "status": "running_fine_window",
+    "status": "protected_verified_optional_exploration",
     "directory": "artifacts/cloud-preparation/2026-10-13/n640_campaign_004",
     "discovery_started_at_pt": "2026-10-13T14:29:11-07:00",
     "discovery_extension_count": 1,
@@ -164,5 +166,23 @@
       "outcome": "expired_without_admitted_offer",
       "evidence": "docs/evidence/2026-10-13/retry_discovery/discovery.json"
     }
-  ]
+  ],
+  "result_summary": {
+    "protected_numerical_temporal": "passed",
+    "spatial_curve_classification": "intermediate_sensitivity",
+    "max_relative_Z_difference": 0.0005996963863549451,
+    "max_scaled_net_difference": 0.0018161374160758587,
+    "matched_fourier_peaks": [
+      {
+        "t": 1.0,
+        "relative_difference": 0.004839001869781032,
+        "status": "discretization_sensitive"
+      },
+      {
+        "t": 1.1,
+        "relative_difference": 9.106506848798756e-05,
+        "status": "consistent"
+      }
+    ]
+  }
 }
