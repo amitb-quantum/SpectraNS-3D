@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "discovery_deadline_pt": "2026-10-13T13:02:35-07:00",
+  "outcome": "expired_without_admitted_offer",
+  "approved_max_hourly_usd": "2.25",
+  "campaign_cap_usd": 5,
+  "total_project_cap_usd": 30,
+  "attempt_created": false,
+  "billable_attempt_consumed": false,
+  "scientific_status": "unfinished",
+  "final_poll_as_of_utc": "2026-10-13T20:02:51.321500+00:00",
+  "reports": [
+    {
+      "path": "docs/evidence/2026-10-13/retry_discovery/20261013T195719-ae15eb79f5514b89a396bbbfd4d06b50.json",
+      "sha256": "a92bd8cdd429a217b240513ccbf5654f1e47cfa8ad506380173ec6cfa4a830dc",
+      "as_of_utc": "2026-10-13T19:57:18.976529+00:00",
+      "qualifying_count": 0
+    },
+    {
+      "path": "docs/evidence/2026-10-13/retry_discovery/20261013T195838-f8a4213fb16945d0997114d95f34f41a.json",
+      "sha256": "04023a0d35b8ea9d3895fa66080a96f6cb223cfb9beedefcba70c6c71cbda046",
+      "as_of_utc": "2026-10-13T19:58:38.254629+00:00",
+      "qualifying_count": 0
+    },
+    {
+      "path": "docs/evidence/2026-10-13/retry_discovery/20261013T200006-dd20d976ad74434fbdd7a8542436e4a0.json",
+      "sha256": "7fba00ab594fc2c4d3ffb51e8ae5e52cb385f411f83e7a697cd60e4afbfdf4ad",
+      "as_of_utc": "2026-10-13T20:00:05.193172+00:00",
+      "qualifying_count": 0
+    },
+    {
+      "path": "docs/evidence/2026-10-13/retry_discovery/20261013T200144-54f916688e014a548cd0f80f277bc336.json",
+      "sha256": "cacbb30dd2556b0a409a80b8130fe18ba77ef881073815600186243232f88dd8",
+      "as_of_utc": "2026-10-13T20:01:43.705790+00:00",
+      "qualifying_count": 0
+    },
+    {
+      "path": "docs/evidence/2026-10-13/retry_discovery/20261013T200251-b4bc47fd736040b69500b7740724ffb4.json",
+      "sha256": "ff356b07bf6f84a43fa6ab296186059d2b2ec9e9d5aac79e2da19700b0b43644",
+      "as_of_utc": "2026-10-13T20:02:51.321500+00:00",
+      "qualifying_count": 0
+    }
+  ]
+}
