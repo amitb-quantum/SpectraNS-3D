@@ -62,3 +62,6 @@ Thumbs.db
 !/artifacts/cloud-preparation/2026-10-10/enstrophy_extension_002/results/coarse/enstrophy.csv
 !/artifacts/cloud-preparation/2026-10-10/enstrophy_extension_002/results/coarse/spectra.csv
 !/artifacts/cloud-preparation/2026-10-10/enstrophy_extension_002/results/coarse/run.json
+
+# Local runtime execution coordination
+configs/.refinement-execution.lock
