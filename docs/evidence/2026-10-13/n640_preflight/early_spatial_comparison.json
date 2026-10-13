@@ -1,0 +1,14 @@
+{
+  "interval": [
+    0,
+    0.05
+  ],
+  "matched_events": 6,
+  "scope": "preflight interval only; does not establish agreement near historical stretching peaks or through1.10",
+  "max_relative_E": 6.280159459539904e-16,
+  "max_relative_Z": 6.690450034518507e-16,
+  "max_relative_wmax": 0.0006407110237420161,
+  "max_relative_bkm": 0.0004192111206929014,
+  "max_net_scaled_difference": 2.3512690625110727e-15,
+  "max_spectrum_L1_over_E": 9.76558341060692e-16
+}

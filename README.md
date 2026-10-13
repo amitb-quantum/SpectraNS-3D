@@ -4,7 +4,7 @@
 
 SpectraNS-3D asks which features of an intense flow survive changes in timestep, grid resolution, precision and execution backend—and where the available computation stops supporting a physical conclusion. Its immediate output is an auditable experiment, including unsuccessful and under-resolved runs. Its long-term goal is a reproducible research study of the competition between vortex stretching and viscous smoothing.
 
-**Current status, October 12, 2026:** the solver audit, CPU/H100 backend checks, N512 timestep study and bounded N512 extension are complete. N640 H100 numerical/memory/restart preflight passed, but production was rejected by the measured lifetime gate. The revised local suite passes **185 tests** and the controller passes **eleven real-process rehearsals**, including seven independent SIGKILL cases. N640 spatial validation remains **unfinished**. No numerical result here proves global regularity or finite-time blowup.
+**Current status, October 13, 2026:** the solver audit, CPU/H100 backend checks, N512 timestep study and bounded N512 extension are complete. The final budgeted N640 attempt passed 185 H100 tests, eight CPU/H100 references and numerical/memory/restart preflight, but production was refused by the measured lifetime gate. The single attempt is closed with verified GPU termination; no automatic retry is planned. N640 spatial validation remains **unfinished**. See the [campaign outcome](docs/N640_CAMPAIGN_OUTCOME_2026-10-13.md). No numerical result here proves global regularity or finite-time blowup.
 
 ## Why this project exists
 
@@ -97,6 +97,7 @@ Test counts below refer to the versions present at each campaign, not to repeate
 | Bounded N512 extension | Last accepted (t=1.10); first tail-gate failure (t=1.11) preserved | Bounds the operationally accepted trajectory; no enstrophy turnover reached |
 | Endpoint continuation check | Identical-checkpoint window $1.00\rightarrow1.10$, largest scalar difference about $2.53\times10^{-8}$ | Local continuation error; inherited error at the anchor is shared |
 | Sampling study | Fourier local estimates at (t=1.00/1.10); sampled-peak biases about 0.927%/0.150% | Peak sampling matters; estimates are not certified global suprema |
+| October13 N640 attempt | 185 H100 tests and 8 backend checks passed; numerical/memory/restart preflight passed through0.05 | Production forecast 102.16 min exceeded 94.85 min available; comparison incomplete; GPU termination verified |
 | Current local engineering validation | 185 tests and eleven controller rehearsals, including seven real SIGKILL phases | Selective diagnostics, verified same-grid preflight continuation and failure-path evidence; no completed N640 spatial comparison |
 
 The N512 observations are scientifically useful but still need spatial refinement:
@@ -113,7 +114,7 @@ Read the [H100 report](docs/H100_VALIDATION_2026-10-10.md), [timestep report](do
 
 ## Where we are headed
 
-The next experiment is **N640 from the original initial condition**, with identical viscosity and a 0.0005 timestep cap. The revised controller preserves its 0–0.05 preflight trajectory and continues from that exact same-grid checkpoint, then verifies and joins the complete 0–1.10 evidence. Fourier peak estimates use a declared subset of events; sampled maxima, budgets, spectra and numerical gates remain at every event. Full checkpoint downloads are disabled by default. See the [October 12 continuation revision](docs/N640_SAMPLING_CONTINUATION_2026-10-12.md). It must protect the comparison through (t=1.10), immediately validate the $1.00\rightarrow1.10$ window at cap 0.00025, and collect/hash-verify the small scientific evidence before any exploration. Reloading N512 fields onto N640 would not establish full-trajectory spatial convergence.
+The remaining scientifically informative experiment, if research is resumed, is **N640 from the original initial condition**, with identical viscosity and a 0.0005 timestep cap. The revised controller preserves its 0–0.05 preflight trajectory and continues from that exact same-grid checkpoint, then verifies and joins the complete 0–1.10 evidence. Fourier peak estimates use a declared subset of events; sampled maxima, budgets, spectra and numerical gates remain at every event. Full checkpoint downloads are disabled by default. See the [October 12 continuation revision](docs/N640_SAMPLING_CONTINUATION_2026-10-12.md). It must protect the comparison through (t=1.10), immediately validate the $1.00\rightarrow1.10$ window at cap 0.00025, and collect/hash-verify the small scientific evidence before any exploration. Reloading N512 fields onto N640 would not establish full-trajectory spatial convergence.
 
 Predeclared comparisons include:
 
@@ -211,4 +212,4 @@ The original supplied source families remain separately identifiable; audited co
 
 No distribution license has been selected. This is a public research repository; a public repository is not itself a license grant. Scientific conclusions are bounded by the validated configurations and accepted intervals described above.
 
-The remaining campaign and its account-credit protection are described in [the closeout procedure](docs/ACCOUNT_COEXISTENCE_AND_CLOSEOUT.md). N640 production comparison remains pending; local checks are not cloud results.
+The [closeout procedure](docs/ACCOUNT_COEXISTENCE_AND_CLOSEOUT.md) and [October 13 outcome](docs/N640_CAMPAIGN_OUTCOME_2026-10-13.md) record the closed single attempt. The late-time N640 comparison is incomplete, and the follow-up is paused after publication.

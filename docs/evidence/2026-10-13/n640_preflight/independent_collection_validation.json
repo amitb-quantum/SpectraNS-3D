@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "source_manifest_files": 40,
+  "all_source_hashes_match": true,
+  "local_additional_records": [
+    "tests.log",
+    "source_binding.json",
+    "references.log",
+    "N512_benchmark.log",
+    "plan.json",
+    "warmup_timing.json",
+    "authorization.json",
+    "acceptance.json",
+    "transfer_preflight.json",
+    "runtime_preflight.json"
+  ],
+  "raw_checkpoint_arrays_recovered": false
+}

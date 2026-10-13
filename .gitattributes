@@ -13,3 +13,6 @@
 artifacts/cloud-preparation/2026-10-10/enstrophy_extension_002/results/coarse/*.csv -text
 configs/original_manifest.json -text
 tests/fixtures/ns_fast_original.py -text
+
+# Preserve measured evidence bytes, including CSV CRLF and original manifests.
+docs/evidence/2026-10-13/n640_preflight/** -text whitespace=cr-at-eol

@@ -1,0 +1,23 @@
+{
+  "process_wall_s": 24.853221889818087,
+  "seconds": {
+    "solver_setup": 0.12148329406045377,
+    "initial_condition_or_restart": 7.843466404126957,
+    "scalar_diagnostics_and_tail": 0.6187141099944711,
+    "enstrophy_budget": 2.0807721328455955,
+    "full_spectrum": 0.09088019607588649,
+    "fourier_peak_refinement": 10.365068190963939,
+    "integration": 3.5673409590963274
+  },
+  "calls": {
+    "solver_setup": 1,
+    "initial_condition_or_restart": 1,
+    "scalar_diagnostics_and_tail": 2,
+    "enstrophy_budget": 2,
+    "full_spectrum": 2,
+    "fourier_peak_refinement": 2,
+    "integration": 1
+  },
+  "unattributed_wall_s": 0.1654966026544571,
+  "convention": "Disjoint synchronized wall stages; integration includes per-step CSV writes. Unattributed includes event control, diagnostic CSV, manifest I/O and timer boundary waits."
+}

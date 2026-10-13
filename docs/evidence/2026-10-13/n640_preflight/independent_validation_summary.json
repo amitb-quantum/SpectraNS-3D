@@ -1,0 +1,53 @@
+{
+  "preflight_passed": true,
+  "reload_passed": true,
+  "preflight_interval": [
+    0,
+    0.05
+  ],
+  "reload_interval": [
+    0.05,
+    0.051
+  ],
+  "achieved_steps": 100,
+  "reload_achieved_steps": 2,
+  "diagnostic_events": 6,
+  "full_spectrum_events": 6,
+  "max_divergence": 2.7716576401652658e-15,
+  "max_tail": 4.790605998747699e-36,
+  "max_energy_fd_residual": 2.1092485361707122e-06,
+  "max_enstrophy_budget_residual": 1.5265566588595902e-16,
+  "reload_boundary_absolute_differences": {
+    "E": 0.0,
+    "Z": 0.0,
+    "eps": 0.0,
+    "wmax": 0.0,
+    "bkm": 0.0,
+    "tail_ratio": 1.3363823550460978e-51,
+    "div_max": 0.0
+  },
+  "cfl_limited_steps": 0,
+  "corrective_epsilon_steps": 0,
+  "clock_snapping": {
+    "events": 0,
+    "max_abs_adjustment": 0.0,
+    "signed_total_adjustment": 0.0,
+    "rule": "min(32 ulps at event clock scale, 1e-9 of actual dt)"
+  },
+  "memory": {
+    "peak_allocated_GB": 47.432884224,
+    "peak_reserved_GB": 49.578770432,
+    "free_GB": 34.796077056,
+    "total_GB": 85.017493504,
+    "gpu": "NVIDIA H100 PCIe"
+  },
+  "protected_validated": false,
+  "production_started": false,
+  "fine_timestep_window_started": false,
+  "exploration_started": false,
+  "driver": {
+    "peak_driver_used_fraction": 0.5872435905295553,
+    "sampling_interval_s": 0.25,
+    "limitation": "periodic samples do not bound transients between samples"
+  }
+}

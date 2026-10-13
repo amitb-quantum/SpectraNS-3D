@@ -1,0 +1,26 @@
+{
+  "forecast_seconds": 6129.376212653442,
+  "remaining_lifetime_seconds": 5691.118719339371,
+  "fits": false,
+  "compute_uninflated_seconds": 4759.500970122754,
+  "coarse_start_t": 0.05,
+  "remaining_coarse_steps": 2100,
+  "fine_steps": 400,
+  "diagnostic_events": 117,
+  "refinement_events": 31,
+  "refinement_seconds_per_call": 6.408691389136948,
+  "checkpoint_events": 12,
+  "step_seconds": 1.6449084904743358,
+  "diagnostic_seconds": 1.1635225034939747,
+  "checkpoint_seconds": 26.0356814970728,
+  "achieved_dt_min": 0.00049999999999999,
+  "fine_reserve_seconds": 1034.4744081330525,
+  "refinement_counts": {
+    "coarse": 29,
+    "fine": 2,
+    "total": 31,
+    "coarse_diagnostic_events": 106,
+    "fine_diagnostic_events": 11
+  },
+  "note": "verified original-IC prefix reused; sampled maxima/budgets/spectra every event; only declared Fourier estimates timed separately"
+}

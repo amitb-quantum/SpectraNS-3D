@@ -1,0 +1,14 @@
+[
+  {
+    "path": "checkpoints/terminal_t0.05000000",
+    "kind": "terminal",
+    "t": 0.05,
+    "retained": true,
+    "metadata_sha256": "cf101711b4c1ecdaafa1b6d298a654c9258b8cbca0f8d599376d215c4e221abe",
+    "files": {
+      "U0.npy": "41e3d0f180dae1ad06fa5a2f9b936da660ff5c1ba33a095445a4daa1c0e84e50",
+      "U1.npy": "9235fcbe45f8e241531f06cdc625e9b193df55a58d60264dc544adb4a9b9546b",
+      "U2.npy": "1be86cde7cd31346c792129f36faf90a3e20f9377aa33733c387dda25c378b3b"
+    }
+  }
+]

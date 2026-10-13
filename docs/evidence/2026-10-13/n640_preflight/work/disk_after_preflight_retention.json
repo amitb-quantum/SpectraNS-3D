@@ -1,0 +1,13 @@
+{
+  "requested_disk_GB": 64,
+  "full_state_bytes": 6311117184,
+  "maximum_raw_states": 6,
+  "runtime_bytes_upper": 46186703104,
+  "required_free_bytes": 55424043725,
+  "free_space_margin": 1.2,
+  "scope": "Available space after setup; image and installed packages already occupy disk.",
+  "path": "/opt/spectrans-3d/project/artifacts/refinement_run",
+  "available_bytes": 56946941952,
+  "filesystem_total_bytes": 68719476736,
+  "fits": true
+}

@@ -1,0 +1,9 @@
+{
+  "peak_driver_used_MiB": 47895,
+  "driver_total_MiB": 81559,
+  "peak_driver_used_GB": 50.22154752,
+  "driver_total_GB": 85.520809984,
+  "driver_used_fraction": 0.5872435905295553,
+  "sampling_interval_seconds": 0.25,
+  "limitation": "Periodic driver samples do not bound unsampled transients; driver and CUDA allocator totals are distinct."
+}

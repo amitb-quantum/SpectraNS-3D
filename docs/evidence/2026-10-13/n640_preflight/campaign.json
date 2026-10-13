@@ -1,0 +1,13 @@
+{
+  "status": "incomplete",
+  "protected_validated": false,
+  "exploration": "not_started",
+  "checkpoint_collection": "not_started",
+  "profile": "production",
+  "source_sha256": {
+    "ns_fast_v3.py": "ab9eebda2750c7be019d3c2f54fe7aa5f2be98a0276a55260e35a81989b34842",
+    "ns_fast_v2.py": "6f01107b931b80231e27336faeae94b51916d91861473f46e85aedbba0bdaf5d"
+  },
+  "error": "ValueError: protected prefix/fine/collection do not fit measured lifetime",
+  "ended_epoch": 1791912745.996576
+}
