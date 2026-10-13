@@ -120,7 +120,8 @@ def test_provider_guard_imports_without_numerical_runtime():
     subprocess.run([sys.executable,"-c",command,str(ROOT/"scripts/refinement_guard.py")],
                    check=True,cwd=ROOT,timeout=5)
 
-def test_execute_records_quote_and_bounds_before_any_provisioning(tmp_path,monkeypatch):
+@pytest.mark.parametrize("mode",["default","tightened","repriced","storage_repriced","credit_floor","floor_pass","cannot_widen","invalid_limit"])
+def test_execute_records_quote_and_bounds_before_any_provisioning(tmp_path,monkeypatch,mode):
     """Exercise the real launcher up to SSH preparation with no provider mutations."""
     from types import SimpleNamespace
     import run_vast_refinement as launcher
@@ -139,12 +140,17 @@ def test_execute_records_quote_and_bounds_before_any_provisioning(tmp_path,monke
     monkeypatch.setattr(launcher,"validate_rehearsal",lambda p: {})
     monkeypatch.setattr(launcher,"validate_assets",lambda a: (environment,payload))
     monkeypatch.setattr(refinement_assessment,"historical_reference",lambda: {})
-    monkeypatch.setattr(reconcile_extension_budget,"reconcile",lambda p: ledger())
-    monkeypatch.setattr(vast_execution_access,"inspect",lambda: dict(broad_instance_write=True))
+    measured_offer=offer();measured_ledger=ledger()
+    if mode in ("repriced","credit_floor","floor_pass"):
+        measured_offer.update(dph_total=2.25 if mode!="repriced" else 2.26,storage_cost=0)
+    if mode=="storage_repriced":measured_offer.update(dph_total=2.24,storage_cost=.2)
+    if mode in ("credit_floor","floor_pass"):measured_ledger["reported_credit_balance_usd"]=5.9 if mode=="credit_floor" else 6.0
+    monkeypatch.setattr(reconcile_extension_budget,"reconcile",lambda p: measured_ledger)
+    monkeypatch.setattr(vast_execution_access,"inspect",lambda: dict(broad_instance_write=True,financial_fields=dict(credit=measured_ledger["reported_credit_balance_usd"])))
     monkeypatch.setattr(vast_readonly,"read_key",lambda p: "test-only-placeholder")
     def request(method,path,key,body=None):
         assert (method,path)==("POST","/api/v0/bundles")
-        return dict(offers=[offer()])
+        return dict(offers=[measured_offer])
     monkeypatch.setattr(vast_readonly,"request",request)
     def forbidden(*args,**kwargs):
         pytest.fail("provider mutation before verified quote")
@@ -155,7 +161,10 @@ def test_execute_records_quote_and_bounds_before_any_provisioning(tmp_path,monke
         assert command[0]=="ssh-keygen"
         receipt=json.loads((out/"quote.json").read_text())
         assert receipt["cap_usd"]==5
-        assert receipt["rate_usd"]==validate_quote(offer())["rate_usd"]
+        assert receipt["rate_usd"]==validate_quote(measured_offer)["rate_usd"]
+        assert float(receipt["minimum_credit_including_guard_usd"])<=measured_ledger["reported_credit_balance_usd"]
+        assert float(receipt["account_credit_floor_usd"])==1.0
+        if mode!="default":assert receipt["max_hourly_rate_usd"]=="2.25"
         assert receipt["project_exposure_usd"]=="24"
         assert receipt["environment_sha256"]==sha(environment)
         assert receipt["payload_sha256"]==sha(payload)
@@ -166,5 +175,13 @@ def test_execute_records_quote_and_bounds_before_any_provisioning(tmp_path,monke
     monkeypatch.setattr(launcher.Path,"home",classmethod(lambda cls: tmp_path))
     (tmp_path/".config").mkdir()
     args=SimpleNamespace(rehearsal="test",job_dir=str(out),offer_id=123,image="test-image")
-    with pytest.raises(PreparedQuote):
-        launcher.execute(args)
+    if mode!="default":args.max_hourly_rate="2.25"
+    if mode=="cannot_widen":args.max_hourly_rate="3.0"
+    if mode=="invalid_limit":args.max_hourly_rate="nan"
+    if mode in ("repriced","storage_repriced","credit_floor","cannot_widen","invalid_limit"):
+        with pytest.raises(ValueError):launcher.execute(args)
+        assert not (out/"quote.json").exists()
+        assert not (out/"controller_state.json").exists()
+        assert json.loads((tmp_path/"configs/project_budget.json").read_text())["other_committed_project_spend_usd"]==0
+    else:
+        with pytest.raises(PreparedQuote):launcher.execute(args)

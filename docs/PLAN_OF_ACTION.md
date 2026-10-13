@@ -17,9 +17,9 @@ A release can also close with an explicitly incomplete scientific milestone, if 
 - N640 production has never reached the requested comparison interval. The October13 attempt was refused because protected work forecast 102.16 minutes versus 94.85 usable minutes.
 - Its instance was destroyed and absence verified. The attempt cost USD 0.433 posted at closure, with a conservative USD 0.929173 bound. Its report and evidence are on main at commit d258fcb556e69090454c437454cf7830d897029d.
 - The last budget snapshot has USD 20.778741 conservative project exposure, including pending allowances; USD 9.221259 remains below the USD 30 ceiling. These are dated project figures, not current shared account credit.
-- No new rental is authorized by this document alone. Fresh shared credit must cover the quote-specific lifetime cost, any separately attributed rental reserve and the USD 1 balance guard floor, independently of project headroom. If funding is insufficient, consult before provisioning. The previous single-attempt authorization is closed, and the automation is paused.
+- No new rental is authorized by this document alone. Fresh shared credit must cover the quote-specific lifetime cost, any separately attributed rental reserve and the USD 1 balance guard floor, independently of project headroom. If funding is insufficient, consult before provisioning. The previous single-attempt authorization is closed. A fresh single-attempt authorization was received; preparation and proof binding precede reactivation of its follow-up.
 
-**Current task: P02 — obtain your continuation decision.** All later execution tasks depend on that decision.
+**Decision received:** one additional USD5 attempt on an H100 at no more than USD2.25/hour. **Current task: P05 — verify the offer and financing.** The [additional-attempt specification](N640_RETRY_SPEC_2026-10-13.md) freezes the scope and discovery deadline; PLAN_STATE.json carries subsequent handoffs.
 
 ## Chronological tasks
 
@@ -38,7 +38,7 @@ A release can also close with an explicitly incomplete scientific milestone, if 
 | P11 | Write the scientific interpretation and final report. | State what changed with resolution, which numerical gates passed, whether each observation is supported, and what remains unknown. Include the exact evidence and limitations. If closing without the experiment, state that the late-time spatial question is unanswered. | P12 |
 | P12 | Publish and close the phase. | Update README/status, commit and push the report plus sanitized small evidence to main, verify published hashes and pause the follow-up. Give you the result, repository link, cost and remaining limitations. Do not create a further billable experiment automatically. | End this phase. A new study requires a separate agreed specification. |
 
-## Decision required at P02
+## P02 decision — selected option1
 
 1. **Recommended: one additional USD 5 attempt on an eligible H100 at no more than USD 2.25/hour.** Prefer a measured fast host; keep all scientific and runtime gates. The last host's timing scenario would have fit the full 120-minute lifetime with about 4.70 minutes of slack after the existing 25% compute margin. That is a scenario, not a promise about another host. Discovery is timeboxed to 60 minutes; if no suitable host appears, consult immediately.
 2. **One additional attempt with a USD 6 ceiling, retaining the USD 30 project ceiling.** This requires implementing and revalidating the new explicit spending authority, and sufficient fresh shared credit. At the existing hourly screening ceiling of USD 2.60, two hours plus USD 0.50 reserve is USD 5.70. Numerical gates and the 120-minute maximum stay fixed. Do not change the cap or provision until this option is selected and readiness passes.

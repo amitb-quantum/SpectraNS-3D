@@ -4,12 +4,12 @@ import argparse,fcntl,json,os,re,shlex,subprocess,sys,time,uuid
 from pathlib import Path
 from datetime import datetime,timezone
 from decimal import Decimal
-from cloud_policy import ROOT,verify_audited_sources
+from cloud_policy import ROOT,verify_audited_sources,money
 from extension_state import sha,write
 from refinement_io import fingerprint
 from refinement_policy import validate_rehearsal,validate_quote,validate_budget,offer_query
 from refinement_guard import birth
-from refinement_capacity import DISK_GB
+from refinement_capacity import DISK_GB,MAX_HOURLY_USD
 from refinement_controller import run
 from refinement_vast_backend import VastBackend,REMOTE,PROJECT,WORK,PYTHON
 
@@ -69,6 +69,8 @@ def close_budget(out):
 
 def execute(args):
     if sys.platform!="linux":raise ValueError("execute from native WSL")
+    hourly_limit=money(getattr(args,"max_hourly_rate",MAX_HOURLY_USD),"selection hourly ceiling")
+    if not 0<hourly_limit<=Decimal(MAX_HOURLY_USD):raise ValueError("selection ceiling may only tighten the fixed policy")
     from vast_readonly import read_key,KEYFILE,request,SAFE_OFFER
     from vast_campaign_api import api,owned_instance,attach_owned_ssh
     from vast_execution_access import inspect
@@ -88,11 +90,18 @@ def execute(args):
             raise ValueError("another commitment exists")
         account_context=json.loads(Path(args.account_context).read_text()) if getattr(args,"account_context",None) else None
         ledger=reconcile(out/"billing_before",account_context=account_context) if account_context else reconcile(out/"billing_before")
-        if inspect().get("broad_instance_write") is not True:raise ValueError("local key lacks instance operations")
+        access=inspect()
+        if access.get("broad_instance_write") is not True:raise ValueError("local key lacks instance operations")
         raw=request("POST","/api/v0/bundles",read_key(KEYFILE),body=offer_query())
         chosen=[r for r in raw["offers"] if r["id"]==args.offer_id]
         if len(chosen)!=1:raise ValueError("specified live offer unavailable; no automatic substitution")
         offer=chosen[0];quote=validate_quote(offer);bounds=validate_budget(ledger,quote)
+        if Decimal(quote["rate_usd"])>hourly_limit:raise ValueError("fresh offer exceeds authorized selection ceiling")
+        credit_floor=Decimal("1")
+        minimum_credit=Decimal(bounds["lifetime_cost_bound_usd"])+Decimal(bounds["nonproject_credit_reserve_usd"])+credit_floor
+        available_credit=min(money(ledger["reported_credit_balance_usd"],"ledger credit"),money(access.get("financial_fields",{}).get("credit"),"fresh account credit"))
+        if available_credit<minimum_credit:raise ValueError("shared credit cannot fund quoted lifetime plus account guard floor")
+        bounds.update(max_hourly_rate_usd=str(hourly_limit),minimum_credit_including_guard_usd=str(minimum_credit),account_credit_floor_usd=str(credit_floor))
         write(out/"quote.json",dict(quote,**bounds,offer={k:offer[k] for k in SAFE_OFFER if k in offer},
               image=args.image,environment_sha256=sha(environment),payload_sha256=sha(payload),at_epoch=time.time()))
         # The key never leaves WSL. Only this run's public SSH key is uploaded.
@@ -168,7 +177,9 @@ def execute(args):
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument("--execute",action="store_true")
     for name in ("job-dir","rehearsal","environment","payload","image","bootstrap-validation"):p.add_argument("--"+name)
-    p.add_argument("--offer-id",type=int);p.add_argument("--account-context");a=p.parse_args()
+    p.add_argument("--offer-id",type=int);p.add_argument("--account-context")
+    p.add_argument("--max-hourly-rate",default=MAX_HOURLY_USD,help="Optional tighter fresh-quote ceiling; cannot exceed fixed policy")
+    a=p.parse_args()
     if not a.execute:print((ROOT/"configs/n640_refinement_proposal.json").read_text());return 0
     if any(getattr(a,n) is None for n in ("job_dir","rehearsal","environment","payload","image","bootstrap_validation","offer_id")):
         p.error("all execution bindings required")

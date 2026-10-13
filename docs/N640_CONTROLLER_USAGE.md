@@ -106,3 +106,7 @@ The current local proof is under artifacts/cloud-preparation/2026-10-12/n640_sam
 ## Separate account rentals
 
 Optional --account-context points to a private JSON attribution record. See [account coexistence and closeout](ACCOUNT_COEXISTENCE_AND_CLOSEOUT.md). No unknown rental is silently excluded and no separate rental is modified. The default without context still requires an empty account.
+
+## Tighter selection and credit-floor admission
+
+The additional approved attempt uses --max-hourly-rate 2.25. This option may only tighten the existing policy ceiling; the launcher rechecks the fresh GPU-plus-storage quote before SSH preparation, reservation or provisioning. Fresh shared credit must cover the quote-specific lifetime cost, the exact separate-rental reserve and the unchanged USD1 account-credit floor. Repricing and insufficient floor funding fail before any provider mutation. See [the additional-attempt specification](N640_RETRY_SPEC_2026-10-13.md).
