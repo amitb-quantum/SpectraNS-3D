@@ -40,7 +40,9 @@ def main(directory):
         elif mode=="local-rehearsal" and state.get("inject"):
             stage=state.get("phase")
             if stage==state["inject"] or (state["inject"]=="checkpoint_collection" and stage=="exploration"):
-                if state["inject"] in ("coarse","fine","exploration"):
+                if state["inject"]=="prefix_assembly":
+                    reason="injected_prefix_assembly"
+                elif state["inject"] in ("preflight","coarse","fine","exploration"):
                     marker=Path(state["worker_progress"])
                     if marker.exists() and json.loads(marker.read_text()).get("t",0)>state.get("worker_start_t",0)+1e-14:reason="injected_"+state["inject"]
                 else:

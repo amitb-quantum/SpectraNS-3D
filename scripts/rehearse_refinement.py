@@ -10,7 +10,8 @@ from refinement_guard import same
 def run_suite(out,cuda=False):
     out=Path(out).resolve();out.mkdir(parents=True,exist_ok=False)
     binding=fingerprint(ROOT);cases=[("success_overlap",None,False),("success_sequential",None,True),
-         ("kill_coarse","coarse",False),("kill_fine","fine",False),
+         ("success_metadata_only",None,False),("kill_preflight","preflight",False),
+         ("kill_coarse","coarse",False),("kill_prefix_assembly","prefix_assembly",False),("kill_fine","fine",False),
          ("kill_protected_collection","protected_collection",False),
          ("kill_checkpoint_collection","checkpoint_collection",True),
          ("kill_exploration","exploration",False)]
@@ -22,6 +23,7 @@ def run_suite(out,cuda=False):
              "--profile","cuda-rehearsal" if name=="success_cuda" else "cpu-rehearsal","--lifetime","600"]
         if inject:cmd+=["--inject",inject]
         if sequential:cmd+=["--sequential"]
+        if name=="success_metadata_only":cmd+=["--metadata-only"]
         started=time.monotonic()
         with (out/(name+".log")).open("x") as f:
             process=subprocess.run(cmd,cwd=ROOT,stdout=f,stderr=subprocess.STDOUT,
@@ -51,7 +53,14 @@ def run_suite(out,cuda=False):
             if process.returncode or campaign["status"]!="completed" or not campaign["protected_validated"]:
                 raise ValueError("success rehearsal failed: "+name)
             decision=json.loads((directory/"overlap_decision.json").read_text())
-            if decision["overlap"]==sequential:raise ValueError("overlap branch not exercised")
+            if name=="success_metadata_only":
+                if decision["overlap"] or campaign["checkpoint_collection"]!="disabled_predeclared" or (directory/"checkpoint_receipt.json").exists():
+                    raise ValueError("metadata-only path collected unrequested fields")
+            elif decision["overlap"]==sequential:raise ValueError("overlap branch not exercised")
+            if not campaign.get("preflight_continuation",{}).get("verified"):
+                raise ValueError("successful campaign lacks verified original-IC prefix")
+            if (directory/"work/preflight/checkpoints").exists():
+                raise ValueError("successful assembly did not release retained preflight anchor")
         result=dict(name=name,status="passed",returncode=process.returncode,
              wall_s=time.monotonic()-started,protected_evidence_verified=protected,
              partial_files=[p.relative_to(directory).as_posix() for p in directory.rglob("*.part")],

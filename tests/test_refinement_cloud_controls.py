@@ -91,11 +91,17 @@ def test_actual_remote_pack_restart_and_collection_on_local_transport(tmp_path,m
     assert measured["fits"]==expected_disk["fits"]
     assert measured["required_free_bytes"]==expected_disk["required_free_bytes"]
     binding=fingerprint(ROOT)
-    for name in ("coarse","fine"):
-        restart=None if name=="coarse" else str(checkpoint_at(b.work/"coarse",.01,require_arrays=False))
+    from ns_refinement_worker import profile
+    p=profile("cpu-rehearsal")
+    for name,target in (("preflight",.001),("reload",.002),("coarse",.011),("fine",.011)):
+        restart=None if name=="preflight" else str(checkpoint_at(b.work/("coarse" if name=="fine" else "preflight"),.01 if name=="fine" else .001,require_arrays=False))
         cfg=dict(profile="cpu-rehearsal",phase=name,output=str(b.work/name),restart=restart,
               fingerprint=binding,wall_seconds=120,rehearsal_pause_s=0,telemetry_path=str(b.work/(name+"_driver.csv")))
-        b.phase(name,cfg);validate(b.work/name,64,.011,.001)
+        b.phase(name,cfg);validate(b.work/name,64,target,.001)
+        if name=="coarse":
+            receipt=b.complete_coarse(p)
+            assert receipt["verified"] and receipt["merged_diagnostic_events"]==12
+            assert not (remote_work/"preflight/checkpoints").exists()
     assert not list(b.work.rglob("*.npy"))
     archive,record=b.archive("checkpoint",str(remote_work/"coarse"),"pinned-test",.011)
     b.checkpoint_metrics=record

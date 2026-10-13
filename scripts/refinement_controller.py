@@ -37,6 +37,11 @@ class LocalBackend:
                 if p.poll() is None:kill_owned(owned);p.wait()
     def checkpoint(self,t):
         return checkpoint_at(self.work/"coarse",t)
+    def preflight_checkpoint(self,t):
+        return checkpoint_at(self.work/"preflight",t)
+    def complete_coarse(self,p):
+        from refinement_prefix import join_prefix,release_prefix
+        receipt=join_prefix(self.work,p);release_prefix(self.work);return receipt
     def prepare_checkpoint(self,endpoint):
         target=self.out/"checkpoint_frozen";target.mkdir()
         for file in endpoint.iterdir():
@@ -52,8 +57,9 @@ class LocalBackend:
     def close(self):
         return dict(verified=True,mode=self.mode,provider="local mock; no provider API called",reason="normal_closure",at_epoch=time.time())
 
-def run(out,backend,mode,*,inject=None,force_sequential=False):
+def run(out,backend,mode,*,inject=None,force_sequential=False,force_metadata_only=False):
     out=Path(out);p=profile(mode);state=backend.state
+    if mode=="production" and force_metadata_only:raise ValueError("local rehearsal override forbidden in production")
     binding=fingerprint(ROOT);write(backend.work/"source_binding.json",binding)
     write(backend.work/"plan.json",json.loads((ROOT/"configs/n640_refinement_proposal.json").read_text()))
     write(backend.work/"acceptance.json",json.loads((ROOT/"configs/h100_acceptance.json").read_text()))
@@ -63,10 +69,11 @@ def run(out,backend,mode,*,inject=None,force_sequential=False):
         state.update(phase=name)
         if progress:state["transfer_progress"]=str(progress)
         write(out/"controller_state.json",state);print("PHASE "+name,flush=True)
+        if inject==name=="prefix_assembly" and mode!="production":time.sleep(.3)
     def worker(name,restart=None):
-        stage(name)
         state["worker_progress"]=str(backend.work/name/"peak_last_event.json")
-        state["worker_start_t"]=p["anchor"] if name=="fine" else p["prefix"] if name=="exploration" else 0.
+        state["worker_start_t"]=p["anchor"] if name=="fine" else p["prefix"] if name=="exploration" else p["preflight_t"] if name=="coarse" else 0.
+        stage(name)  # Publish phase and its fresh marker/start atomically for the guard.
         cfg=dict(profile=mode,phase=name,output=str(backend.work/name),restart=None if restart is None else str(restart),
                  wall_seconds=max(1,state["deadline_epoch"]-time.time()-20),fingerprint=binding,
                  rehearsal_pause_s=.2 if inject else 0.,telemetry_path=str(backend.work/(name+"_driver.csv")))
@@ -78,7 +85,14 @@ def run(out,backend,mode,*,inject=None,force_sequential=False):
     transfer_thread=None;transfer_errors=[]
     try:
         if mode=="production":backend.preflight(binding)
-        worker("coarse")
+        else:
+            worker("preflight")
+            validate(backend.work/"preflight",p["N"],p["preflight_t"],p["log_dt"])
+            worker("reload",backend.preflight_checkpoint(p["preflight_t"]))
+            validate(backend.work/"reload",p["N"],p["reload_t"],p["log_dt"])
+        worker("coarse",backend.preflight_checkpoint(p["preflight_t"]))
+        stage("prefix_assembly")
+        result["preflight_continuation"]=backend.complete_coarse(p)
         coarse=validate(backend.work/"coarse",p["N"],p["prefix"],p["log_dt"])
         anchor=backend.checkpoint(p["anchor"])
         endpoint=backend.checkpoint(p["prefix"])
@@ -118,31 +132,38 @@ def run(out,backend,mode,*,inject=None,force_sequential=False):
         if state["deadline_epoch"]-time.time()<backend.minimum_optional_seconds:
             result.update(checkpoint_collection="skipped_lifetime",exploration="skipped_lifetime",status="completed")
             return result
-        checkpoint_archive,fields,checkpoint_metrics=backend.prepare_checkpoint(endpoint)
-        measured_rate=backend.measured_rate or transfer["copied"]/max(transfer["seconds"],1e-9)
-        checkpoint_allowance=1.5*(checkpoint_metrics["bytes"]/measured_rate+checkpoint_metrics["seconds"]+backend.verification_allowance_seconds)+backend.cleanup_seconds
+        plan=json.loads((ROOT/"configs/n640_refinement_proposal.json").read_text())
+        download_enabled=(mode!="production" or plan["checkpoint_collection"]["full_field_download_enabled"]) and not force_metadata_only
         cm=coarse["manifest"]["timing"]
         elapsed=cm["process_wall_s"]
         explore_seconds=elapsed*(p["ceiling"]-p["prefix"])/p["prefix"]*1.25+10
-        decision=overlap_decision(state["deadline_epoch"]-time.time(),checkpoint_allowance,explore_seconds,cleanup=backend.cleanup_seconds)
-        if force_sequential:decision["overlap"]=False;decision["rehearsal_override"]="sequential branch coverage"
-        write(out/"overlap_decision.json",dict(decision,checkpoint=checkpoint_metrics,
-              collection_rate_bytes_per_second=measured_rate,exploration_forecast_seconds=explore_seconds))
-        def collect_checkpoint():
-            try:
-                backend.collect(checkpoint_archive,out/"checkpoint_recovered.tar.gz",
-                    out/"checkpoint_transfer_progress.json",bool(inject))
-                result["checkpoint_receipt"]=unpack_verified(out/"checkpoint_recovered.tar.gz",out/"checkpoint",fields)
-                result["checkpoint_collection"]="verified"
-                write(out/"checkpoint_receipt.json",result["checkpoint_receipt"])
-            except Exception as exc:
-                result["checkpoint_collection"]="incomplete";transfer_errors.append(type(exc).__name__)
-        stage("checkpoint_collection",out/"checkpoint_transfer_progress.json")
-        if decision["overlap"]:
-            transfer_thread=threading.Thread(target=collect_checkpoint,daemon=True);transfer_thread.start()
-        elif checkpoint_allowance+backend.cleanup_seconds<state["deadline_epoch"]-time.time():
-            collect_checkpoint()
-        else:result["checkpoint_collection"]="skipped_lifetime"
+        if download_enabled:
+            checkpoint_archive,fields,checkpoint_metrics=backend.prepare_checkpoint(endpoint)
+            measured_rate=backend.measured_rate or transfer["copied"]/max(transfer["seconds"],1e-9)
+            checkpoint_allowance=1.5*(checkpoint_metrics["bytes"]/measured_rate+checkpoint_metrics["seconds"]+backend.verification_allowance_seconds)+backend.cleanup_seconds
+            decision=overlap_decision(state["deadline_epoch"]-time.time(),checkpoint_allowance,explore_seconds,cleanup=backend.cleanup_seconds)
+            if force_sequential:decision["overlap"]=False;decision["rehearsal_override"]="sequential branch coverage"
+            write(out/"overlap_decision.json",dict(decision,checkpoint=checkpoint_metrics,
+                  collection_rate_bytes_per_second=measured_rate,exploration_forecast_seconds=explore_seconds))
+            def collect_checkpoint():
+                try:
+                    backend.collect(checkpoint_archive,out/"checkpoint_recovered.tar.gz",
+                        out/"checkpoint_transfer_progress.json",bool(inject))
+                    result["checkpoint_receipt"]=unpack_verified(out/"checkpoint_recovered.tar.gz",out/"checkpoint",fields)
+                    result["checkpoint_collection"]="verified"
+                    write(out/"checkpoint_receipt.json",result["checkpoint_receipt"])
+                except Exception as exc:
+                    result["checkpoint_collection"]="incomplete";transfer_errors.append(type(exc).__name__)
+            stage("checkpoint_collection",out/"checkpoint_transfer_progress.json")
+            if decision["overlap"]:
+                transfer_thread=threading.Thread(target=collect_checkpoint,daemon=True);transfer_thread.start()
+            elif checkpoint_allowance+backend.cleanup_seconds<state["deadline_epoch"]-time.time():
+                collect_checkpoint()
+            else:result["checkpoint_collection"]="skipped_lifetime"
+        else:
+            result["checkpoint_collection"]="disabled_predeclared"
+            write(out/"overlap_decision.json",dict(overlap=False,checkpoint_collection_enabled=False,
+              exploration_forecast_seconds=explore_seconds,reason="metadata/hash custody only; no full-field archive or transfer"))
         if explore_seconds+backend.cleanup_seconds<state["deadline_epoch"]-time.time():
             try:
                 worker("exploration",endpoint);result["exploration"]="completed"
@@ -182,8 +203,8 @@ def run(out,backend,mode,*,inject=None,force_sequential=False):
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument("--output",required=True)
     parser.add_argument("--profile",choices=("cpu-rehearsal","cuda-rehearsal"),required=True)
-    parser.add_argument("--inject",choices=("coarse","fine","protected_collection","checkpoint_collection","exploration"))
-    parser.add_argument("--sequential",action="store_true");parser.add_argument("--lifetime",type=float,default=600)
+    parser.add_argument("--inject",choices=("preflight","coarse","prefix_assembly","fine","protected_collection","checkpoint_collection","exploration"))
+    parser.add_argument("--sequential",action="store_true");parser.add_argument("--metadata-only",action="store_true");parser.add_argument("--lifetime",type=float,default=600)
     a=parser.parse_args();out=Path(a.output).resolve();out.mkdir(parents=True,exist_ok=False)
     if not 10<a.lifetime<=1800:parser.error("local lifetime must be 10..1800 seconds")
     state=dict(mode="local-rehearsal",controller_pid=os.getpid(),controller_birth=birth(os.getpid()),
@@ -197,7 +218,7 @@ def main():
         if guard.poll() is not None:raise RuntimeError("independent guard failed to arm")
         time.sleep(.02)
     else:raise TimeoutError("guard startup")
-    result=run(out,LocalBackend(out,state),a.profile,inject=a.inject,force_sequential=a.sequential)
+    result=run(out,LocalBackend(out,state),a.profile,inject=a.inject,force_sequential=a.sequential,force_metadata_only=a.metadata_only)
     guard.wait(timeout=10)
     return 0 if result["status"]=="completed" else 2
 

@@ -6,10 +6,18 @@ from extension_state import write,sha
 from refinement_io import small_snapshot,pack,inventory,unpack_verified
 from refinement_assessment import checkpoint_at
 def main():
-    p=argparse.ArgumentParser();p.add_argument("operation",choices=("small","checkpoint","probe","prune","verify"))
+    p=argparse.ArgumentParser();p.add_argument("operation",choices=("small","checkpoint","probe","prune","verify","join-prefix"))
     p.add_argument("--source",required=True);p.add_argument("--output",required=True);p.add_argument("--t",type=float)
     a=p.parse_args();source=Path(a.source);output=Path(a.output)
     output.parent.mkdir(parents=True,exist_ok=True)
+    if a.operation=="join-prefix":
+        if source.name!="refinement_run" or source.parent.name!="artifacts":
+            raise ValueError("continuation assembly restricted to new refinement work")
+        from ns_refinement_worker import profile
+        from refinement_prefix import join_prefix,release_prefix
+        exact=json.loads((source/"preflight"/"exact_configuration.json").read_text())
+        receipt=join_prefix(source,profile(exact["request"]["profile"]))
+        release_prefix(source);write(output,receipt);return
     if a.operation=="prune":
         if source.name!="preflight" or source.parent.name!="refinement_run":
             raise ValueError("prune restricted to new refinement preflight")

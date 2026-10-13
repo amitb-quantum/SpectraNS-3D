@@ -11,7 +11,7 @@ from refinement_capacity import DISK_GB,MAX_HOURLY_USD
 def validate_rehearsal(path):
     r=json.loads(Path(path).read_text())
     names={c["name"] for c in r.get("cases",[]) if c.get("status")=="passed"}
-    needed={"success_overlap","success_sequential","kill_coarse","kill_fine","kill_protected_collection","kill_checkpoint_collection","kill_exploration","success_cuda"}
+    needed={"success_overlap","success_sequential","success_metadata_only","kill_preflight","kill_coarse","kill_prefix_assembly","kill_fine","kill_protected_collection","kill_checkpoint_collection","kill_exploration","success_cuda"}
     if r.get("status")!="passed" or r.get("provider_calls")!=0 or not needed<=names or r.get("fingerprint")!=fingerprint(ROOT):
         raise ValueError("current source/config-bound complete CPU/CUDA kill rehearsals required")
     return r

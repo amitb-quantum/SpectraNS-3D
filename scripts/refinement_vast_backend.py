@@ -44,6 +44,12 @@ class VastBackend:
         return WORK+"/"+Path(path).relative_to(self.work).as_posix()
     def checkpoint(self,t):
         return checkpoint_at(self.work/"coarse",t,require_arrays=False)
+    def preflight_checkpoint(self,t):
+        return checkpoint_at(self.work/"preflight",t,require_arrays=False)
+    def complete_coarse(self,p):
+        self.remote("cd "+PROJECT+" && "+PYTHON+" scripts/refinement_remote_io.py join-prefix --source "+WORK+" --output "+WORK+"/continuation_receipt.json")
+        self.sync_small()
+        return json.loads((self.work/"continuation_receipt.json").read_text())
     def archive(self,operation,source,name,t=None):
         archive=REMOTE+"/"+name+".tar.gz"
         command=[PYTHON,"scripts/refinement_remote_io.py",operation,"--source",source,"--output",archive]
@@ -145,9 +151,9 @@ class VastBackend:
         self.verification_allowance_seconds=max(60.,2*verification["seconds"])
         self.preflight_compression=compression
         write(self.work/"transfer_preflight.json",dict(trials=trials,compression=compression,slowest_bytes_per_second=self.measured_rate))
-        self.remote("cd "+PROJECT+" && "+PYTHON+" scripts/refinement_remote_io.py prune --source "+WORK+"/preflight --output "+WORK+"/preflight_prune.json")
+        # Keep the exact preflight state until the original-IC continuation is joined.
         self.remote("rm -- "+shlex.quote(archive)+" "+shlex.quote(archive+".json"))
-        self.disk_gate("after_preflight_prune")
+        self.disk_gate("after_preflight_retention")
         m=json.loads((self.work/"preflight"/"run.json").read_text());timing=m["timing"]
         seconds=timing["seconds"];calls=timing["calls"]
         integration_rows=__import__("csv").DictReader((self.work/"preflight"/"steps.csv").open())
@@ -158,15 +164,24 @@ class VastBackend:
         write(self.work/"warmup_timing.json",dict(discarded_steps=20,timed_steps=len(samples)-20,
               median_increment_seconds=__import__("statistics").median(after_warmup),
               integration_mean_seconds=seconds["integration"]/m["achieved_steps"]))
-        diagnostic=sum(seconds.get(k,0) for k in ("scalar_diagnostics_and_tail","enstrophy_budget","full_spectrum","fourier_peak_refinement"))/calls["scalar_diagnostics_and_tail"]
+        sampling=json.loads((self.work/"preflight"/"sampling_timing.json").read_text())
+        if sampling["refinement_calls"]!=2:raise ValueError("preflight must time both declared refined endpoints")
+        refined=sampling["refinement_seconds"]/sampling["refinement_calls"]
+        callback_base=max(0.,seconds.get("fourier_peak_refinement",0)-sampling["refinement_seconds"])
+        diagnostic=(sum(seconds.get(k,0) for k in ("scalar_diagnostics_and_tail","enstrophy_budget","full_spectrum"))+callback_base)/calls["scalar_diagnostics_and_tail"]
         checkpoint=seconds["checkpoint_write_hash_prune"]/calls["checkpoint_write_hash_prune"]
         dt=m["dt_statistics"]["min"]
         if dt<.0005*(1-1e-8):raise ValueError("preflight CFL clipping needs revised runtime forecast")
-        forecast=protected_phase_forecast(step,diagnostic,checkpoint,self.remaining(120),180)
-        self.fine_reserve_seconds=1.25*(400*step+11*diagnostic)+180
+        from refinement_sampling import count_remaining
+        from ns_refinement_worker import profile
+        counts=count_remaining(profile("production"))
+        forecast=protected_phase_forecast(step,diagnostic,checkpoint,self.remaining(120),180,
+            coarse_start_t=.05,refinement_seconds=refined,refinement_events=counts["total"])
+        self.fine_reserve_seconds=1.25*(400*step+11*diagnostic+counts["fine"]*refined)+180
         forecast.update(step_seconds=step,diagnostic_seconds=diagnostic,checkpoint_seconds=checkpoint,
              achieved_dt_min=dt,fine_reserve_seconds=self.fine_reserve_seconds,
-             note="conservative integration mean includes warmup; every-event interpolation included")
+             refinement_seconds_per_call=refined,refinement_counts=counts,
+             note="verified original-IC prefix reused; sampled maxima/budgets/spectra every event; only declared Fourier estimates timed separately")
         write(self.work/"runtime_preflight.json",forecast)
         for name in ("tests.log","references.log","N512_benchmark.log"):
             shutil.copyfile(self.out/name,self.work/name)

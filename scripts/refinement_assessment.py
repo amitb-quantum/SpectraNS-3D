@@ -18,6 +18,9 @@ def validate(directory,N,target,log_dt,*,current_driver=True):
         raise ValueError("required phase did not reach its accepted endpoint")
     ds=rows(directory/"diagnostics.csv");bs=rows(directory/"enstrophy.csv")
     if not ds or [r["t"] for r in ds]!=[r["t"] for r in bs]:raise ValueError("diagnostic times differ")
+    expected=[round(m["start_t"]+i*log_dt,12) for i in range(round((target-m["start_t"])/log_dt)+1)]
+    if [round(float(r["t"]),12) for r in ds]!=expected:
+        raise ValueError("required event lattice incomplete")
     spectra={}
     for row in rows(directory/"spectra.csv"):
         t=round(float(row["t"]),12);k=int(row["shell_k"]);v=float(row["E_shell_mean_density"])
@@ -40,11 +43,21 @@ def validate(directory,N,target,log_dt,*,current_driver=True):
     if current_driver:
         ip=rows(directory/"interpolated_vorticity.csv")
         if [r["t"] for r in ip]!=[r["t"] for r in ds]:raise ValueError("missing per-event interpolation")
+        exact=json.loads((directory/"exact_configuration.json").read_text())
+        from refinement_sampling import selected
+        phase=exact["request"]["phase"];p=exact["profile"]
         for d,v in zip(ds,ip):
             if abs(float(d["wmax"])-float(v["sampled_wmax"]))/max(float(d["wmax"]),1e-30)>2e-11:
                 raise ValueError("grid maximum mismatch")
-            if not all(math.isfinite(float(v[k])) for k in v if k not in ("estimator_stable",)):
-                raise ValueError("nonfinite interpolation")
+            expected=selected(float(d["t"]),phase,p,continued=phase=="coarse" and m["start_t"]>0)
+            if v.get("refinement_performed")!=str(expected):
+                raise ValueError("predeclared refinement schedule mismatch")
+            keys=("fourier_refined_peak_estimate","sampling_bias_fraction","seed_expansion_relative_change","last_level_relative_increment")
+            if expected:
+                if not all(math.isfinite(float(v[k])) for k in keys) or v["estimator_stable"] not in ("True","False"):
+                    raise ValueError("nonfinite interpolation")
+            elif any(v[k]!="" for k in (*keys,"estimator_stable")):
+                raise ValueError("unperformed refinement must remain explicitly empty")
         for entry in m["checkpoint_history"]:
             archive=directory/"checkpoint_metadata"/(Path(entry["path"]).name+".json")
             if sha(archive)!=entry["metadata_sha256"]:raise ValueError("checkpoint metadata missing")
@@ -139,7 +152,7 @@ def matched_peak_comparison(coarse,reference):
     comparisons=[]
     for r in reference["checkpoints"]:
         value=actual.get(round(r["t"],12))
-        if value is None:raise ValueError("matched peak event absent")
+        if value is None or value.get("refinement_performed")!="True":raise ValueError("matched refined peak event absent")
         a,b=r["peak"]["fourier_refined_peak_estimate"],float(value["fourier_refined_peak_estimate"])
         stable=value["estimator_stable"]=="True" and r["peak"]["estimator_stable"]
         error=abs(a-b)/max(a,b,1e-30)
