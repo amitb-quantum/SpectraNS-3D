@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "plan_version": "1.0",
+  "updated_at_pt": "2026-10-13T11:06:22.137041-07:00",
+  "project": "SpectraNS-3D",
+  "scientific_milestone": "Original-IC N512/N640 comparison through1.10 and local fine-window validation",
+  "scientific_status": "unfinished",
+  "current_task": "P02",
+  "next_action": "Obtain user continuation decision; unaffected plan documentation may proceed",
+  "decision": null,
+  "automation_status": "PAUSED",
+  "new_billable_attempt_pending_decision": true,
+  "baseline_commit": "d258fcb556e69090454c437454cf7830d897029d",
+  "last_budget_snapshot": {
+    "conservative_exposure_usd": 20.77874122875802,
+    "headroom_usd": 9.221258771241981,
+    "total_ceiling_usd": 30,
+    "note": "Dated closure snapshot; fresh billing/shared credit mandatory before provisioning"
+  },
+  "proposed_choices": [
+    "one_more_5_usd_attempt_at_2_25_or_less",
+    "one_more_6_usd_attempt_after_guard_revalidation",
+    "close_current_phase_incomplete"
+  ],
+  "tasks": [
+    {
+      "id": "P01",
+      "title": "Freeze baseline",
+      "status": "completed",
+      "successor": "P02",
+      "evidence": [
+        "docs/N640_CAMPAIGN_OUTCOME_2026-10-13.md",
+        "docs/evidence/2026-10-13/n640_preflight/evidence_manifest.json"
+      ]
+    },
+    {
+      "id": "P02",
+      "title": "Choose continuation or explicit incomplete closeout",
+      "status": "awaiting_user_decision",
+      "successor": null,
+      "successors": {
+        "continue": "P03",
+        "close_current_phase": "P11"
+      }
+    },
+    {
+      "id": "P03",
+      "title": "Freeze experiment and spending specification",
+      "status": "pending",
+      "depends_on": "P02",
+      "successor": "P04"
+    },
+    {
+      "id": "P04",
+      "title": "Verify implementation and bound proofs",
+      "status": "pending",
+      "depends_on": "P03",
+      "successor": "P05"
+    },
+    {
+      "id": "P05",
+      "title": "Discover eligible offer and financing",
+      "status": "pending",
+      "depends_on": "P04",
+      "successor": "P06"
+    },
+    {
+      "id": "P06",
+      "title": "Provision one instance and measure preflight",
+      "status": "pending",
+      "depends_on": "P05",
+      "successor": "P07"
+    },
+    {
+      "id": "P07",
+      "title": "Run N640 original-IC prefix through1.10",
+      "status": "pending",
+      "depends_on": "P06",
+      "successor": "P08"
+    },
+    {
+      "id": "P08",
+      "title": "Run protected fine timestep window",
+      "status": "pending",
+      "depends_on": "P07",
+      "successor": "P09"
+    },
+    {
+      "id": "P09",
+      "title": "Independently classify spatial evidence",
+      "status": "pending",
+      "depends_on": "P08",
+      "successor": "P10"
+    },
+    {
+      "id": "P10",
+      "title": "Close and reconcile the rental",
+      "status": "pending",
+      "depends_on": "P09",
+      "successor": "P11"
+    },
+    {
+      "id": "P11",
+      "title": "Interpret results",
+      "status": "pending",
+      "successor": "P12",
+      "depends_on_any": [
+        "P10",
+        "P02:close_current_phase"
+      ]
+    },
+    {
+      "id": "P12",
+      "title": "Publish and close phase",
+      "status": "pending",
+      "depends_on": "P11",
+      "successor": null
+    }
+  ],
+  "handoff_rule": "Complete task, record evidence/status, set successor, continue if authorized. If a decision blocks progress, consult immediately; never mark a runtime refusal as completed spatial validation."
+}

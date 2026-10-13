@@ -6,6 +6,8 @@ SpectraNS-3D asks which features of an intense flow survive changes in timestep,
 
 **Current status, October 13, 2026:** the solver audit, CPU/H100 backend checks, N512 timestep study and bounded N512 extension are complete. The final budgeted N640 attempt passed 185 H100 tests, eight CPU/H100 references and numerical/memory/restart preflight, but production was refused by the measured lifetime gate. The single attempt is closed with verified GPU termination; no automatic retry is planned. N640 spatial validation remains **unfinished**. See the [campaign outcome](docs/N640_CAMPAIGN_OUTCOME_2026-10-13.md). No numerical result here proves global regularity or finite-time blowup.
 
+Follow the [Plan of Action](docs/PLAN_OF_ACTION.md) for chronological tasks, acceptance criteria, the current decision and the mandatory next-step handoff.
+
 ## Why this project exists
 
 Large vorticity, fast enstrophy growth and a plausible-looking spectrum can all occur in a computation that has become unreliable. Errors in the integrator, insufficient spatial resolution, FFT normalization, grid sampling or a failed run controller can imitate or distort the phenomena we want to study.
