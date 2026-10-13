@@ -9,3 +9,7 @@ This heartbeat inspected clean native main and verified campaign004 absent, then
 The watch is paused. P05 returns to P02 for a decision: extend discovery another60 minutes with the same USD5 campaign/USD30 project ceilings and unchanged hardware/scientific gates, or close this phase with the comparison explicitly incomplete. Consultation was requested immediately. No billable execution may proceed under the expired window.
 
 [Sanitized polls and SHA256 records](evidence/2026-10-13/retry_discovery/discovery.json) preserve the observation evidence. Credentials, account context and the live ledger remain private. Historical results and readiness proofs are intact.
+
+## Subsequent user decision
+
+The user explicitly extended discovery60 minutes with unchanged limits. Discovery resumed at14:29:11 PDT and expires15:29:11 PDT (22:29:11 UTC). The first poll in the new window again returned zero eligible offers. The watch is resumed; no new rental has been created. [Extension record and initial poll hash](evidence/2026-10-13/retry_discovery/discovery_extension_001.json) preserve this handoff without overwriting the expired-window evidence.

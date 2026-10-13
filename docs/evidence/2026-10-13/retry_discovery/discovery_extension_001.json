@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "decision": "extend_discovery60_minutes_same_limits",
+  "authorized_by": "explicit_user_reply",
+  "started_at_pt": "2026-10-13T14:29:11-07:00",
+  "deadline_pt": "2026-10-13T15:29:11-07:00",
+  "deadline_utc": "2026-10-13T22:29:11+00:00",
+  "billable_attempt_quantity": 1,
+  "campaign_cap_usd": 5,
+  "max_hourly_rate_usd": "2.25",
+  "total_project_cap_usd": 30,
+  "fixed_campaign_directory": "artifacts/cloud-preparation/2026-10-13/n640_campaign_004",
+  "scientific_or_hardware_gate_changes": false,
+  "prior_window_expired_without_attempt": true,
+  "no_automatic_billable_retry": true,
+  "initial_poll": {
+    "path": "docs/evidence/2026-10-13/retry_discovery/20261013T212927-8eb75a243b5a42c3b2aef9a9add50b25.json",
+    "sha256": "2589ef03babe3f5a98bf2574b42253e4f925d19c4de0724e67186afaf701426e",
+    "as_of_utc": "2026-10-13T21:29:26.941933+00:00",
+    "qualifying_offers": 0
+  }
+}

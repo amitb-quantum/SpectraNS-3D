@@ -1,0 +1,70 @@
+{
+  "mode": "read-only",
+  "status": "completed",
+  "as_of_utc": "2026-10-13T21:29:26.941933+00:00",
+  "provisioning_performed": false,
+  "instance_mutations_performed": false,
+  "budget_mutations_performed": false,
+  "requested_disk_GB": 64,
+  "max_gpu_plus_disk_hourly_usd": "2.6",
+  "requires_fresh_billing_rehearsal_and_measured_preflight_before_execution": true,
+  "query": {
+    "limit": 50,
+    "type": "on-demand",
+    "gpu_name": {
+      "in": [
+        "H100 SXM",
+        "H100 PCIE",
+        "H100 NVL"
+      ]
+    },
+    "num_gpus": {
+      "eq": 1
+    },
+    "verified": {
+      "eq": true
+    },
+    "rentable": {
+      "eq": true
+    },
+    "rented": {
+      "eq": false
+    },
+    "reliability2": {
+      "gte": 0.99
+    },
+    "cuda_max_good": {
+      "gte": 13
+    },
+    "disk_space": {
+      "gte": 64
+    },
+    "gpu_ram": {
+      "gte": 80000
+    },
+    "cpu_arch": {
+      "eq": "amd64"
+    },
+    "cpu_cores_effective": {
+      "gte": 4
+    },
+    "cpu_ram": {
+      "gte": 16000
+    },
+    "dph_total": {
+      "lte": 2.6
+    },
+    "order": [
+      [
+        "dph_total",
+        "asc"
+      ]
+    ]
+  },
+  "eligible": [],
+  "rejected": [],
+  "returned_count": 0,
+  "possibly_truncated": false,
+  "alert": false,
+  "alert_reason": "unchanged"
+}

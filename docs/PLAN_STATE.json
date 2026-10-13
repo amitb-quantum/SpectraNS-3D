@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "plan_version": "1.0",
-  "updated_at_pt": "2026-10-13T13:04:05.030426-07:00",
+  "updated_at_pt": "2026-10-13T14:30:09.040597-07:00",
   "project": "SpectraNS-3D",
   "scientific_milestone": "Original-IC N512/N640 comparison through1.10 and local fine-window validation",
   "scientific_status": "unfinished",
-  "current_task": "P02",
-  "next_action": "Await user decision: extend discovery60 minutes with unchangedUSD5/2.25 limits, or explicitly close the phase incomplete. No provisioning under expired window.",
-  "decision": "awaiting_discovery_extension_or_incomplete_closeout",
-  "automation_status": "PAUSED",
-  "new_billable_attempt_pending_decision": true,
+  "current_task": "P05",
+  "next_action": "Discover eligible H100 by15:29:11 PDT; then refresh billing, verify proofs, bind transport payload and provision the single authorized campaign004.",
+  "decision": "one_more_5_usd_attempt_at_2_25_or_less_discovery_extended",
+  "automation_status": "ACTIVE",
+  "new_billable_attempt_pending_decision": false,
   "baseline_commit": "d258fcb556e69090454c437454cf7830d897029d",
   "last_budget_snapshot": {
     "conservative_exposure_usd": 20.77874122875802,
@@ -36,14 +36,14 @@
     {
       "id": "P02",
       "title": "Choose continuation or explicit incomplete closeout",
-      "status": "awaiting_user_decision",
+      "status": "completed",
       "successor": "P03",
       "successors": {
         "continue": "P03",
         "close_current_phase": "P11"
       },
       "prior_result": "User selected one additional USD5 attempt, maxUSD2.25/hour.",
-      "result": "The authorized discovery timebox expired without an admitted offer; extension or incomplete closeout decision requested."
+      "result": "User explicitly extended discovery60 minutes, with unchangedUSD5/2.25 limits and existing gates. No billable attempt consumed."
     },
     {
       "id": "P03",
@@ -71,13 +71,14 @@
     {
       "id": "P05",
       "title": "Discover eligible offer and financing",
-      "status": "awaiting_user_decision",
+      "status": "in_progress",
       "depends_on": "P04",
       "successor": "P06",
-      "result": "Financing/readiness passed earlier; deadline expired without eligible offer. No new rental or rental charge. Return toP02; retained proof does not expire merely because discovery ends.",
+      "result": "Discovery resumed14:29:11\u201315:29:11 PDT. Initial refreshed poll returned no eligible offer; fresh financing mandatory before provisioning.",
       "evidence": [
         "docs/N640_DISCOVERY_STATUS_2026-10-13.md",
-        "docs/evidence/2026-10-13/retry_discovery/discovery.json"
+        "docs/evidence/2026-10-13/retry_discovery/discovery.json",
+        "docs/evidence/2026-10-13/retry_discovery/discovery_extension_001.json"
       ]
     },
     {
@@ -139,12 +140,18 @@
     "cap_usd": 5,
     "max_hourly_usd": "2.25",
     "maximum_lifetime_seconds": 7200,
-    "discovery_deadline_pt": "2026-10-13T13:02:35-07:00",
-    "status": "discovery_window_expired_no_attempt",
-    "directory": "artifacts/cloud-preparation/2026-10-13/n640_campaign_004"
+    "discovery_deadline_pt": "2026-10-13T15:29:11-07:00",
+    "status": "waiting_for_eligible_offer",
+    "directory": "artifacts/cloud-preparation/2026-10-13/n640_campaign_004",
+    "discovery_started_at_pt": "2026-10-13T14:29:11-07:00",
+    "discovery_extension_count": 1
   },
-  "blocker": {
-    "kind": "discovery_timebox_expired",
-    "detail": "No eligible offer admitted before13:02:35 PDT. No rental created. User consultation requested immediately; awaiting answer."
-  }
+  "blocker": null,
+  "discovery_history": [
+    {
+      "deadline_pt": "2026-10-13T13:02:35-07:00",
+      "outcome": "expired_without_admitted_offer",
+      "evidence": "docs/evidence/2026-10-13/retry_discovery/discovery.json"
+    }
+  ]
 }
