@@ -60,13 +60,26 @@ def transfer_allowance(bytes_to_transfer,trial_bytes_per_second,compression_seco
 
 def protected_phase_forecast(step_seconds,diagnostic_seconds,checkpoint_seconds,
                              remaining_lifetime_seconds,small_artifact_collection_seconds,
-                             setup_preflight_seconds=0,safety_factor=1.25):
-    """The required campaign ends at 1.10 and includes its 1.00-1.10 fine window."""
-    return runtime_forecast(step_seconds,diagnostic_seconds,checkpoint_seconds,2200,122,12,
+                             setup_preflight_seconds=0,safety_factor=1.25,
+                             *,coarse_start_t=0.,refinement_seconds=0.,refinement_events=0):
+    """Separate always-on diagnostics from the declared selective refinement cost."""
+    if not 0<=coarse_start_t<=.05 or not math.isfinite(refinement_seconds) or refinement_seconds<0 or type(refinement_events)is not int or refinement_events<0:
+        raise ValueError("invalid retained-prefix/refinement forecast")
+    steps=round((1.1-coarse_start_t)/.0005)
+    events=round((1.1-coarse_start_t)/.01)+1+11
+    result=runtime_forecast(step_seconds,diagnostic_seconds,checkpoint_seconds,steps,events,12,
                             remaining_lifetime_seconds,fine_steps=400,
                             setup_preflight_seconds=setup_preflight_seconds,
                             collection_cleanup_seconds=small_artifact_collection_seconds,
                             safety_factor=safety_factor)
+    added=refinement_seconds*refinement_events
+    result["compute_uninflated_seconds"]+=added
+    result["forecast_seconds"]+=safety_factor*added
+    result["fits"]=result["forecast_seconds"]<=remaining_lifetime_seconds
+    result.update(coarse_start_t=coarse_start_t,remaining_coarse_steps=steps,fine_steps=400,
+                  diagnostic_events=events,refinement_events=refinement_events,
+                  refinement_seconds_per_call=refinement_seconds,checkpoint_events=12)
+    return result
 
 def exploration_ready(record):
     """Planning status gate; the controller must independently verify these receipts."""

@@ -9,7 +9,7 @@ from cloud_records import utc_now
 from vast_readonly import discover, read_key, KEYFILE
 from vast_execution_access import inspect
 
-def reconcile(output, campaign=None):
+def reconcile(output, campaign=None, account_context=None):
     output = Path(output).resolve()
     output.mkdir(parents=True,exist_ok=False)
     key = read_key(KEYFILE)
@@ -38,8 +38,9 @@ def reconcile(output, campaign=None):
                       if row.get('source')=='instance-'+str(state['instance_id'])),Decimal('0'))
         extra_pending = max(Decimal('0'),upper-posted)
         new_posted = posted
-    if snapshot['instances']:
-        raise ValueError('active account instances must be accounted for before new commitments')
+    from account_coexistence import account_instances
+    account = account_instances(snapshot, ids, account_context)
+    (output/'account_attribution.json').write_text(json.dumps(account,indent=2)+'\n')
     if not snapshot['charge_listing_complete'] or not snapshot['instance_listing_complete']:
         raise ValueError('provider inventories incomplete')
     total = sum((Decimal(str(row['amount'])) for row in snapshot['charges']
@@ -49,18 +50,23 @@ def reconcile(output, campaign=None):
                   verified_as_of_utc=utc_now(),
                   pending_charges_upper_bound_usd=float(max(Decimal('.25'),Decimal(str(ledger.get('pending_charges_upper_bound_usd',0)))-max(Decimal('0'),total-new_posted-Decimal(str(ledger.get('prior_spend_usd',0)))))+extra_pending),
                   other_committed_project_spend_usd=0,
-                  reported_credit_balance_usd=access['financial_fields']['credit'])
+                  reported_credit_balance_usd=access['financial_fields']['credit'],
+                  nonproject_credit_reserve_usd=float(account['nonproject_credit_reserve_usd']),
+                  nonproject_account_instances=account['nonproject_instances'])
     ledger['evidence'].append((output/'provider.json').relative_to(ROOT).as_posix())
     ledger['notes'].append('Follow-up reconciliation: '+utc_now()+'; parent project charges only; final provider posting may lag.')
     ledger_path.write_text(json.dumps(ledger,indent=2)+'\n')
     (output/'budget_after.json').write_bytes(ledger_path.read_bytes())
     print(json.dumps(dict(posted_project_usd=float(total),pending_upper_usd=ledger['pending_charges_upper_bound_usd'],
-                          credit_usd=ledger['reported_credit_balance_usd'],active_instances=0),indent=2))
+                          credit_usd=ledger['reported_credit_balance_usd'],
+                          active_project_instances=0,active_account_instances=account['account_instances_active'],
+                          nonproject_credit_reserve_usd=account['nonproject_credit_reserve_usd']),indent=2))
     return ledger
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output',required=True)
     parser.add_argument('--campaign')
+    parser.add_argument('--account-context')
     args=parser.parse_args()
-    reconcile(args.output,args.campaign)
+    reconcile(args.output,args.campaign,json.loads(Path(args.account_context).read_text()) if args.account_context else None)

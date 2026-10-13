@@ -1,0 +1,59 @@
+{
+  "source": "prior measured H100 preflight; selective cost allocation is a planning scenario, not a new measurement",
+  "always_on_diagnostic_seconds": 1.068681641326597,
+  "estimated_refinement_seconds": 5.133849957104151,
+  "scenarios": {
+    "original": {
+      "forecast_seconds": 6165.003693094282,
+      "remaining_lifetime_seconds": 5943.585358142853,
+      "fits": false,
+      "compute_uninflated_seconds": 4788.002954475426,
+      "coarse_start_t": 0.0,
+      "remaining_coarse_steps": 2200,
+      "fine_steps": 400,
+      "diagnostic_events": 122,
+      "refinement_events": 0,
+      "refinement_seconds_per_call": 0.0,
+      "checkpoint_events": 12
+    },
+    "selective_only": {
+      "forecast_seconds": 5593.862885366447,
+      "remaining_lifetime_seconds": 5943.585358142853,
+      "fits": true,
+      "compute_uninflated_seconds": 4331.090308293157,
+      "coarse_start_t": 0.0,
+      "remaining_coarse_steps": 2200,
+      "fine_steps": 400,
+      "diagnostic_events": 122,
+      "refinement_events": 33,
+      "refinement_seconds_per_call": 5.133849957104151,
+      "checkpoint_events": 12
+    },
+    "continuation_only": {
+      "forecast_seconds": 5943.308253222203,
+      "remaining_lifetime_seconds": 5943.585358142853,
+      "fits": true,
+      "compute_uninflated_seconds": 4610.646602577763,
+      "coarse_start_t": 0.05,
+      "remaining_coarse_steps": 2100,
+      "fine_steps": 400,
+      "diagnostic_events": 117,
+      "refinement_events": 0,
+      "refinement_seconds_per_call": 0.0,
+      "checkpoint_events": 12
+    },
+    "both": {
+      "forecast_seconds": 5391.419382833507,
+      "remaining_lifetime_seconds": 5943.585358142853,
+      "fits": true,
+      "compute_uninflated_seconds": 4169.135506266805,
+      "coarse_start_t": 0.05,
+      "remaining_coarse_steps": 2100,
+      "fine_steps": 400,
+      "diagnostic_events": 117,
+      "refinement_events": 31,
+      "refinement_seconds_per_call": 5.133849957104151,
+      "checkpoint_events": 12
+    }
+  }
+}

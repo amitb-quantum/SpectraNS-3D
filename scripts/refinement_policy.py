@@ -11,7 +11,7 @@ from refinement_capacity import DISK_GB,MAX_HOURLY_USD
 def validate_rehearsal(path):
     r=json.loads(Path(path).read_text())
     names={c["name"] for c in r.get("cases",[]) if c.get("status")=="passed"}
-    needed={"success_overlap","success_sequential","kill_coarse","kill_fine","kill_protected_collection","kill_checkpoint_collection","kill_exploration","success_cuda"}
+    needed={"success_overlap","success_sequential","success_metadata_only","kill_preflight","kill_coarse","kill_prefix_assembly","kill_fine","kill_protected_collection","kill_checkpoint_collection","kill_exploration","success_cuda"}
     if r.get("status")!="passed" or r.get("provider_calls")!=0 or not needed<=names or r.get("fingerprint")!=fingerprint(ROOT):
         raise ValueError("current source/config-bound complete CPU/CUDA kill rehearsals required")
     return r
@@ -40,12 +40,14 @@ def validate_budget(ledger,quote,now=None):
     if authority.get("authorized") is not True or money(authority.get("exclusive_additional_cap_usd"),"authority")<=Decimal("5"):
         raise ValueError("standing user authorization missing")
     total=sum((money(ledger.get(k),k) for k in ("prior_spend_usd","pending_charges_upper_bound_usd","other_committed_project_spend_usd")),Decimal("0"))
-    if total+5>30 or money(ledger.get("reported_credit_balance_usd"),"credit")<5:raise ValueError("USD5 commitment does not fit budget/credit")
+    nonproject=money(ledger.get("nonproject_credit_reserve_usd",0),"nonproject credit reserve")
+    if total+5>30 or money(ledger.get("reported_credit_balance_usd"),"credit")<5+nonproject:raise ValueError("USD5 commitment does not fit budget/credit")
     rate=money(quote["rate_usd"],"rate")
     if not 0<rate<=Decimal(MAX_HOURLY_USD):raise ValueError("hourly bound exceeded")
     from refinement_review import lifetime_seconds
     lifetime=lifetime_seconds(rate)
     return dict(cap_usd=5,project_exposure_usd=str(total+5),lifetime_seconds=lifetime,
+                nonproject_credit_reserve_usd=str(nonproject),
                 lifetime_cost_bound_usd=str(rate*Decimal(lifetime)/3600+Decimal(".5")))
 
 def validate_production_request(cfg):

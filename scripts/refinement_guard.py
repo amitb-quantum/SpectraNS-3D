@@ -31,6 +31,7 @@ def main(directory):
         if not 0<state["deadline_epoch"]-state["started_epoch"]<=7200:raise ValueError("invalid lifetime")
         if state.get("inject"):raise ValueError("fault hooks forbidden in Vast mode")
     write(out/"guard_ready.json",dict(pid=os.getpid(),mode=mode,at_epoch=time.time()))
+    credit_state={}
     while True:
         state=json.loads((out/"controller_state.json").read_text())
         if (out/"termination.json").exists() and json.loads((out/"termination.json").read_text()).get("verified"):return
@@ -40,7 +41,9 @@ def main(directory):
         elif mode=="local-rehearsal" and state.get("inject"):
             stage=state.get("phase")
             if stage==state["inject"] or (state["inject"]=="checkpoint_collection" and stage=="exploration"):
-                if state["inject"] in ("coarse","fine","exploration"):
+                if state["inject"]=="prefix_assembly":
+                    reason="injected_prefix_assembly"
+                elif state["inject"] in ("preflight","coarse","fine","exploration"):
                     marker=Path(state["worker_progress"])
                     if marker.exists() and json.loads(marker.read_text()).get("t",0)>state.get("worker_start_t",0)+1e-14:reason="injected_"+state["inject"]
                 else:
@@ -48,6 +51,10 @@ def main(directory):
                     if marker.is_file():
                         r=json.loads(marker.read_text())
                         if 0<r["copied"]<r["total"]:reason="injected_"+state["inject"]
+        if reason is None and mode=="vast" and type(state.get("instance_id")) is int and state.get("account_credit_floor_usd") is not None:
+            from account_coexistence import monitor_credit
+            credit_state["account_credit_floor_usd"]=state["account_credit_floor_usd"]
+            reason=monitor_credit(out,credit_state,time.time())
         if reason:
             write(out/"guard_trigger.json",dict(reason=reason,phase=state.get("phase"),at_epoch=time.time()))
             if mode=="local-rehearsal":

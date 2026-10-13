@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "status": "IMPLEMENTED; LOCAL REHEARSAL PROOF AND FRESH CLOUD BINDINGS REQUIRED; NO N640 EXECUTED",
+  "status": "REVISED; LOCAL REHEARSAL PROOF AND FRESH CLOUD BINDINGS REQUIRED; N640 PREFLIGHT ONLY COMPLETED",
   "configuration": {
     "N": 640,
     "case": "tubes",
@@ -90,9 +90,26 @@
       },
       "estimator_sha256": "e29ad95b72cafc45b9dd0948758ccdea042c3c00c5227e7c20fbdf4f3dbbacff",
       "qualification": "Fourier local peak estimate, not certified global supremum. Unstable estimates are explicitly inconclusive.",
-      "per_event_N640": true,
+      "per_event_N640": false,
       "reference": "configs/n512_interpolated_peak_reference.json",
-      "historical_t0p89": "No full N512 field; sampled maximum remains secondary."
+      "historical_t0p89": "No full N512 field; sampled maximum remains secondary.",
+      "schedule": {
+        "coarse_period": 0.05,
+        "coarse_peak_window": [
+          0.86,
+          0.94
+        ],
+        "peak_window_spacing": 0.01,
+        "fine_times": [
+          1.0,
+          1.1
+        ],
+        "coarse_total_refined_events": 31,
+        "fine_refined_events": 2,
+        "remaining_after_preflight": 31,
+        "sampled_wmax_every_event": true,
+        "unselected_estimates": "empty with refinement_performed=false; never imputed"
+      }
     }
   },
   "numerical_gates": {
@@ -184,7 +201,7 @@
   "checkpoint_collection": {
     "regular_retained_on_gpu": 2,
     "temporary_terminal_retained": true,
-    "arrays_to_collect": "one N640 coarse t=1.10 protected checkpoint, if measured transfer forecast fits",
+    "arrays_to_collect": "none by default; preserve all checkpoint metadata/component hashes and small evidence",
     "final_metadata_rule": "archive exact checkpoint.json for every checkpoint before deleting any arrays; retain all per-component SHA256 values",
     "failing_terminal": "diagnostics, spectra and exact metadata/hashes retained; arrays excluded from collection",
     "prune_rule": "only new campaign fields; after successful fine-window validation and metadata archive; preserve prior campaign arrays",
@@ -194,7 +211,7 @@
     "egress_upper_GB": 8.25,
     "checkpoint_time_note": "The protected checkpoint is exactly t=1.10; exploratory fields have separate metadata/hash records.",
     "protected_small_artifacts": "all prefix/fine diagnostics, full spectra, configs, source/runtime/timing/GPU records, checkpoint metadata/hash history, assessment; verified in WSL before exploration",
-    "optional_checkpoint_priority": "After verified small evidence; overlap pinned field download with exploration only when measured joint lifetime forecast passes.",
+    "optional_checkpoint_priority": "Production full-field archive/download disabled; local rehearsals cover optional transfer failures.",
     "probe_egress_GB_upper": 0.15,
     "memory_rule": "Separate coarse/fine/exploration processes. Wait for process exit before the next load; do not retain two full trajectories on GPU.",
     "protected_checkpoint_pin": true,
@@ -204,7 +221,9 @@
       "fallback": "sequential collection and shortened/skipped exploration; protected snapshot stays immutable",
       "pin": "fixed coarse t=1.10 gzip archive; exploration writes a separate directory"
     },
-    "maximum_coarse_and_exploration_raw_states": 6
+    "maximum_coarse_and_exploration_raw_states": 6,
+    "full_field_download_enabled": false,
+    "preflight_anchor_disk_note": "Anchor plus up to three coarse states coexist; anchor released before fine/exploration. Existing six-state disk bound stays conservative; free-space gate after retention."
   },
   "budget": {
     "total_project_cap_usd": 30,
@@ -231,10 +250,10 @@
         "max_lifetime_seconds": 3791
       }
     ],
-    "last_reconciled_spend_usd": 17.437,
-    "last_pending_upper_usd": 1.2771458647423863,
-    "remaining_before_commit_usd": 11.285854135257612,
-    "total_exposure_if_committing_5_usd": 23.714145864742388,
+    "last_reconciled_spend_usd": 18.116,
+    "last_pending_upper_usd": 1.7335682660196106,
+    "remaining_before_commit_usd": 10.15043173398039,
+    "total_exposure_if_committing_5_usd": 24.84956826601961,
     "fresh_complete_billing_and_quote_required": true,
     "transfer_quote_rule": "Include 8.25 GB upper egress including probes and small snapshots, image/environment ingress, residual storage and fees within USD 0.50; otherwise refuse/reprice.",
     "no_automatic_retry": true,
@@ -250,7 +269,7 @@
     "discard_warmup_steps": 20,
     "exact_diagnostics_budget_spectrum_checkpoint_reload": true,
     "driver_and_allocator_peak_measurement": true,
-    "do_not_keep_preflight_arrays_after_reload": true,
+    "do_not_keep_preflight_arrays_after_reload": false,
     "timing_categories": [
       "solver_setup",
       "initial_condition_or_restart",
@@ -259,7 +278,8 @@
       "enstrophy_budget",
       "full_spectrum",
       "checkpoint_write_hash_prune",
-      "unattributed_wall_s"
+      "unattributed_wall_s",
+      "selective_Fourier_seconds_and_call_count"
     ],
     "device_trace_fields": [
       "uuid",
@@ -274,7 +294,7 @@
       "throttle_reasons"
     ],
     "required_CPU_H100_reference": true,
-    "runtime_gate": "Required prefix+fine+verified small-artifact collection must fit actual remaining lifetime with 25% compute margin. Optional checkpoint and exploration get independent forecasts from remaining time; 1.5 completion is not required.",
+    "runtime_gate": "Measure always-on diagnostics and selected refinement separately; 2100 coarse steps+400 fine steps+117 always-on events+31 Fourier calls+12 checkpoints, existing25% margin+180s small collection; actual remaining lifetime controls production.",
     "reforecast_every_diagnostic": true,
     "CFL_rule": "Forecast using actual achieved dt; abort production forecast when clipping increases projected steps beyond available time.",
     "keep_unchanged_numerical_gates": true,
@@ -313,6 +333,15 @@
       "small_artifact_reserve_bytes": 2000000000,
       "required_free_margin": 1.2,
       "live_gate": "Measure statvfs available bytes after setup and after preflight field pruning; require 1.2*(6*6311117184+6320000000+2000000000). Image occupancy is accounted by actual free bytes, not assumed."
+    },
+    "retained_prefix": {
+      "start_t": 0.0,
+      "end_t": 0.05,
+      "original_analytic_IC": true,
+      "same_grid": true,
+      "continuation_from": "preflight t=0.05, never the t=0.051 reload state",
+      "release": "only after verified prefix assembly",
+      "repeated_anchor_refinement": false
     }
   },
   "indicative_forecasts_not_measured_N640": [
@@ -365,9 +394,9 @@
     "ns_fast_v2.py": "6f01107b931b80231e27336faeae94b51916d91861473f46e85aedbba0bdaf5d"
   },
   "execution_note": "Separate scripts/run_vast_refinement.py default plan only; explicit --execute requires matching all rehearsal cases, exact live offer, fresh billing, bootstrap and payload bindings. Earlier launchers retain original grid restrictions.",
-  "scientific_goal": "Protect the original-IC comparison through 1.10 and its local temporal validation; then use remaining resources for a temporally checked checkpoint and optional accepted-horizon exploration up to 1.5.",
+  "scientific_goal": "Protect full original-IC comparison through1.10 by verified assembly of0-0.05 preflight and identical-N640 continuation, with local temporal validation and selected Fourier estimates; optional exploration only afterward.",
   "higher_grid_scope": "No N768/N1024 run proposed or authorized here.",
-  "revision": "Protected-core offer screening at USD2.60/hr, measured 64GB disk model, read-only offer watch",
+  "revision": "Selective Fourier sampling, verified same-grid preflight continuation, metadata-only production collection",
   "phase_order": [
     {
       "name": "preflight",
@@ -383,14 +412,18 @@
     {
       "name": "coarse_prefix",
       "required": true,
-      "start_t": 0.0,
+      "start_t": 0.05,
       "end_t": 1.1,
       "max_dt": 0.0005,
       "checkpoint_requirements": [
         1.0,
         1.1
       ],
-      "note": "Original analytic IC. Stop immediately on unchanged numerical gates. Process exits before fine-window process starts."
+      "note": "Continue original analytic-IC N640 preflight checkpoint; preserve both phase originals, verify state/boundary identity and join complete0-1.10 evidence before fine.",
+      "covered_interval": [
+        0.0,
+        1.1
+      ]
     },
     {
       "name": "fine_prefix_window",
@@ -415,7 +448,8 @@
       "name": "optional_checkpoint_collection",
       "required": false,
       "target": "one N640 coarse t=1.10 checkpoint",
-      "note": "Prefer securing the temporally checked state before spending residual time on exploration. Measured compression/transfer/hash forecast decides whether it fits."
+      "note": "Production full-field archive/download disabled. All checkpoint metadata/hashes retained; transfer branches covered locally.",
+      "enabled": false
     },
     {
       "name": "optional_exploration",
@@ -450,7 +484,9 @@
       "N256 local CUDA tubes compressed timeline"
     ],
     "faults": [
+      "preflight",
       "coarse",
+      "prefix_assembly",
       "fine",
       "protected_collection",
       "checkpoint_collection",
@@ -467,5 +503,6 @@
     "budget_mutations": false,
     "period_minutes": 30,
     "requires_fresh_execution_bindings": true
-  }
+  },
+  "measured_prior_preflight": "artifacts/cloud-preparation/2026-10-12/n640_campaign_002; rates are planning inputs, not new host authorization."
 }
