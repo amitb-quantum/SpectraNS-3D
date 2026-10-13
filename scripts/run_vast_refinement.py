@@ -37,13 +37,16 @@ def close_budget(out):
     from vast_execution_access import inspect
     snapshot=discover(read_key(KEYFILE));write(out/"billing_after.json",snapshot)
     state=json.loads((out/"controller_state.json").read_text())
-    if not snapshot["charge_listing_complete"] or not snapshot["instance_listing_complete"] or snapshot["instances"]:
+    if not snapshot["charge_listing_complete"] or not snapshot["instance_listing_complete"]:
         raise ValueError("complete absence/billing required; commitment stays reserved")
     path=ROOT/"configs/project_budget.json";ledger=json.loads(path.read_text())
     previous=Decimal(str(ledger["prior_spend_usd"]));ids=set(ledger["project_instance_ids"])
     identity=state["instance_id"]
     if identity is None:raise ValueError("ambiguous create: retain commitment for reconciliation")
     ids.add(identity)
+    from account_coexistence import account_instances
+    account=account_instances(snapshot,ids,state.get("account_context"))
+    write(out/"account_attribution_after.json",account)
     def parent(i):
         return sum((Decimal(str(r["amount"])) for r in snapshot["charges"]
                     if r.get("type")=="instance" and r.get("source")=="instance-"+str(i)),Decimal("0"))
@@ -56,6 +59,8 @@ def close_budget(out):
        pending_charges_upper_bound_usd=float(pending_old+max(Decimal("0"),upper-posted_new)),
        other_committed_project_spend_usd=0,project_instance_ids=sorted(ids),
        reported_credit_balance_usd=inspect()["financial_fields"]["credit"],
+       nonproject_credit_reserve_usd=float(account["nonproject_credit_reserve_usd"]),
+       nonproject_account_instances=account["nonproject_instances"],
        verified_as_of_utc=datetime.now(timezone.utc).isoformat())
     ledger["evidence"].append((out/"billing_after.json").relative_to(ROOT).as_posix())
     write(path,ledger);write(out/"budget_final.json",ledger)
@@ -81,7 +86,8 @@ def execute(args):
         ledger_path=ROOT/"configs/project_budget.json"
         if json.loads(ledger_path.read_text()).get("other_committed_project_spend_usd",0)!=0:
             raise ValueError("another commitment exists")
-        ledger=reconcile(out/"billing_before")
+        account_context=json.loads(Path(args.account_context).read_text()) if getattr(args,"account_context",None) else None
+        ledger=reconcile(out/"billing_before",account_context=account_context) if account_context else reconcile(out/"billing_before")
         if inspect().get("broad_instance_write") is not True:raise ValueError("local key lacks instance operations")
         raw=request("POST","/api/v0/bundles",read_key(KEYFILE),body=offer_query())
         chosen=[r for r in raw["offers"] if r["id"]==args.offer_id]
@@ -99,6 +105,7 @@ def execute(args):
            started_epoch=started,deadline_epoch=started+bounds["lifetime_seconds"]-60,
            provisioning_authorized=True,approval_note=ledger["autonomous_authorization"]["user_instruction"],
            label="SpectraNS-3D-v3-refinement-"+uuid.uuid4().hex[:12],instance_id=None,
+           account_context=account_context,account_credit_floor_usd=1.0,
            ssh_key_path=str(key),known_hosts=str(private/"refinement-known-hosts"),phase="prepared")
         write(out/"controller_state.json",state)
         with (out/"guard.log").open("x") as f:
@@ -161,7 +168,7 @@ def execute(args):
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument("--execute",action="store_true")
     for name in ("job-dir","rehearsal","environment","payload","image","bootstrap-validation"):p.add_argument("--"+name)
-    p.add_argument("--offer-id",type=int);a=p.parse_args()
+    p.add_argument("--offer-id",type=int);p.add_argument("--account-context");a=p.parse_args()
     if not a.execute:print((ROOT/"configs/n640_refinement_proposal.json").read_text());return 0
     if any(getattr(a,n) is None for n in ("job_dir","rehearsal","environment","payload","image","bootstrap_validation","offer_id")):
         p.error("all execution bindings required")

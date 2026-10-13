@@ -4,7 +4,7 @@
 
 SpectraNS-3D asks which features of an intense flow survive changes in timestep, grid resolution, precision and execution backend—and where the available computation stops supporting a physical conclusion. Its immediate output is an auditable experiment, including unsuccessful and under-resolved runs. Its long-term goal is a reproducible research study of the competition between vortex stretching and viscous smoothing.
 
-**Current status, October 12, 2026:** the solver audit, CPU/H100 backend checks, N512 timestep study and bounded N512 extension are complete. N640 H100 numerical/memory/restart preflight passed, but production was rejected by the measured lifetime gate. The revised local suite passes **168 tests** and the controller passes **eleven real-process rehearsals**, including seven independent SIGKILL cases. N640 spatial validation remains **unfinished**. No numerical result here proves global regularity or finite-time blowup.
+**Current status, October 12, 2026:** the solver audit, CPU/H100 backend checks, N512 timestep study and bounded N512 extension are complete. N640 H100 numerical/memory/restart preflight passed, but production was rejected by the measured lifetime gate. The revised local suite passes **185 tests** and the controller passes **eleven real-process rehearsals**, including seven independent SIGKILL cases. N640 spatial validation remains **unfinished**. No numerical result here proves global regularity or finite-time blowup.
 
 ## Why this project exists
 
@@ -97,7 +97,7 @@ Test counts below refer to the versions present at each campaign, not to repeate
 | Bounded N512 extension | Last accepted (t=1.10); first tail-gate failure (t=1.11) preserved | Bounds the operationally accepted trajectory; no enstrophy turnover reached |
 | Endpoint continuation check | Identical-checkpoint window $1.00\rightarrow1.10$, largest scalar difference about $2.53\times10^{-8}$ | Local continuation error; inherited error at the anchor is shared |
 | Sampling study | Fourier local estimates at (t=1.00/1.10); sampled-peak biases about 0.927%/0.150% | Peak sampling matters; estimates are not certified global suprema |
-| Current local engineering validation | 168 tests and eleven controller rehearsals, including seven real SIGKILL phases | Selective diagnostics, verified same-grid preflight continuation and failure-path evidence; no completed N640 spatial comparison |
+| Current local engineering validation | 185 tests and eleven controller rehearsals, including seven real SIGKILL phases | Selective diagnostics, verified same-grid preflight continuation and failure-path evidence; no completed N640 spatial comparison |
 
 The N512 observations are scientifically useful but still need spatial refinement:
 
@@ -210,3 +210,5 @@ Original sources, historical results and completed evidence are preserved. A Git
 The original supplied source families remain separately identifiable; audited code is retained and hash-bound. Low-storage RK4 coefficients are attributed in the audit to [Carpenter and Kennedy, NASA TM-109112](https://ntrs.nasa.gov/citations/19940028444). Links to OpenAI identify external mathematical work; there is no affiliation, endorsement or independently verified reproduction of that work implied here.
 
 No distribution license has been selected. This is a public research repository; a public repository is not itself a license grant. Scientific conclusions are bounded by the validated configurations and accepted intervals described above.
+
+The remaining campaign and its account-credit protection are described in [the closeout procedure](docs/ACCOUNT_COEXISTENCE_AND_CLOSEOUT.md). N640 production comparison remains pending; local checks are not cloud results.

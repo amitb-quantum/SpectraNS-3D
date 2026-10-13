@@ -102,3 +102,7 @@ The October 10 implementation report remains historical evidence. Current policy
 The current scientific/workflow contract is [N640 sampling and continuation](N640_SAMPLING_CONTINUATION_2026-10-12.md). Keep the original 0–0.05 preflight checkpoint until coarse continuation is independently joined with preserved prefix evidence. Production starts at 0.05 on the same grid and cap; its complete assembled comparison still covers 0–1.10. Fine validation remains 1.00–1.10. A previous campaign's deleted fields cannot be reused.
 
 The current local proof is under artifacts/cloud-preparation/2026-10-12/n640_sampling_revision_001/sealed_rehearsal_003/. Older proofs do not bind these revised sources/configuration. Sampled maxima, all numerical gates and full spectra remain at every event. Fourier estimates use the predeclared subset; full production field downloads are off. Fresh measured preflight determines whether the revised protected forecast fits.
+
+## Separate account rentals
+
+Optional --account-context points to a private JSON attribution record. See [account coexistence and closeout](ACCOUNT_COEXISTENCE_AND_CLOSEOUT.md). No unknown rental is silently excluded and no separate rental is modified. The default without context still requires an empty account.
