@@ -1,0 +1,102 @@
+{
+  "mode": "read-only",
+  "status": "completed",
+  "as_of_utc": "2026-10-13T22:15:05.620357+00:00",
+  "provisioning_performed": false,
+  "instance_mutations_performed": false,
+  "budget_mutations_performed": false,
+  "requested_disk_GB": 64,
+  "max_gpu_plus_disk_hourly_usd": "2.6",
+  "requires_fresh_billing_rehearsal_and_measured_preflight_before_execution": true,
+  "query": {
+    "limit": 50,
+    "type": "on-demand",
+    "gpu_name": {
+      "in": [
+        "H100 SXM",
+        "H100 PCIE",
+        "H100 NVL"
+      ]
+    },
+    "num_gpus": {
+      "eq": 1
+    },
+    "verified": {
+      "eq": true
+    },
+    "rentable": {
+      "eq": true
+    },
+    "rented": {
+      "eq": false
+    },
+    "reliability2": {
+      "gte": 0.99
+    },
+    "cuda_max_good": {
+      "gte": 13
+    },
+    "disk_space": {
+      "gte": 64
+    },
+    "gpu_ram": {
+      "gte": 80000
+    },
+    "cpu_arch": {
+      "eq": "amd64"
+    },
+    "cpu_cores_effective": {
+      "gte": 4
+    },
+    "cpu_ram": {
+      "gte": 16000
+    },
+    "dph_total": {
+      "lte": 2.6
+    },
+    "order": [
+      [
+        "dph_total",
+        "asc"
+      ]
+    ]
+  },
+  "eligible": [
+    {
+      "offer": {
+        "id": 49864346,
+        "gpu_name": "H100 SXM",
+        "gpu_ram": 81559,
+        "num_gpus": 1,
+        "dph_total": 2.0696296296296297,
+        "storage_cost": 0.2666666666666666,
+        "inet_up_cost": 0.00390625,
+        "inet_down_cost": 0.0026041666666666665,
+        "reliability2": 0.9958124,
+        "verification": "verified",
+        "cuda_max_good": 13.2,
+        "driver_version": "595.71.05",
+        "cpu_arch": "amd64",
+        "cpu_cores_effective": 24.0,
+        "cpu_ram": 125718,
+        "disk_space": 721.0,
+        "inet_down": 336.2,
+        "inet_up": 231.5
+      },
+      "quote": {
+        "rate_usd": "2.093333333333333397777777778",
+        "transfer_upper_usd": "0.0686848958333333310"
+      }
+    }
+  ],
+  "rejected": [
+    {
+      "id": 50491378,
+      "reason": "hardware, price, transfer or required-field gate"
+    }
+  ],
+  "returned_count": 2,
+  "possibly_truncated": false,
+  "alert": true,
+  "alert_reason": "qualifying_offer_change"
+}
