@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "plan_version": "1.0",
-  "updated_at_pt": "2026-10-13T15:18:15.926333-07:00",
+  "updated_at_pt": "2026-10-13T15:29:54.044314-07:00",
   "project": "SpectraNS-3D",
   "scientific_milestone": "Original-IC N512/N640 comparison through1.10 and local fine-window validation",
   "scientific_status": "unfinished",
-  "current_task": "P06",
-  "next_action": "Finish pinned-runtime setup and measured preflight on owned instance55821344. If admitted continue directly toP07; otherwise preserve evidence, verify destruction/reconcile and consult immediately.",
+  "current_task": "P07",
+  "next_action": "Continue accepted same-grid N640 prefix to1.10, verify and join original-IC evidence, then immediately run P08 fine1.00\u20131.10 window before protected collection.",
   "decision": "one_more_5_usd_attempt_at_2_25_or_less_discovery_extended",
   "automation_status": "ACTIVE",
   "new_billable_attempt_pending_decision": false,
@@ -85,17 +85,18 @@
     {
       "id": "P06",
       "title": "Provision one instance and measure preflight",
-      "status": "in_progress",
+      "status": "completed",
       "depends_on": "P05",
       "successor": "P07",
-      "result": "Instance55821344 provisioned with guard armed before create. Exact fresh quoteUSD2.093333/hour, two-hour lifetime, conservativeUSD4.686667 bound. Setup/preflight running; no production admission yet."
+      "result": "192 H100 tests, eight backend references and numerical/memory/disk/restart/transfer preflight passed. Protected forecast5338.54s versus6318.28s available; all original gates retained."
     },
     {
       "id": "P07",
       "title": "Run N640 original-IC prefix through1.10",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": "P06",
-      "successor": "P08"
+      "successor": "P08",
+      "result": "Coarse production continuing own verified N6400.05 checkpoint. Prefix endpoint1.10 and numerical acceptance still pending."
     },
     {
       "id": "P08",
@@ -143,7 +144,7 @@
     "max_hourly_usd": "2.25",
     "maximum_lifetime_seconds": 7200,
     "discovery_deadline_pt": "2026-10-13T15:29:11-07:00",
-    "status": "running_setup_preflight",
+    "status": "running_coarse",
     "directory": "artifacts/cloud-preparation/2026-10-13/n640_campaign_004",
     "discovery_started_at_pt": "2026-10-13T14:29:11-07:00",
     "discovery_extension_count": 1,
