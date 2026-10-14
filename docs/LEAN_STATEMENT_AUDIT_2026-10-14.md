@@ -67,7 +67,7 @@ The subtlety is placement. In (D), equation (8) governs the data (u° and f), wh
 
 ## Not verified here
 
-- **The proofs.** This audit did not build the project or run Comparator. That requires the Lean 4.34.0-rc2 toolchain and the Mathlib cache (several GB), with `lake exe comparator ComparatorChallenges/NavierStokes.json`. Statement fidelity is meaningful only together with a passing Comparator run.
+- **The proofs.** This audit did not build the project or run Comparator; [COMPARATOR_GUIDE.md](evidence/2026-10-14/lean_audit/COMPARATOR_GUIDE.md) gives the steps. That requires the Lean 4.34.0-rc2 toolchain and the Mathlib cache (several GB), with `lake exe comparator ComparatorChallenges/NavierStokes.json`. Statement fidelity is meaningful only together with a passing Comparator run.
 - **Comparator's own guarantees.** The audit relies on Comparator checking that the solution's theorem types match the challenge's, including all definitions they reference. The textual identity of the definitions is consistent with that but does not replace it.
 - **The Euler result.** Out of scope.
 

@@ -174,7 +174,7 @@ def fake_bundle(tmp_path_factory):
     real = rq.get_backend
     mp.setattr(rq, "get_backend", lambda args: fake_heron() if args.fake else real(args))
     try:
-        rq.cmd_prepare(argparse.Namespace(fake=True, backend=None, instance=None, out=str(out), sim_seed=1))
+        rq.cmd_prepare(prepare_args(out))
     finally:
         mp.undo()
     return out
@@ -191,7 +191,7 @@ def test_prepare_freezes_a_guarded_bundle(fake_bundle):
 
 def test_prepare_refuses_a_nonempty_directory(fake_bundle):
     with pytest.raises(SystemExit, match="not empty"):
-        rq.cmd_prepare(argparse.Namespace(fake=True, backend=None, instance=None, out=str(fake_bundle), sim_seed=1))
+        rq.cmd_prepare(prepare_args(fake_bundle))
 
 
 def execute_args(bundle, sha):
@@ -263,7 +263,7 @@ class _Sampler:
 
 def test_execute_with_mock_sampler_sets_caps_and_writes_records(tmp_path, monkeypatch):
     bundle = tmp_path / "b"
-    rq.cmd_prepare(argparse.Namespace(fake=True, backend=None, instance=None, out=str(bundle), sim_seed=1))
+    rq.cmd_prepare(prepare_args(bundle))
     m = json.loads((bundle / "manifest.json").read_text())
     m["fake_backend"] = False                     # simulate a real-backend bundle
     sha = rq.write_json(bundle / "manifest.json", m)
@@ -282,7 +282,7 @@ def test_execute_with_mock_sampler_sets_caps_and_writes_records(tmp_path, monkey
 
 def test_fetch_recovers_results_without_submitting(tmp_path, monkeypatch):
     bundle = tmp_path / "f"
-    rq.cmd_prepare(argparse.Namespace(fake=True, backend=None, instance=None, out=str(bundle), sim_seed=1))
+    rq.cmd_prepare(prepare_args(bundle))
     args = argparse.Namespace(bundle=str(bundle), instance=None)
     with pytest.raises(SystemExit, match="nothing was submitted"):
         rq.cmd_fetch(args, job_loader=lambda i: None)
@@ -295,3 +295,77 @@ def test_fetch_recovers_results_without_submitting(tmp_path, monkeypatch):
     assert (bundle / "assessment.json").exists()
     with pytest.raises(SystemExit, match="already exists"):
         rq.cmd_fetch(args, job_loader=lambda i: job)
+
+
+# ---------------------------------------------------------------- replication path and addendum
+
+ADDENDUM = rq.HERE / "PREREGISTRATION_ADDENDUM_kingston_002.md"
+REPLICATION_PATH = "100,101,102,103"
+
+
+def prepare_args(out, **kw):
+    base = dict(fake=True, backend=None, instance=None, out=str(out), sim_seed=1, path=None, addendum=None)
+    base.update(kw)
+    return argparse.Namespace(**base)
+
+
+def test_parse_path_validation():
+    assert rq.parse_path(None) == list(sa.PATH)
+    assert rq.parse_path(REPLICATION_PATH) == [100, 101, 102, 103]
+    with pytest.raises(SystemExit, match="distinct"):
+        rq.parse_path("1,2,2,3")
+    with pytest.raises(SystemExit, match="distinct"):
+        rq.parse_path("1,2,3")
+
+
+def test_non_chain_path_is_refused(tmp_path):
+    with pytest.raises(SystemExit, match="not a connected chain"):
+        rq.cmd_prepare(prepare_args(tmp_path / "x", path="1,2,3,100", addendum=str(ADDENDUM)))
+
+
+def test_other_path_requires_an_addendum(tmp_path):
+    with pytest.raises(SystemExit, match="needs --addendum"):
+        rq.cmd_prepare(prepare_args(tmp_path / "x", path=REPLICATION_PATH))
+
+
+def test_addendum_must_name_the_path(tmp_path):
+    with pytest.raises(SystemExit, match="does not name the path"):
+        rq.cmd_prepare(prepare_args(tmp_path / "x", path="17,27,28,29", addendum=str(ADDENDUM)))
+
+
+def test_replication_bundle_binds_path_and_addendum(tmp_path):
+    out = tmp_path / "rep"
+    rq.cmd_prepare(prepare_args(out, path=REPLICATION_PATH, addendum=str(ADDENDUM)))
+    manifest, circuits = rq.load_bundle(out)
+    assert manifest["path"] == [100, 101, 102, 103]
+    assert manifest["addendum"]["path"] == "quantum/PREREGISTRATION_ADDENDUM_kingston_002.md"
+    assert manifest["addendum"]["sha256"] == rq.sha256_file(ADDENDUM)
+    assert rq.active_qubits(circuits) <= {100, 101, 102, 103}
+    with pytest.raises(SystemExit, match="outside the pre-registered path"):
+        rq.guard(circuits, manifest["budget"])          # default path 1-2-3-16 must reject these circuits
+
+
+def test_execute_refuses_a_changed_addendum(tmp_path, monkeypatch):
+    temp_addendum = rq.HERE / "_test_addendum_tmp.md"
+    temp_addendum.write_text(ADDENDUM.read_text())
+    try:
+        out = tmp_path / "rep"
+        rq.cmd_prepare(prepare_args(out, path=REPLICATION_PATH, addendum=str(temp_addendum)))
+        m = json.loads((out / "manifest.json").read_text())
+        m["fake_backend"] = False
+        sha = rq.write_json(out / "manifest.json", m)
+        temp_addendum.write_text(temp_addendum.read_text() + "\nedited after prepare\n")
+        with pytest.raises(SystemExit, match="addendum is missing or changed"):
+            rq.cmd_execute(execute_args(out, sha), sampler_factory=_Sampler)
+    finally:
+        temp_addendum.unlink(missing_ok=True)
+
+
+def test_readout_errors_are_recorded_and_flagged():
+    counts, meta = synthetic_counts(eps=0.1, readout=0.02)
+    a = sa.analyse_counts([{k: max(1, v // 250) for k, v in c.items()} for c in counts], meta)
+    assert len(a["readout_calibration"]) == sa.N_QUBITS
+    assert a["readout_flagged_logical_qubits"] == []
+    bad = [c if m["kind"] != "readout_0000" else {"0000": 700, "0001": 300} for c, m in zip(counts, meta)]
+    b = sa.analyse_counts([{k: max(1, v // 250) for k, v in c.items()} for c in bad], meta)
+    assert 0 in b["readout_flagged_logical_qubits"]

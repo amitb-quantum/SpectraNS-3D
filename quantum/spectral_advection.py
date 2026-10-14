@@ -39,6 +39,7 @@ P2_RAW_PEAK_MIN_DEFICIT = 0.05
 P4_CORRECTED_PEAK_MAX_REL = 0.075
 P3_MIN_INACCURACY_TVD = 0.05
 BOOTSTRAP_SAMPLES = 2000
+READOUT_FLAG = 0.10               # flag (not a verdict): any qubit misreading more often than this
 BOOTSTRAP_SEED = 20261014
 
 X = 2 * np.pi * np.arange(N) / N
@@ -142,6 +143,17 @@ def counts_to_probs(counts: dict[str, int]) -> np.ndarray:
     for key, value in counts.items():
         p[int(key.replace(" ", ""), 2)] += value
     return p / p.sum()
+
+
+def readout_errors(counts0: dict, counts1: dict) -> list[dict]:
+    """Per-logical-qubit P(read 1 | prep 0) and P(read 0 | prep 1) from the calibration circuits."""
+    out = []
+    n0, n1 = sum(counts0.values()), sum(counts1.values())
+    for q in range(N_QUBITS):
+        e01 = sum(v for k, v in counts0.items() if k.replace(" ", "")[::-1][q] == "1") / n0
+        e10 = sum(v for k, v in counts1.items() if k.replace(" ", "")[::-1][q] == "0") / n1
+        out.append({"logical_qubit": q, "p1_given_0": e01, "p0_given_1": e10})
+    return out
 
 
 def tensored_inverse(counts0: dict, counts1: dict) -> np.ndarray:
@@ -277,6 +289,11 @@ def analyse_counts(counts: list[dict], meta: list[dict], psi: np.ndarray | None 
                            for f in row if not f.endswith("_exact")}
     verdicts = assess(point)
     boot_pass = {name: float(np.mean([assess(s)[name]["pass"] for s in samples])) for name in verdicts}
+    cal = {m["kind"]: c for c, m in zip(counts, meta) if m["kind"].startswith("readout")}
+    readout = readout_errors(cal["readout_0000"], cal["readout_1111"])
+    flagged = [r["logical_qubit"] for r in readout if max(r["p1_given_0"], r["p0_given_1"]) > READOUT_FLAG]
     return {"point": point, "bootstrap_95ci": ci, "verdicts": verdicts,
+            "readout_calibration": readout, "readout_flag_threshold": READOUT_FLAG,
+            "readout_flagged_logical_qubits": flagged,
             "bootstrap_pass_fraction": boot_pass,
             "bootstrap": {"samples": BOOTSTRAP_SAMPLES, "seed": BOOTSTRAP_SEED}}

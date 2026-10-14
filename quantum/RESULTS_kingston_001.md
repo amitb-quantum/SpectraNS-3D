@@ -39,6 +39,10 @@ It does not demonstrate quantum advantage; a laptop computes every exact value h
 - The bootstrap interval for the maximum pairwise spectral TVD (0.034–0.059) lies above its point estimate (0.027). Resampling adds sampling noise to each distribution, and a maximum of TVDs is biased upward by it. P3 passes in every resample regardless.
 - The dry run passed all four predictions, with P2 in 84% and P4 in 43% of resamples. The pre-registration noted both as uncertain; neither threshold was changed after the bundle was frozen.
 
+## Note added after analysis (October 14, 2026)
+
+FakeKingston, the April 2026 calibration snapshot shipped with qiskit-ibm-runtime, already lists 16.8% readout error for physical qubit 1. The fault seen in this job may therefore be recurring rather than one-off. The backend audit ranked this path first from the current calibration alone, which did not show it. A replication on a path without qubit 1 is pre-registered in [PREREGISTRATION_ADDENDUM_kingston_002.md](PREREGISTRATION_ADDENDUM_kingston_002.md).
+
 ## Reproduce
 
 ```bash
