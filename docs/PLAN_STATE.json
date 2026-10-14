@@ -5,8 +5,8 @@
   "project": "SpectraNS-3D",
   "scientific_milestone": "Original-IC N512/N640 comparison through1.10 and local fine-window validation",
   "scientific_status": "third_grid_comparison_incomplete_preflight_only",
-  "current_task": "P21",
-  "next_action": "Measured CFL-aware admission, then protected N7680\u20131.10 and fine1.00\u20131.10; no additional rental.",
+  "current_task": "P22",
+  "next_action": "Accepted N768 through1.10, then fine1.00\u20131.10, protect/independently assess, close/reconcile and publish.",
   "decision": "one_more_5_usd_attempt_at_2_25_or_less_discovery_extended",
   "automation_status": "ACTIVE",
   "new_billable_attempt_pending_decision": false,
@@ -215,15 +215,19 @@
     {
       "id": "P21",
       "title": "Fresh funding/quote and one corrected USD14 N768 campaign",
-      "status": "in_progress",
+      "status": "completed",
       "successor": "P22",
-      "result": "Fresh exact quote/bindings passed; corrected owned H20055858324 created. Guard armed; measured preflight pending."
+      "result": "Corrected H20055858324 measured CFL-aware runtime/memory/disk/restart/transfer admission passed.",
+      "evidence": [
+        "artifacts/cloud-preparation/2026-10-13/n768_campaign_002/work/runtime_preflight.json"
+      ]
     },
     {
       "id": "P22",
       "title": "Protected three-grid assessment, closure and publication",
-      "status": "pending",
-      "successor": null
+      "status": "in_progress",
+      "successor": null,
+      "result": "Original-IC N768 continuing own0.05 state toward1.10, then local fine and protected assessment."
     }
   ],
   "handoff_rule": "Complete task, record evidence/status, set successor, continue if authorized. If a decision blocks progress, consult immediately; never mark a runtime refusal as completed spatial validation.",
@@ -273,7 +277,7 @@
       }
     ]
   },
-  "phase_status": "corrected_third_grid_preflight",
+  "phase_status": "corrected_third_grid_production",
   "publication_commit": "610df59a9b357be744a83a484b8f7d2aac8f31d7",
   "published_evidence_hashes_verified": 161,
   "final_financial_summary": {
@@ -308,7 +312,7 @@
     "total_ceiling_usd": 40,
     "maximum_lifetime_seconds": 10800,
     "max_hourly_usd": 4.5,
-    "status": "running_preflight",
+    "status": "running_production",
     "directory": "artifacts/cloud-preparation/2026-10-13/n768_campaign_002",
     "source": "Explicit user reply: Yes\u2014one corrected $14 attempt, same $40 total and numerical gates.",
     "instance_id": 55858324,

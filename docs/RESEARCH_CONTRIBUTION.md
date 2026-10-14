@@ -27,3 +27,11 @@ We can say that this project supplies a separate empirical methodology and quant
 ## Finite release definition
 
 Complete the authorized common-window three-grid experiment where admitted, independently assess and publish its result, verify financial/resource closure and document unresolved questions. Spatial certification and a converged turnover may remain open. A research release can be complete without declaring the underlying PDE problem solved.
+
+## Selected primary literature context
+
+Numerical resolution and method choice have long mattered in nearly singular vortex calculations. Hou and Li's2006 Euler study compares2/3-dealiased and Fourier-smoothed pseudo-spectral schemes across resolutions and reports bounded velocity with at most doubly exponential peak-vorticity growth over its computed interval. That is a different zero-viscosity problem and does not validate our viscous tubes. [Hou and Li, original paper/abstract](https://arxiv.org/abs/physics/0608126).
+
+Kerr's2017 Navier–Stokes reconnection study examines trefoil and anti-parallel vortices, viscosity-dependent vorticity/enstrophy norms and domain scaling. Our single-viscosity, fixed-domain short interval cannot establish those viscosity-limit scalings or a dissipation anomaly. [Kerr, original paper/abstract](https://arxiv.org/abs/1610.00398).
+
+These examples establish that resolution studies and enstrophy diagnostics themselves are not new. This is a selected context check, not an exhaustive novelty review. Our defensible contribution is the exact experimental evidence and auditable workflow for this specified trajectory, including failure-path evidence and observable-specific acceptance decisions.
