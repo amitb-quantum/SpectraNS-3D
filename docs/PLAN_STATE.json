@@ -1,21 +1,21 @@
 {
   "schema_version": 1,
   "plan_version": "1.0",
-  "updated_at_pt": "2026-10-13T16:56:29.963462-07:00",
+  "updated_at_pt": "2026-10-13T17:05:47.144488-07:00",
   "project": "SpectraNS-3D",
   "scientific_milestone": "Original-IC N512/N640 comparison through1.10 and local fine-window validation",
   "scientific_status": "two_grid_assessment_complete_resolution_not_certified",
   "current_task": "P12",
-  "next_action": "Commit and push report/README/sanitized evidence, verify published hashes and remote main, then record final closeout.",
+  "next_action": "None: this authorized phase is closed. Any further scientific campaign requires a separate specification and approval.",
   "decision": "one_more_5_usd_attempt_at_2_25_or_less_discovery_extended",
   "automation_status": "PAUSED",
   "new_billable_attempt_pending_decision": false,
   "baseline_commit": "d258fcb556e69090454c437454cf7830d897029d",
   "last_budget_snapshot": {
-    "conservative_exposure_usd": 20.77874122875802,
-    "headroom_usd": 9.221258771241981,
+    "conservative_exposure_usd": 24.241990606252408,
+    "headroom_usd": 5.758009393747593,
     "total_ceiling_usd": 30,
-    "note": "Fresh private reconciliation passed after exact separate-job attribution; refresh again before provisioning. Account credit and attribution remain private."
+    "note": "Fresh postclose project-only reconciliation at2026-10-13T23:47:49 UTC; pending allowances retained. This is not shared account credit."
   },
   "proposed_choices": [
     "one_more_5_usd_attempt_at_2_25_or_less",
@@ -140,10 +140,14 @@
     {
       "id": "P12",
       "title": "Publish and close phase",
-      "status": "in_progress",
+      "status": "completed",
       "depends_on": "P11",
       "successor": null,
-      "result": "Public dataset replay and all131 protected hashes verified; final curated publication pending Git-blob/remote verification."
+      "result": "Final research report, README and sanitized evidence pushed to public main; remote commit and all161 curated Git-blob hashes verified. All131 original protected files verified, assessment replayed, figure visually checked. Rental absent; watch paused.",
+      "evidence": [
+        "docs/N640_COMPARISON_2026-10-13.md",
+        "docs/evidence/2026-10-13/n640_campaign_004/evidence_manifest.json"
+      ]
     }
   ],
   "handoff_rule": "Complete task, record evidence/status, set successor, continue if authorized. If a decision blocks progress, consult immediately; never mark a runtime refusal as completed spatial validation.",
@@ -153,7 +157,7 @@
     "max_hourly_usd": "2.25",
     "maximum_lifetime_seconds": 7200,
     "discovery_deadline_pt": "2026-10-13T15:29:11-07:00",
-    "status": "closed_protected_comparison_completed",
+    "status": "closed",
     "directory": "artifacts/cloud-preparation/2026-10-13/n640_campaign_004",
     "discovery_started_at_pt": "2026-10-13T14:29:11-07:00",
     "discovery_extension_count": 1,
@@ -164,7 +168,8 @@
     "guard_deadline_pt": "2026-10-13T17:16:07.342437-07:00",
     "quoted_hourly_usd": "2.093333333333333397777777778",
     "lifetime_cost_bound_usd": "4.686666666666666795555555556",
-    "verified_termination": true
+    "verified_termination": true,
+    "authorization_exhausted": true
   },
   "blocker": null,
   "discovery_history": [
@@ -191,5 +196,16 @@
         "status": "consistent"
       }
     ]
+  },
+  "phase_status": "closed",
+  "publication_commit": "610df59a9b357be744a83a484b8f7d2aac8f31d7",
+  "published_evidence_hashes_verified": 161,
+  "final_financial_summary": {
+    "posted_campaign_usd": 2.895,
+    "campaign_upper_usd": 3.463249377494388,
+    "campaign_cap_usd": 5,
+    "posted_project_usd": 21.444,
+    "project_pending_upper_usd": 2.7979906062524065,
+    "other_committed_project_usd": 0
   }
 }
