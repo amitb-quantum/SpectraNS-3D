@@ -1,0 +1,14 @@
+{
+  "observed_epoch": 1791947754.2713535,
+  "ordinary_min_dt": 0.0004315345212859038,
+  "ordinary_min_CFL_safety_floor": 0.00038838106915731343,
+  "coarse_remaining_steps_bound": 2809,
+  "extra_event_steps_allowance": 105,
+  "fine_steps_if_cap_limited": 400,
+  "measured_step_s": 1.5299608710071988,
+  "diagnostic_s": 1.1561707886867225,
+  "refinement_s": 6.167240385897458,
+  "checkpoint_s": 57.959347777068615,
+  "illustrative_corrected_forecast_s": 7594.516303282616,
+  "scope": "CPU review only, not current admission. Actual bound script still refuses CFL clipping. No relaxation of CFL or numerical gates; revised operational predictor would need tests and fresh proof."
+}

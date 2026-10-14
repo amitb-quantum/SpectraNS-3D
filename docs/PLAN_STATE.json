@@ -4,11 +4,11 @@
   "updated_at_pt": "2026-10-13T20:06:12.587395-07:00",
   "project": "SpectraNS-3D",
   "scientific_milestone": "Original-IC N512/N640 comparison through1.10 and local fine-window validation",
-  "scientific_status": "two_grid_assessment_complete_third_grid_pending",
-  "current_task": "P15",
-  "next_action": "Measured preflight admission, then protected original-IC N768 through1.10 and local fine1.00\u20131.10.",
+  "scientific_status": "third_grid_comparison_incomplete_preflight_only",
+  "current_task": "P20",
+  "next_action": "P20: correct operational CFL-aware predictor and verify complete proof; then fresh funding/offer and one authorized USD14 attempt.",
   "decision": "one_more_5_usd_attempt_at_2_25_or_less_discovery_extended",
-  "automation_status": "ACTIVE",
+  "automation_status": "PAUSED",
   "new_billable_attempt_pending_decision": false,
   "baseline_commit": "d258fcb556e69090454c437454cf7830d897029d",
   "last_budget_snapshot": {
@@ -170,31 +170,53 @@
     {
       "id": "P15",
       "title": "One owned H200 create and measured admission",
-      "status": "in_progress",
+      "status": "refused",
       "successor": "P16",
-      "result": "Owned H20055853636 created; independent guard armed; pinned setup and preflight in progress."
+      "result": "Numerical/memory/reload preflight passed; inherited cap-only predictor refused legitimate CFL clipping. Required production not started.",
+      "evidence": [
+        "docs/N768_PREFLIGHT_OUTCOME_2026-10-13.md"
+      ]
     },
     {
       "id": "P16",
       "title": "Original-IC N768 through1.10 and local fine check",
-      "status": "pending",
+      "status": "not_run",
       "successor": "P17"
     },
     {
       "id": "P17",
       "title": "Protect evidence and assess all three grids",
-      "status": "pending",
+      "status": "not_run",
       "successor": "P18"
     },
     {
       "id": "P18",
       "title": "Verify termination and reconcile charges",
-      "status": "pending",
-      "successor": "P19"
+      "status": "completed",
+      "successor": "P19",
+      "result": "Instance55853636 destroyed and independent absence/billing verified."
     },
     {
       "id": "P19",
       "title": "Publish final study and explicit limits",
+      "status": "pending",
+      "successor": null
+    },
+    {
+      "id": "P20",
+      "title": "Correct CFL-aware forecast and bind complete proof",
+      "status": "in_progress",
+      "successor": "P21"
+    },
+    {
+      "id": "P21",
+      "title": "Fresh funding/quote and one corrected USD14 N768 campaign",
+      "status": "pending",
+      "successor": "P22"
+    },
+    {
+      "id": "P22",
+      "title": "Protected three-grid assessment, closure and publication",
       "status": "pending",
       "successor": null
     }
@@ -246,7 +268,7 @@
       }
     ]
   },
-  "phase_status": "third_grid_preflight",
+  "phase_status": "corrected_third_grid_preparation",
   "publication_commit": "610df59a9b357be744a83a484b8f7d2aac8f31d7",
   "published_evidence_hashes_verified": 161,
   "final_financial_summary": {
@@ -265,12 +287,24 @@
     "total_ceiling_usd": 40,
     "maximum_lifetime_seconds": 10800,
     "max_hourly_usd": 4.5,
-    "status": "running_preflight",
+    "status": "closed_preflight_only",
     "directory": "artifacts/cloud-preparation/2026-10-13/n768_campaign_001",
     "instance_id": 55853636,
     "offer_id": 45315037,
     "billable_attempt_consumed": true,
     "guard_deadline_pt": "2026-10-13T23:01:06.578443-07:00",
-    "quoted_hourly_usd": "4.417777777777777666666666667"
+    "quoted_hourly_usd": "4.417777777777777666666666667",
+    "verified_termination": true,
+    "authorization_exhausted": true
+  },
+  "corrected_third_grid_authorization": {
+    "quantity": 1,
+    "cap_usd": 14,
+    "total_ceiling_usd": 40,
+    "maximum_lifetime_seconds": 10800,
+    "max_hourly_usd": 4.5,
+    "status": "preparing",
+    "directory": "artifacts/cloud-preparation/2026-10-13/n768_campaign_002",
+    "source": "Explicit user reply: Yes\u2014one corrected $14 attempt, same $40 total and numerical gates."
   }
 }

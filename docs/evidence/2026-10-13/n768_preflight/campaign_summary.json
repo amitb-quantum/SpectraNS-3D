@@ -1,0 +1,40 @@
+{
+  "status": "preflight_refused_production_not_started",
+  "instance_id": 55853636,
+  "offer": {
+    "id": 45315037,
+    "gpu_name": "H200 NVL",
+    "gpu_ram": 143771,
+    "num_gpus": 1,
+    "dph_total": 4.251111111111111,
+    "storage_cost": 1.0,
+    "inet_up_cost": 0.00390625,
+    "inet_down_cost": 0.0026041666666666665,
+    "reliability2": 0.99754,
+    "verification": "verified",
+    "cuda_max_good": 13.2,
+    "driver_version": "595.84",
+    "cpu_arch": "amd64",
+    "cpu_cores_effective": 32.0,
+    "cpu_ram": 171937,
+    "disk_space": 767.3333333333333,
+    "inet_down": 909.7,
+    "inet_up": 928.8
+  },
+  "rate_usd": "4.417777777777777666666666667",
+  "core_source_sha256": {
+    "ns_fast_v3.py": "ab9eebda2750c7be019d3c2f54fe7aa5f2be98a0276a55260e35a81989b34842",
+    "ns_fast_v2.py": "6f01107b931b80231e27336faeae94b51916d91861473f46e85aedbba0bdaf5d"
+  },
+  "implementation_commit": "57ac63e81498defb801fbbfafc5f537226ecadfd",
+  "payload_sha256": "3709ee964b51d7fc3a69b7ad1fb504cadd94d1c4b4a8261d4d9139c04d77bfc8",
+  "bootstrap_sha256": "65d31aba3992bdd0493583367c88fde5b5a0f146a2658d2c42f393b48f690583",
+  "image": "vastai/base-image@sha256:82a53405a50901ab7e462a80ddde335a8f927a90bdab5cdea9006f02cb858a3e",
+  "started_epoch": 1791946926.5784426,
+  "termination_verified": true,
+  "accepted_preflight_end_t": 0.05,
+  "reload_test_end_t": 0.051,
+  "required_common_comparison_end_t": 1.1,
+  "protected_validated": false,
+  "reason": "Inherited cap-only admission rejected legitimate ordinary CFL clipping. Operational predictor error; numerical/memory tests passed. No production or required fine window."
+}

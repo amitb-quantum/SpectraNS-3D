@@ -1,0 +1,101 @@
+{
+  "status": "running",
+  "start_t": 0.05,
+  "t": 0.051,
+  "steps": 121,
+  "initial_step": 118,
+  "source_sha256": {
+    "ns_fast_v3.py": "ab9eebda2750c7be019d3c2f54fe7aa5f2be98a0276a55260e35a81989b34842",
+    "ns_fast_v2.py": "6f01107b931b80231e27336faeae94b51916d91861473f46e85aedbba0bdaf5d"
+  },
+  "driver_sha256": "b831bd53eceebddf69c83cdf7967cbcf6373f73e5c90965b94f8e7261b560546",
+  "parameters": {
+    "N": 768,
+    "nu": 0.0005,
+    "device": "cuda:0",
+    "case": "tubes",
+    "scheme": "lsrk4",
+    "fp64": true,
+    "cfl": 0.2,
+    "max_dt": 0.0005,
+    "target_t": 0.051,
+    "log_dt": 0.01,
+    "checkpoint_dt": 0.1,
+    "checkpoint_enabled": false,
+    "turnover_enabled": false,
+    "high_shell_min_k": 128
+  },
+  "restart": {
+    "path": "/opt/spectrans-3d/project/artifacts/third_grid_run/preflight/checkpoints/terminal_t0.05000000",
+    "metadata": {
+      "schema_version": 1,
+      "physics": {
+        "N": 768,
+        "nu": 0.0005,
+        "case": "tubes",
+        "scheme": "lsrk4",
+        "fp64": true,
+        "domain": 6.283185307179586,
+        "dealias": "strict spherical |k|<N/3",
+        "legacy_tube_parameters": {
+          "gamma": 5.0,
+          "a": 0.25,
+          "sep": 0.6,
+          "pert": 0.35
+        }
+      },
+      "t": 0.05,
+      "step": 118,
+      "bkm": 1.2583153609447306,
+      "E0": 0.06633336245320776,
+      "source_sha256": {
+        "ns_fast_v3.py": "ab9eebda2750c7be019d3c2f54fe7aa5f2be98a0276a55260e35a81989b34842",
+        "ns_fast_v2.py": "6f01107b931b80231e27336faeae94b51916d91861473f46e85aedbba0bdaf5d"
+      },
+      "checkpoint_driver_sha256": "06da638cad9330e6f646d76de304568f3731d4b409523ad9f3e6f16b156d2adc",
+      "torch": "2.13.0+cu130",
+      "cuda": "13.0",
+      "numpy": "2.5.1",
+      "axes": "component,kx,ky,kz_rfft",
+      "normalization": "unnormalized torch rfftn coefficients",
+      "residual_restart": "LSRK4 first stage has coefficient zero; residual can be reset",
+      "files": {
+        "U0.npy": "31ed1351015ba9c3b36b4a6f08468a25978ed8632a360e2a71d3663d747a02b9",
+        "U1.npy": "e40aec7283b93a56d34bfea5b2b57237c79f4e49e4d23c8da6462db996012ba0",
+        "U2.npy": "43de55ebad9a3fa88a251a191e8755e5d47731a1624062879e26d42b366ec983"
+      }
+    },
+    "metadata_sha256": "332540cf9ed43f8934bd1f58a52acd3253382d3514dc716addf40665280c3a64"
+  },
+  "torch": "2.13.0+cu130",
+  "cuda": "13.0",
+  "numpy": "2.5.1",
+  "python": "3.12.13 | packaged by conda-forge | (main, Mar  5 2026, 16:50:00) [GCC 14.3.0]",
+  "physical_conventions": {
+    "domain": 6.283185307179586,
+    "dealias": "strict spherical |k|<N/3",
+    "initial_tubes": {
+      "gamma": 5.0,
+      "a": 0.25,
+      "sep": 0.6,
+      "pert": 0.35
+    }
+  },
+  "last_accepted": {
+    "step": 121,
+    "t": 0.051,
+    "dt": 0.00012405355530544643,
+    "E": 0.06628252680672896,
+    "Z": 0.9955984533308586,
+    "eps": 0.0009955984533308586,
+    "dEdt_fd": -0.0009956236163150061,
+    "budget_resid_rel": -1.967216328180129e-08,
+    "wmax": 25.097904719930867,
+    "bkm": 1.2834149769858687,
+    "tail_ratio": 8.543537537645397e-35,
+    "div_max": 3.882680640856505e-15,
+    "wall_s": 24.48790790233761,
+    "peak_mem_GB": 81.91588096
+  },
+  "turnover": null
+}
