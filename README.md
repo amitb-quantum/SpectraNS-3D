@@ -136,6 +136,10 @@ The completed N768/H200 study tested this sensitivity on a third original-IC gri
 
 The ultimate deliverable is a reproducible study with uncertainty and resolution limits attached to its claims: validated trajectories, refinement comparisons, calibrated warning diagnostics and enough evidence for independent reanalysis. There is no meaningful percentage-complete estimate toward a mathematical regularity proof; this project is building numerical evidence, and a proof would require additional mathematical work.
 
+## Quantum hardware experiment
+
+A small, pre-registered run on IBM's `ibm_kingston` asks the same question with hardware noise in place of grid resolution. It executes one Fourier spectral advection step (QFT, modal phase, inverse QFT) on a 16-point grid encoded in four qubits, and checks which outputs survive. In the first run (13 s of QPU time), the integral-type centroid survived (within 0.08 cell) and four runs agreed closely with each other while all sitting far from the exact answer. The local peak's error changed sign, and a one-parameter noise correction made it worse. Both traced to a 28% readout fault on one qubit during the job. This is a methodology experiment with no quantum-advantage claim; a laptop computes the exact answer. See the [pre-registration](quantum/PREREGISTRATION.md) and [results](quantum/RESULTS_kingston_001.md).
+
 ## Reproduce locally
 
 The primary development workspace is on the native WSL/Linux filesystem. Windows Documents holds selected exports rather than the active checkout.
