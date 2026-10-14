@@ -1,0 +1,11 @@
+SpectraNS-3D
+Copyright 2026 Amit Brahmbhatt / Quantum-Clarity LLC
+
+Source code and tests in this repository are licensed under the Apache License,
+Version 2.0 (see LICENSE).
+
+Documentation, reports, figures and published evidence under docs/ are licensed
+under the Creative Commons Attribution 4.0 International License (CC-BY-4.0;
+see LICENSE-docs), except where a file states otherwise.
+
+Low-storage RK4 coefficients follow Carpenter and Kennedy, NASA TM-109112 (1994).
