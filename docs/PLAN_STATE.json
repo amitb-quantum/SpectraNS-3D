@@ -6,9 +6,9 @@
   "scientific_milestone": "Original-IC N512/N640 comparison through1.10 and local fine-window validation",
   "scientific_status": "third_grid_comparison_incomplete_preflight_only",
   "current_task": "P21",
-  "next_action": "Fresh financing/live H200 and exact final transport binding, then one USD14 corrected attempt.",
+  "next_action": "Measured CFL-aware admission, then protected N7680\u20131.10 and fine1.00\u20131.10; no additional rental.",
   "decision": "one_more_5_usd_attempt_at_2_25_or_less_discovery_extended",
-  "automation_status": "PAUSED",
+  "automation_status": "ACTIVE",
   "new_billable_attempt_pending_decision": false,
   "baseline_commit": "d258fcb556e69090454c437454cf7830d897029d",
   "last_budget_snapshot": {
@@ -216,7 +216,8 @@
       "id": "P21",
       "title": "Fresh funding/quote and one corrected USD14 N768 campaign",
       "status": "in_progress",
-      "successor": "P22"
+      "successor": "P22",
+      "result": "Fresh exact quote/bindings passed; corrected owned H20055858324 created. Guard armed; measured preflight pending."
     },
     {
       "id": "P22",
@@ -272,7 +273,7 @@
       }
     ]
   },
-  "phase_status": "corrected_third_grid_preparation",
+  "phase_status": "corrected_third_grid_preflight",
   "publication_commit": "610df59a9b357be744a83a484b8f7d2aac8f31d7",
   "published_evidence_hashes_verified": 161,
   "final_financial_summary": {
@@ -307,8 +308,13 @@
     "total_ceiling_usd": 40,
     "maximum_lifetime_seconds": 10800,
     "max_hourly_usd": 4.5,
-    "status": "preparing",
+    "status": "running_preflight",
     "directory": "artifacts/cloud-preparation/2026-10-13/n768_campaign_002",
-    "source": "Explicit user reply: Yes\u2014one corrected $14 attempt, same $40 total and numerical gates."
+    "source": "Explicit user reply: Yes\u2014one corrected $14 attempt, same $40 total and numerical gates.",
+    "instance_id": 55858324,
+    "offer_id": 45315037,
+    "billable_attempt_consumed": true,
+    "guard_deadline_pt": "2026-10-13T23:34:13.013212-07:00",
+    "quoted_hourly_usd": "4.417777777777777666666666667"
   }
 }
