@@ -5,8 +5,8 @@
   "project": "SpectraNS-3D",
   "scientific_milestone": "Original-IC N512/N640 comparison through1.10 and local fine-window validation",
   "scientific_status": "third_grid_comparison_incomplete_preflight_only",
-  "current_task": "P20",
-  "next_action": "P20: correct operational CFL-aware predictor and verify complete proof; then fresh funding/offer and one authorized USD14 attempt.",
+  "current_task": "P21",
+  "next_action": "Fresh financing/live H200 and exact final transport binding, then one USD14 corrected attempt.",
   "decision": "one_more_5_usd_attempt_at_2_25_or_less_discovery_extended",
   "automation_status": "PAUSED",
   "new_billable_attempt_pending_decision": false,
@@ -205,13 +205,17 @@
     {
       "id": "P20",
       "title": "Correct CFL-aware forecast and bind complete proof",
-      "status": "in_progress",
-      "successor": "P21"
+      "status": "completed",
+      "successor": "P21",
+      "result": "Actual118step CFL regression,239local tests,11CPU/CUDA cases including7realSIGKILLs; extracted235passed/4CUDA-onlyskips. Numerical criteria/core unchanged.",
+      "evidence": [
+        "docs/evidence/2026-10-13/n768_cfl_correction_readiness/rehearsal.json"
+      ]
     },
     {
       "id": "P21",
       "title": "Fresh funding/quote and one corrected USD14 N768 campaign",
-      "status": "pending",
+      "status": "in_progress",
       "successor": "P22"
     },
     {

@@ -17,14 +17,14 @@ def offer():
 def ledger():
     return dict(total_ceiling_usd=40,verified_prior_spend=True,project_instance_list_complete=True,
           evidence=["test"],verified_as_of_utc=datetime.now(timezone.utc).isoformat(),
-          third_grid_authorization=dict(authorized=True,exclusive_additional_cap_usd=15,allowed_grids=[768],status="unused"),
+          third_grid_authorization=dict(authorized=True,exclusive_additional_cap_usd=14,allowed_grids=[768],status="unused"),
           prior_spend_usd=18,pending_charges_upper_bound_usd=1,other_committed_project_spend_usd=0,
           reported_credit_balance_usd=30)
 
 def test_quote_and_budget_keep_distinct_hourly_and_total_caps():
     q=validate_quote(offer());b=validate_budget(ledger(),q)
-    assert b["cap_usd"]==15 and float(b["project_exposure_usd"])==34
-    assert b["lifetime_seconds"]<=10800 and float(b["lifetime_cost_bound_usd"])<=15
+    assert b["cap_usd"]==14 and float(b["project_exposure_usd"])==33
+    assert b["lifetime_seconds"]<=10800 and float(b["lifetime_cost_bound_usd"])<=14
 
 @pytest.mark.parametrize("field,value",[("gpu_name","H100 SXM"),("gpu_ram",139000),("num_gpus",2),
        ("dph_total",5),("inet_up_cost",.2),("cpu_arch","arm64"),("dph_total",float("nan"))])
@@ -33,7 +33,7 @@ def test_unsupported_or_costly_offer_refused(field,value):
     with pytest.raises(ValueError):validate_quote(o)
 
 def test_unreconciled_or_exhausted_finances_refused():
-    a=ledger();a["prior_spend_usd"]=26
+    a=ledger();a["prior_spend_usd"]=27
     with pytest.raises(ValueError):validate_budget(a,validate_quote(offer()))
     a=ledger();a["verified_as_of_utc"]="2020-01-01T00:00:00+00:00"
     with pytest.raises(ValueError):validate_budget(a,validate_quote(offer()))
@@ -157,16 +157,16 @@ def test_execute_records_quote_and_bounds_before_any_provisioning(tmp_path,monke
         pytest.fail("provider mutation before verified quote")
     monkeypatch.setattr(vast_campaign_api,"api",forbidden)
     class PreparedQuote(Exception):pass
-    out=tmp_path/"artifacts/cloud-preparation/2026-10-13/n768_campaign_001"
+    out=tmp_path/"artifacts/cloud-preparation/2026-10-13/n768_campaign_002"
     def ssh_boundary(command,**kwargs):
         assert command[0]=="ssh-keygen"
         receipt=json.loads((out/"quote.json").read_text())
-        assert receipt["cap_usd"]==15
+        assert receipt["cap_usd"]==14
         assert receipt["rate_usd"]==validate_quote(measured_offer)["rate_usd"]
         assert float(receipt["minimum_credit_including_guard_usd"])<=measured_ledger["reported_credit_balance_usd"]
         assert float(receipt["account_credit_floor_usd"])==1.0
         if mode!="default":assert receipt["max_hourly_rate_usd"]=="4.5"
-        assert receipt["project_exposure_usd"]=="34"
+        assert receipt["project_exposure_usd"]=="33"
         assert receipt["environment_sha256"]==sha(environment)
         assert receipt["payload_sha256"]==sha(payload)
         assert receipt["offer"]["id"]==123

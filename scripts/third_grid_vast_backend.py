@@ -4,7 +4,7 @@ from pathlib import Path
 from extension_state import write,sha
 from third_grid_io import unpack_verified,small_snapshot,copy_verified
 from third_grid_assessment import validate,checkpoint_at
-from third_grid_review import protected_phase_forecast
+from third_grid_review import protected_phase_forecast,measured_step_plan
 
 REMOTE="/opt/spectrans-3d"
 PROJECT=REMOTE+"/project"
@@ -171,14 +171,16 @@ class VastBackend:
         diagnostic=(sum(seconds.get(k,0) for k in ("scalar_diagnostics_and_tail","enstrophy_budget","full_spectrum"))+callback_base)/calls["scalar_diagnostics_and_tail"]
         checkpoint=seconds["checkpoint_write_hash_prune"]/calls["checkpoint_write_hash_prune"]
         dt=m["dt_statistics"]["min"]
-        if dt<.0005*(1-1e-8):raise ValueError("preflight CFL clipping needs revised runtime forecast")
+        step_plan=measured_step_plan(samples)
+        write(self.work/"measured_step_plan.json",step_plan)
         from third_grid_sampling import count_remaining
         from ns_third_grid_worker import profile
         counts=count_remaining(profile("production"))
         forecast=protected_phase_forecast(step,diagnostic,checkpoint,self.remaining(120),180,
-            coarse_start_t=.05,refinement_seconds=refined,refinement_events=counts["total"])
+            coarse_start_t=.05,refinement_seconds=refined,refinement_events=counts["total"],
+            coarse_steps_override=step_plan["remaining_coarse_steps"])
         self.fine_reserve_seconds=1.25*(400*step+11*diagnostic+counts["fine"]*refined)+180
-        forecast.update(step_seconds=step,diagnostic_seconds=diagnostic,checkpoint_seconds=checkpoint,
+        forecast.update(measured_step_plan=step_plan,step_seconds=step,diagnostic_seconds=diagnostic,checkpoint_seconds=checkpoint,
              achieved_dt_min=dt,fine_reserve_seconds=self.fine_reserve_seconds,
              refinement_seconds_per_call=refined,refinement_counts=counts,
              note="verified original-IC prefix reused; sampled maxima/budgets/spectra every event; only declared Fourier estimates timed separately")

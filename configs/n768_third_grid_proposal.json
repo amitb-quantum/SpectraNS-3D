@@ -1,6 +1,6 @@
 {
-  "schema_version": 3,
-  "status": "New authorized N768/H200 specification; readiness verification in progress.",
+  "schema_version": 4,
+  "status": "Corrected single USD14 attempt; full source-bound proof required.",
   "configuration": {
     "N": 768,
     "case": "tubes",
@@ -227,7 +227,7 @@
   },
   "budget": {
     "total_project_cap_usd": 40,
-    "new_all_in_cap_usd": 15,
+    "new_all_in_cap_usd": 14,
     "noncompute_reserve_usd": 0.5,
     "maximum_lifetime_seconds": 10800,
     "max_hourly_gpu_plus_120GB_disk_usd": 4.5,
@@ -255,9 +255,9 @@
       "never_use_reload_state": true,
       "release_only_after_verified_assembly": true
     },
-    "runtime_gate": "Measured2100coarse+400fine steps,117diagnostic events,31refined calls,12checkpoint events;1.25compute margin+180s collection.",
+    "runtime_gate": "Ordinary measured dt planning floor0.9*minimum excluding event-limited remainders; ceil(remaining time/floor)+one extra alignment step/event;400fine steps,117diagnostic events,31refined calls,12checkpoints;1.25compute margin+180s collection. Per-event remaining-phase guard unchanged.",
     "reforecast_every_diagnostic": true,
-    "CFL_rule": "Preflight cap clipping requires revised forecast; fail closed.",
+    "CFL_rule": "Preserve CFL0.2 and actual recorded limits; legitimate clipping increases projected step count. Tiny/nonfinite/invalid steps fail closed. This is an operational forecast correction, not a numerical-gate relaxation.",
     "disk_requirement": {
       "requested_GB": 120,
       "raw_states_max": 6,
@@ -271,7 +271,10 @@
       "bytes_each": 67108864,
       "actual_SCP_checksum_verified": true
     },
-    "memory_between_phases": "Sequential solver processes; driver and allocator fractions each<0.8."
+    "memory_between_phases": "Sequential solver processes; driver and allocator fractions each<0.8.",
+    "step_regression_reference": {
+      "docs/evidence/2026-10-13/n768_preflight/work/preflight/steps.csv": "b3e8bac5d4d9975107cf7b1d24c60da30187f89cf4789713bf09297c366f550d"
+    }
   },
   "source_sha256": {
     "ns_fast_v3.py": "ab9eebda2750c7be019d3c2f54fe7aa5f2be98a0276a55260e35a81989b34842",
@@ -280,7 +283,7 @@
   "execution_note": "Only scripts/run_vast_third_grid.py --execute with complete exact proof/bootstrap/reference/payload/live offer/funding bindings.",
   "scientific_goal": "Original-IC N768 accepted0\u20131.10 plus same-grid fine1.00\u20131.10 and separately classified N512/N768, N640/N768 and signed three-grid trends.",
   "higher_grid_scope": "Only N768; no N1024. Old N640/H100 launchers and audited solver remain unchanged.",
-  "revision": "Selective Fourier sampling, verified same-grid preflight continuation, metadata-only production collection",
+  "revision": "CFL-aware count forecast; initial cap-only attempt preserved in published evidence.",
   "phase_order": [
     {
       "name": "preflight",
@@ -352,13 +355,13 @@
   "N640_reference": "configs/n768_baseline_reference.json",
   "financial_authority": {
     "total_ceiling_usd": 40,
-    "single_attempt_cap_usd": 15,
+    "single_attempt_cap_usd": 14,
     "max_hourly_usd": 4.5,
     "max_lifetime_seconds": 10800,
     "reserve_usd": 0.5,
     "account_floor_usd": 1,
-    "fixed_attempt": "artifacts/cloud-preparation/2026-10-13/n768_campaign_001",
-    "source": "User explicitly approved raising the total ceiling to USD40 and seeking H200 after the one-attempt USD15/3-hour option was presented."
+    "fixed_attempt": "artifacts/cloud-preparation/2026-10-13/n768_campaign_002",
+    "source": "Explicit user approval: Yes\u2014one corrected $14 attempt, same $40 total and numerical gates."
   },
   "execution_hardware": {
     "name_contains": "H200",
@@ -375,5 +378,6 @@
     "protected_compute_safety_factor": 1.25,
     "small_collection_reserve_s": 180,
     "preflight": "Measure N768 ordinary-step, scalar/budget/spectrum/refinement/checkpoint costs; refuse production unless complete protected result fits remaining lifetime. A refusal consumes the sole billable attempt."
-  }
+  },
+  "prior_attempt_outcome": "docs/N768_PREFLIGHT_OUTCOME_2026-10-13.md"
 }

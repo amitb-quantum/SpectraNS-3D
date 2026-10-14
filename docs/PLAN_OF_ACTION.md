@@ -12,7 +12,7 @@ A release can also close with an explicitly incomplete scientific milestone, if 
 
 ## Current phase — authorized third grid
 
-N512/N640 and publication are complete. The user subsequently raised the project ceiling toUSD40 and authorized one N768/H200 follow-up capped atUSD15. Current taskP13 is implementation/proof binding; its successor is fresh offer/funding verification, then measured preflight, protected N768 comparison, closure and publication. Follow [the new frozen specification](N768_THIRD_GRID_SPEC_2026-10-13.md) and PLAN_STATE.json. The historical N640 steps/criteria below remain preserved; their formerUSD30/H100/N640 authorization does not authorize another old campaign.
+N512/N640 and publication are complete. The user subsequently raised the project ceiling toUSD40 and authorized one N768/H200 follow-up capped atUSD15. Initial N768 preflight refused the inherited cap-only predictor and was destroyed. The user explicitly approved one correctedUSD14 attempt underUSD40 total. Current taskP21 is fresh offer/funding verification after239tests, complete CPU/CUDA SIGKILL proof and extracted235-test CPU validation; then measured preflight, protected N768 comparison, closure and publication. Follow [the new frozen specification](N768_THIRD_GRID_SPEC_2026-10-13.md) and PLAN_STATE.json. The historical N640 steps/criteria below remain preserved; their formerUSD30/H100/N640 authorization does not authorize another old campaign.
 
 ## Historical position before completed N640 campaign
 

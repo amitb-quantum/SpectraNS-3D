@@ -24,6 +24,11 @@ def build(output):
         path=ROOT/name
         if sha(path)!=digest:raise ValueError("N640 baseline changed")
         blobs[name]=path.read_bytes()
+    plan=json.loads((ROOT/"configs/n768_third_grid_proposal.json").read_text())
+    for name,digest in plan["preflight"]["step_regression_reference"].items():
+        path=ROOT/name
+        if sha(path)!=digest:raise ValueError("measured CFL regression input changed")
+        blobs[name]=path.read_bytes()
     files={name:hashlib.sha256(blob).hexdigest() for name,blob in sorted(blobs.items())}
     blobs["payload_manifest.json"]=(json.dumps(files,indent=2)+"\n").encode()
     archive=output/"spectrans-3d-n768.tar"

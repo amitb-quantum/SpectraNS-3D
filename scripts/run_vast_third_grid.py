@@ -30,6 +30,9 @@ def validate_assets(args):
         if manifest["files"].get(key)!=digest:raise ValueError("payload missing required small historical evidence")
     ref640=json.loads((ROOT/"configs/n768_baseline_reference.json").read_text())
     if any(manifest["files"].get(n)!=h for n,h in ref640["files"].items()):raise ValueError("payload missing N640 baseline")
+    plan=json.loads((ROOT/"configs/n768_third_grid_proposal.json").read_text())
+    if any(manifest["files"].get(n)!=h for n,h in plan["preflight"]["step_regression_reference"].items()):
+        raise ValueError("payload missing exact CFL regression data")
     if environment.stat().st_size>6_000_000_000 or not re.fullmatch(r"vastai/base-image@sha256:[a-f0-9]{64}",args.image):
         raise ValueError("bootstrap size or immutable image invalid")
     return environment,payload
@@ -66,12 +69,12 @@ def close_budget(out):
        verified_as_of_utc=datetime.now(timezone.utc).isoformat())
     ledger["evidence"].append((out/"billing_after.json").relative_to(ROOT).as_posix())
     write(path,ledger);write(out/"budget_final.json",ledger)
-    write(out/"financial_closure.json",dict(cost_upper_usd=str(upper),within_campaign_cap=upper<=15,
+    write(out/"financial_closure.json",dict(cost_upper_usd=str(upper),within_campaign_cap=upper<=14,
                                            posting_pending=True))
 
 def execute(args):
     if sys.platform!="linux":raise ValueError("execute from native WSL")
-    expected=ROOT/"artifacts/cloud-preparation/2026-10-13/n768_campaign_001"
+    expected=ROOT/"artifacts/cloud-preparation/2026-10-13/n768_campaign_002"
     if Path(args.job_dir).resolve()!=expected.resolve() or expected.exists():raise ValueError("only the one unused fixed N768 attempt is authorized")
     hourly_limit=money(getattr(args,"max_hourly_rate",MAX_HOURLY_USD),"selection hourly ceiling")
     if not 0<hourly_limit<=Decimal(MAX_HOURLY_USD):raise ValueError("selection ceiling may only tighten the fixed policy")
@@ -131,11 +134,11 @@ def execute(args):
         else:raise TimeoutError("guard did not arm")
         authorization=dict(allowed_grids=[768],source_sha256=verify_audited_sources(),fingerprint=fingerprint(ROOT),
           provisioning_authorized=True,approval_note=state["approval_note"],guard_armed=True,
-          cap_usd=15,lifetime_seconds=bounds["lifetime_seconds"],reserve_usd=.5,
+          cap_usd=14,lifetime_seconds=bounds["lifetime_seconds"],reserve_usd=.5,
           plan_sha256=sha(ROOT/"configs/n768_third_grid_proposal.json"),instance_id=None,
           started_epoch=started,deadline_epoch=state["deadline_epoch"])
         backend=VastBackend(out,state,authorization)
-        ledger["other_committed_project_spend_usd"]=15;write(ledger_path,ledger);write(out/"budget_reserved.json",ledger)
+        ledger["other_committed_project_spend_usd"]=14;write(ledger_path,ledger);write(out/"budget_reserved.json",ledger)
         try:
             body=dict(image=args.image,label=state["label"],disk=DISK_GB,runtype="ssh",target_state="running",cancel_unavail=True,
               onstart='mkdir -p /root/.ssh && chmod 700 /root/.ssh && printf "%s\\n" '+shlex.quote(public)+' >> /root/.ssh/authorized_keys && chmod 600 /root/.ssh/authorized_keys')

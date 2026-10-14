@@ -1,3 +1,13 @@
+## Current correction — one explicitly authorized USD14 attempt
+
+The first USD15 attempt was destroyed after its cap-only predictor rejected legitimate CFL clipping; its immutable plan and results are preserved in [the preflight outcome](N768_PREFLIGHT_OUTCOME_2026-10-13.md). The user explicitly approved one correctedUSD14 attempt, with the sameUSD40 total ceiling and numerical gates. The only new directory is artifacts/cloud-preparation/2026-10-13/n768_campaign_002; maximum10800seconds andUSD4.50/hour remain.
+
+The corrected predictor excludes legitimate event remainders from the ordinary-dt floor, uses0.9*minimum ordinary measured dt, forecasts ceil(remaining simulated time/floor) plus one alignment step/event, and retains all measured diagnostic/refinement/checkpoint costs,25%compute margin,180second collection reserve and live per-event remaining-phase refusals. Invalid/roundoff-sized ordinary or event steps fail closed. A preflight floor below the declared fine cap also refuses. CFL0.2, coarse/fine caps0.0005/0.00025, numerical and temporal criteria are unchanged.
+
+The actual118-step first preflight is hash-bound as a regression input. Its conservative corrected scenario forecasts2809remaining coarse steps and7594.52seconds of protected work. A fresh host measurement is still mandatory; this history does not admit a new rental automatically.
+
+The original authorization and design text below is retained as dated history, superseded for new execution by this correction and the current machine specification.
+
 # N768 third-grid specification — October 13, 2026
 
 This is a new phase following the completed N512/N640 study. The user authorized a USD40 total project ceiling after seeing the current H200 price and the one-attempt USD15 / three-hour option. One N768 original-initial-condition campaign is authorized. No N1024, automatic retry, or later-time simulation is authorized by this specification.

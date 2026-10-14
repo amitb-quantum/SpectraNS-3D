@@ -37,16 +37,16 @@ def validate_budget(ledger,quote,now=None):
     age=(now-utc(ledger["verified_as_of_utc"])).total_seconds()
     if not 0<=age<=3600:raise ValueError("fresh billing required")
     authority=ledger.get("third_grid_authorization",{})
-    if authority.get("authorized") is not True or money(authority.get("exclusive_additional_cap_usd"),"authority")!=Decimal("15") or authority.get("allowed_grids")!=[768] or authority.get("status")!="unused":
+    if authority.get("authorized") is not True or money(authority.get("exclusive_additional_cap_usd"),"authority")!=Decimal("14") or authority.get("allowed_grids")!=[768] or authority.get("status")!="unused":
         raise ValueError("standing user authorization missing")
     total=sum((money(ledger.get(k),k) for k in ("prior_spend_usd","pending_charges_upper_bound_usd","other_committed_project_spend_usd")),Decimal("0"))
     nonproject=money(ledger.get("nonproject_credit_reserve_usd",0),"nonproject credit reserve")
-    if total+15>40 or money(ledger.get("reported_credit_balance_usd"),"credit")<15+nonproject:raise ValueError("USD15 commitment does not fit budget/credit")
+    if total+14>40 or money(ledger.get("reported_credit_balance_usd"),"credit")<14+nonproject:raise ValueError("USD14 commitment does not fit budget/credit")
     rate=money(quote["rate_usd"],"rate")
     if not 0<rate<=Decimal(MAX_HOURLY_USD):raise ValueError("hourly bound exceeded")
     from third_grid_review import lifetime_seconds
     lifetime=lifetime_seconds(rate)
-    return dict(cap_usd=15,project_exposure_usd=str(total+15),lifetime_seconds=lifetime,
+    return dict(cap_usd=14,project_exposure_usd=str(total+14),lifetime_seconds=lifetime,
                 nonproject_credit_reserve_usd=str(nonproject),
                 lifetime_cost_bound_usd=str(rate*Decimal(lifetime)/3600+Decimal(".5")))
 
@@ -56,7 +56,7 @@ def validate_production_request(cfg):
         raise ValueError("production source/authority binding missing")
     if a.get("provisioning_authorized") is not True or not a.get("approval_note") or not a.get("guard_armed") or type(a.get("instance_id"))is not int:
         raise ValueError("owned instance and armed provider guard required")
-    if a.get("cap_usd")!=15 or not 0<a.get("lifetime_seconds",0)<=10800 or a.get("reserve_usd")!=.5:
+    if a.get("cap_usd")!=14 or not 0<a.get("lifetime_seconds",0)<=10800 or a.get("reserve_usd")!=.5:
         raise ValueError("production spending guard mismatch")
     if a.get("plan_sha256")!=sha(ROOT/"configs/n768_third_grid_proposal.json"):raise ValueError("plan mismatch")
     if cfg.get("provider_deadline_epoch")!=a.get("deadline_epoch") or not 0<a.get("deadline_epoch",0)-a.get("started_epoch",0)<=a["lifetime_seconds"]:

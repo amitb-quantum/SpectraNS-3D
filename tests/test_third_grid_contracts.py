@@ -31,7 +31,7 @@ def test_lifetime_cost_and_disk_bounds():
     assert rate*10800/3600+.5<15
     assert disk_requirement()["required_free_bytes"]>93_000_000_000
     assert disk_requirement()["requested_disk_GB"]==120
-    with pytest.raises(ValueError):lifetime_seconds(rate,cap_usd=16)
+    with pytest.raises(ValueError):lifetime_seconds(rate,cap_usd=15)
 
 def test_exact_published_640_baseline_excludes_later_unaccepted_state():
     r=historical_640()
@@ -44,12 +44,12 @@ def test_bound_request_rejects_grid_spending_lifetime_plan_and_deadline_tamperin
     import copy
     a=dict(allowed_grids=[768],source_sha256=verify_audited_sources(),fingerprint=fingerprint(ROOT),
         provisioning_authorized=True,approval_note="explicit test authority",guard_armed=True,instance_id=123,
-        cap_usd=15,lifetime_seconds=10800,reserve_usd=.5,
+        cap_usd=14,lifetime_seconds=10800,reserve_usd=.5,
         plan_sha256=sha(ROOT/"configs/n768_third_grid_proposal.json"),
         started_epoch=1000.,deadline_epoch=11740.)
     cfg=dict(authorization=a,provider_deadline_epoch=a["deadline_epoch"])
     assert validate_production_request(cfg)==a
-    for field,value in [("allowed_grids",[1024]),("cap_usd",16),("lifetime_seconds",10801),
+    for field,value in [("allowed_grids",[1024]),("cap_usd",15),("lifetime_seconds",10801),
                         ("plan_sha256","0"*64),("guard_armed",False),("instance_id",None)]:
         bad=copy.deepcopy(cfg);bad["authorization"][field]=value
         with pytest.raises(ValueError):validate_production_request(bad)
@@ -62,7 +62,7 @@ def test_machine_spec_and_worker_financial_capacity_are_consistent():
     cfg=json.loads((ROOT/"configs/n768_third_grid_proposal.json").read_text())
     assert cfg["configuration"]["N"]==cfg["preflight"]["N"]==768
     assert cfg["budget"]["total_project_cap_usd"]==40
-    assert cfg["budget"]["new_all_in_cap_usd"]==15
+    assert cfg["budget"]["new_all_in_cap_usd"]==14
     assert cfg["budget"]["maximum_lifetime_seconds"]==10800
     assert cfg["checkpoint_collection"]["full_state_bytes"]==disk_requirement()["full_state_bytes"]
     assert cfg["preflight"]["disk_requirement"]["requested_GB"]==120

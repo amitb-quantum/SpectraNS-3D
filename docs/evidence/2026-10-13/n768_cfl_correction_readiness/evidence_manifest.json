@@ -1,0 +1,11 @@
+{
+  "files": {
+    "local_tests_proof.json": "90c74951280a6b69badb08eaa0adb869951bf457661f4fe8b7bba9c461713acc",
+    "proof_payload_validation.json": "9e8aa295c055c4da2106fb7785013c44acafc8efd448c43472c1e05ce0f2e6db",
+    "extracted_tests.txt": "a76dd35027762d3e4b86bb5eb2ed82d3f0c46d5a0823f1f9196e24bbb8981ef8",
+    "rehearsal.json": "8f3a9de00999d1c72caf14b4f851412c4424d78fb168c0d5f365938380ead028",
+    "local_tests.txt": "7fc1073aa05426a06f700d108d6fd4c42109025197e301902cce8d213857b4ec"
+  },
+  "provider_calls": 0,
+  "scope": "Corrected operational predictor proof; no late-time N768 result."
+}

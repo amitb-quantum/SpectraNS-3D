@@ -2,10 +2,10 @@
 from decimal import Decimal, ROUND_FLOOR
 import math
 
-def lifetime_seconds(rate_usd,cap_usd=15,reserve_usd=.5,maximum_seconds=10800):
+def lifetime_seconds(rate_usd,cap_usd=14,reserve_usd=.5,maximum_seconds=10800):
     rate,cap,reserve=map(lambda x:Decimal(str(x)),(rate_usd,cap_usd,reserve_usd))
-    if not all(x.is_finite() for x in (rate,cap,reserve)) or rate<=0 or reserve<Decimal('.5') or cap>15 or cap<=reserve:
-        raise ValueError('require finite positive rate, cap<=15, and reserve>=0.5')
+    if not all(x.is_finite() for x in (rate,cap,reserve)) or rate<=0 or reserve<Decimal('.5') or cap>14 or cap<=reserve:
+        raise ValueError('require finite positive rate, cap<=14, and reserve>=0.5')
     return min(maximum_seconds,int(((cap-reserve)*3600/rate).to_integral_value(rounding=ROUND_FLOOR)))
 
 def runtime_forecast(step_seconds,diagnostic_seconds,checkpoint_seconds,remaining_steps,
@@ -61,11 +61,15 @@ def transfer_allowance(bytes_to_transfer,trial_bytes_per_second,compression_seco
 def protected_phase_forecast(step_seconds,diagnostic_seconds,checkpoint_seconds,
                              remaining_lifetime_seconds,small_artifact_collection_seconds,
                              setup_preflight_seconds=0,safety_factor=1.25,
-                             *,coarse_start_t=0.,refinement_seconds=0.,refinement_events=0):
+                             *,coarse_start_t=0.,refinement_seconds=0.,refinement_events=0,coarse_steps_override=None):
     """Separate always-on diagnostics from the declared selective refinement cost."""
     if not 0<=coarse_start_t<=.05 or not math.isfinite(refinement_seconds) or refinement_seconds<0 or type(refinement_events)is not int or refinement_events<0:
         raise ValueError("invalid retained-prefix/refinement forecast")
     steps=round((1.1-coarse_start_t)/.0005)
+    if coarse_steps_override is not None:
+        if type(coarse_steps_override)is not int or coarse_steps_override<steps:
+            raise ValueError("measured step override may only increase fixed-cap forecast")
+        steps=coarse_steps_override
     events=round((1.1-coarse_start_t)/.01)+1+11
     result=runtime_forecast(step_seconds,diagnostic_seconds,checkpoint_seconds,steps,events,12,
                             remaining_lifetime_seconds,fine_steps=400,
@@ -149,3 +153,33 @@ def compare_fitted_local_peaks(left,right,relative_tolerance=.001,time_tolerance
     else:
         status='inconclusive'
     return dict(result,status=status,time_difference=dt,value_relative_difference=dv/max(abs(a['fitted_value']),abs(b['fitted_value']),1e-14))
+
+def measured_step_plan(rows,start_t=.05,end_t=1.1,log_dt=.01,cap_dt=.0005,safety=.9):
+    """Separate legitimate event truncation from ordinary stability-controlled steps."""
+    if not rows or not 0<safety<=1 or not 0<=start_t<end_t or not log_dt>0:
+        raise ValueError("invalid measured step plan")
+    ordinary=[];events=0;limits={}
+    for r in rows:
+        dt=float(r["dt"]);limits_row=[float(r[k]) for k in ("cap_dt","cfl_dt","viscous_dt")]
+        if not all(math.isfinite(v) and v>1e-12 for v in (dt,*limits_row)):
+            raise ValueError("nonfinite, nonpositive or roundoff-sized step")
+        if dt>min(limits_row)*(1+1e-10):
+            raise ValueError("recorded step exceeds its stability/cap limit")
+        limiter=r["limiter"]
+        if limiter not in ("cap","cfl","viscous","event"):raise ValueError("unknown limiter")
+        limits[limiter]=limits.get(limiter,0)+1
+        if limiter=="event":events+=1
+        else:ordinary.append(dt)
+    if not ordinary:raise ValueError("ordinary step timing required")
+    minimum=min(ordinary)
+    if minimum>cap_dt*(1+1e-10):raise ValueError("ordinary step exceeds declared cap")
+    floor=safety*minimum
+    if floor<=.00025:raise ValueError("stability floor cannot support declared fine cap; revise temporal specification")
+    n_event=round((end_t-start_t)/log_dt)
+    if abs(start_t+n_event*log_dt-end_t)>1e-11:raise ValueError("off-lattice endpoint")
+    steps=math.ceil((end_t-start_t)/floor)+n_event
+    return dict(ordinary_min_dt=minimum,planning_dt_floor=floor,dt_floor_factor=safety,
+        limiter_counts=limits,event_truncated_steps_observed=events,
+        remaining_coarse_steps=steps,event_alignment_step_allowance=n_event,
+        cap_only_remaining_steps=round((end_t-start_t)/cap_dt),
+        qualification="Planning allowance, not a future CFL bound; per-event measured remaining-phase refusal stays active.")
