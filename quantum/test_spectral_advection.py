@@ -18,6 +18,27 @@ import spectral_advection as sa  # noqa: E402
 from qiskit.quantum_info import Statevector  # noqa: E402
 
 
+def fake_heron():
+    """FakeKingston, or a same-topology Heron fake on older qiskit-ibm-runtime releases."""
+    from qiskit_ibm_runtime import fake_provider as fp
+    for name in ("FakeKingston", "FakeFez", "FakeMarrakesh", "FakeTorino"):
+        cls = getattr(fp, name, None)
+        if cls is None:
+            continue
+        backend = cls()
+        edges = {tuple(sorted(e)) for e in backend.coupling_map.get_edges()}
+        if all(tuple(sorted(e)) in edges for e in ((1, 2), (2, 3), (3, 16))):
+            return backend
+    pytest.skip("no Heron fake backend with the 1-2-3-16 chain in this qiskit-ibm-runtime")
+
+
+@pytest.fixture(autouse=True)
+def _offline_fake(monkeypatch):
+    """Route every fake-backend request through fake_heron(); tests never contact IBM."""
+    real = rq.get_backend
+    monkeypatch.setattr(rq, "get_backend", lambda args: fake_heron() if args.fake else real(args))
+
+
 def ideal_probs(qc):
     return Statevector(qc.remove_final_measurements(inplace=False)).probabilities()
 
@@ -56,8 +77,7 @@ def test_exact_centroids_and_profile_resolution():
 
 def test_barriers_keep_the_spectral_step_at_zero_shift():
     from qiskit import transpile
-    from qiskit_ibm_runtime.fake_provider import FakeKingston
-    qc = transpile(sa.logical_circuit(sa.profile(), 0.0, False), backend=FakeKingston(),
+    qc = transpile(sa.logical_circuit(sa.profile(), 0.0, False), backend=fake_heron(),
                    initial_layout=list(sa.PATH), optimization_level=sa.OPTIMIZATION_LEVEL,
                    seed_transpiler=sa.SEED_TRANSPILER)
     # state preparation alone needs far fewer two-qubit gates than prep + QFT + inverse QFT
@@ -150,7 +170,13 @@ def test_bootstrap_is_deterministic():
 @pytest.fixture(scope="module")
 def fake_bundle(tmp_path_factory):
     out = tmp_path_factory.mktemp("bundle")
-    rq.cmd_prepare(argparse.Namespace(fake=True, backend=None, instance=None, out=str(out), sim_seed=1))
+    mp = pytest.MonkeyPatch()
+    real = rq.get_backend
+    mp.setattr(rq, "get_backend", lambda args: fake_heron() if args.fake else real(args))
+    try:
+        rq.cmd_prepare(argparse.Namespace(fake=True, backend=None, instance=None, out=str(out), sim_seed=1))
+    finally:
+        mp.undo()
     return out
 
 
@@ -241,8 +267,7 @@ def test_execute_with_mock_sampler_sets_caps_and_writes_records(tmp_path, monkey
     m = json.loads((bundle / "manifest.json").read_text())
     m["fake_backend"] = False                     # simulate a real-backend bundle
     sha = rq.write_json(bundle / "manifest.json", m)
-    from qiskit_ibm_runtime.fake_provider import FakeKingston
-    monkeypatch.setattr(rq, "get_backend", lambda args: FakeKingston())
+    monkeypatch.setattr(rq, "get_backend", lambda args: fake_heron())
     rq.cmd_execute(execute_args(bundle, sha), sampler_factory=_Sampler)
     opts = _Sampler.seen["options"]
     assert _Sampler.seen["n"] == 10
