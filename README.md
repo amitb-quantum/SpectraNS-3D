@@ -1,5 +1,7 @@
 # SpectraNS-3D
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23374124.svg)](https://doi.org/10.5281/zenodo.23374124)
+
 **A reproducible numerical methodology for studying vortex stretching, small-scale growth, and numerical reliability in unforced three-dimensional incompressible Navier–Stokes flow.**
 
 SpectraNS-3D asks which features of an intense flow survive changes in timestep, grid resolution, precision and execution backend—and where the available computation stops supporting a physical conclusion. Its immediate output is an auditable experiment, including unsuccessful and under-resolved runs. Its long-term goal is a reproducible research study of the competition between vortex stretching and viscous smoothing.
@@ -221,6 +223,6 @@ Code and tests are licensed under [Apache-2.0](LICENSE). Documentation, reports,
 
 ## How to cite
 
-Citation metadata is in [CITATION.cff](CITATION.cff); GitHub's "Cite this repository" button uses it. Each tagged release is archived on Zenodo with a DOI.
+Citation metadata is in [CITATION.cff](CITATION.cff); GitHub's "Cite this repository" button uses it. Each tagged release is archived on Zenodo: [doi:10.5281/zenodo.23374124](https://doi.org/10.5281/zenodo.23374124).
 
 The [closeout procedure](docs/ACCOUNT_COEXISTENCE_AND_CLOSEOUT.md), [preflight-only outcome](docs/N640_CAMPAIGN_OUTCOME_2026-10-13.md) and [completed comparison](docs/N640_COMPARISON_2026-10-13.md) preserve the chronological record. The N640 and corrected N768 phases are closed with their finite-interval assessments and explicit sensitivity limits. The [plan state](docs/PLAN_STATE.json) records the release closeout. The broader mathematical question, continuum peak accuracy and a converged turnover remain open; none is claimed as a completed result.

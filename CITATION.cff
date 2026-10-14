@@ -9,6 +9,11 @@ authors:
     given-names: Amit
     affiliation: Quantum-Clarity LLC
     email: amitb@quantum-clarity.com
+doi: "10.5281/zenodo.23374124"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.23374124"
+    description: "Zenodo archive of SpectraNS-3D releases"
 repository-code: "https://github.com/amitb-quantum/spectrans-3d"
 license: Apache-2.0
 abstract: >-
