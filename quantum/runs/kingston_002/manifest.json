@@ -1,0 +1,116 @@
+{
+  "addendum": {
+    "path": "quantum/PREREGISTRATION_ADDENDUM_kingston_002.md",
+    "sha256": "2fb6db011a5457538f14a254bcea062f00a219e7cbd2d520987ab56443189d1c"
+  },
+  "backend": "ibm_kingston",
+  "budget": {
+    "budget_limit_s": 45.0,
+    "circuits": 10,
+    "estimated_qpu_seconds": 15.55408128,
+    "job_overhead_allowance_s": 5.0,
+    "max_circuit_duration_s": 9.947999999999995e-06,
+    "max_execution_time_s": 60,
+    "rep_delay_s": 0.00025,
+    "shots_per_circuit": 4096,
+    "total_shots": 40960
+  },
+  "calibration_at_prepare": "2026-10-14T11:29:29-07:00",
+  "circuits_qpy_sha256": "0d0a5c7aa1e9a8feb2ff475ad2e3f1ac0bca4f7cfd09ca4583a35ee3ef8e4ad6",
+  "cz_counts": [
+    61,
+    80,
+    61,
+    80,
+    61,
+    80,
+    61,
+    80,
+    0,
+    0
+  ],
+  "depths": [
+    180,
+    232,
+    181,
+    233,
+    181,
+    233,
+    181,
+    233,
+    1,
+    2
+  ],
+  "experiment": "spectral_advection_v1",
+  "fake_backend": false,
+  "git_commit_at_prepare": "245f31ad4336f6d9b152383a8b180dda4035e6ca",
+  "meta": [
+    {
+      "kind": "position",
+      "shift": 0.0
+    },
+    {
+      "kind": "spectral",
+      "shift": 0.0
+    },
+    {
+      "kind": "position",
+      "shift": 1.5
+    },
+    {
+      "kind": "spectral",
+      "shift": 1.5
+    },
+    {
+      "kind": "position",
+      "shift": 3.5
+    },
+    {
+      "kind": "spectral",
+      "shift": 3.5
+    },
+    {
+      "kind": "position",
+      "shift": 5.5
+    },
+    {
+      "kind": "spectral",
+      "shift": 5.5
+    },
+    {
+      "kind": "readout_0000"
+    },
+    {
+      "kind": "readout_1111"
+    }
+  ],
+  "optimization_level": 2,
+  "path": [
+    100,
+    101,
+    102,
+    103
+  ],
+  "prepared_utc": "2026-10-14T18:52:13.719814+00:00",
+  "preregistration_sha256": "8e33a2bc28dba2eccc2a7bd1dfced67e737af800b3badb0c85a4db88e8b2469a",
+  "seed_transpiler": 7,
+  "settings": {
+    "dynamical_decoupling": false,
+    "kappa": 2.0,
+    "shifts": [
+      0.0,
+      1.5,
+      3.5,
+      5.5
+    ],
+    "shots": 4096,
+    "twirling": false
+  },
+  "versions": {
+    "numpy": "2.5.1",
+    "python": "3.12.13",
+    "qiskit": "2.4.2",
+    "qiskit_aer": "0.17.2",
+    "qiskit_ibm_runtime": "0.46.1"
+  }
+}
