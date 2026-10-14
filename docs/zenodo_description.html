@@ -1,0 +1,55 @@
+<h2>In plain language</h2>
+<p>The Navier–Stokes equations describe how fluids such as water and air move. One of mathematics' best-known open questions asks whether a smooth, freely evolving flow can ever spin up without limit in a finite time. No computer simulation can settle that question, because every simulation chops the fluid into a finite grid. A simulation can, however, show which of its own results can be trusted and which cannot.</p>
+<p>SpectraNS-3D does exactly that. We started two counter-rotating tubes of swirling fluid, nudged them toward each other, and let them interact with no outside push. We then ran the same flow on three increasingly fine grids (512³, 640³ and 768³ points) and asked a simple question: <strong>which answers stay the same when the grid gets finer?</strong></p>
+<ul>
+<li><strong>Big-picture quantities are trustworthy.</strong> The total energy and the total amount of swirl (enstrophy) agree between the two finest grids to within about 0.01%.</li>
+<li><strong>The sharpest local spin is not yet trustworthy.</strong> The single strongest spot of swirl still shifts by 1–1.5% when the grid is refined.</li>
+<li><strong>Two agreeing grids can fool you.</strong> On the first two grids, that peak agreed to 0.009%, which looked converged. The third grid moved it by 1.1%. Checking each quantity separately, rather than trusting one passing test, is the main lesson.</li>
+</ul>
+<p>Everything needed to check this is included: the solver, 239 automated tests, the hash-verified evidence and a script that recomputes the comparisons on an ordinary laptop. The finest run used one rented NVIDIA H200 GPU for about 95 minutes, at a cost of about USD 7.</p>
+
+<h2>What this release does not claim</h2>
+<p>This is a finite-interval numerical study through simulated time t = 1.10. It does not prove that the flow stays smooth, does not show a singularity (blowup), and does not reach the point where the total swirl stops growing. It does not reproduce or assess any analytical Navier–Stokes result, including OpenAI's September 2026 announcement, which concerns a different, externally forced construction.</p>
+
+<h2>Technical summary</h2>
+<p>Unforced incompressible Navier–Stokes on the 2π-periodic cube, viscosity ν = 5×10⁻⁴, with an anti-parallel pair of sinusoidally perturbed Gaussian vortex tubes (Γ = 5, core a = 0.25, separation 0.6, perturbation 0.35). The solver is Fourier pseudo-spectral in FP64, with solenoidal projection, a strict spherical cutoff |k| &lt; N/3 and audited low-storage RK4 (Carpenter–Kennedy). Diagnostics, enstrophy budgets and full shell spectra are recorded every 0.01 time units.</p>
+
+<h3>Three-grid comparison over 0 ≤ t ≤ 1.10 (111 matched times)</h3>
+<table>
+<thead>
+<tr><th>Grid pair</th><th>Max relative enstrophy</th><th>Max scaled net production</th><th>Max relative energy</th><th>Classification (0.1% criterion)</th></tr>
+</thead>
+<tbody>
+<tr><td>N512 / N640</td><td>0.0600%</td><td>0.182%</td><td>0.00034%</td><td>intermediate</td></tr>
+<tr><td>N512 / N768</td><td>0.0718%</td><td>0.203%</td><td>0.00041%</td><td>intermediate</td></tr>
+<tr><td>N640 / N768</td><td>0.0128%</td><td>0.0804%</td><td>0.00007%</td><td>consistent</td></tr>
+</tbody>
+</table>
+
+<h3>Stable local Fourier vorticity estimates</h3>
+<table>
+<thead>
+<tr><th>t</th><th>N512</th><th>N640</th><th>N768</th><th>N640 / N768 difference</th></tr>
+</thead>
+<tbody>
+<tr><td>1.00</td><td>89.745</td><td>89.311</td><td>87.944</td><td>1.53%</td></tr>
+<tr><td>1.10</td><td>80.759</td><td>80.766</td><td>79.872</td><td>1.11%</td></tr>
+</tbody>
+</table>
+<p>Grid-sampling bias at N768 (0.26% at t = 1.00, 0.04% at t = 1.10) is too small to explain these differences. At t = 1.10 enstrophy is still rising (Z = 1.947, dZ/dt = +1.725). A finer-timestep check from the t = 1.00 checkpoint agrees to 1.6×10⁻⁸.</p>
+
+<h2>Validation and reproducibility</h2>
+<ul>
+<li>239 tests passed on the H200, plus eight CPU/GPU reference comparisons.</li>
+<li>Eleven controller rehearsals, including seven deliberate process kills, verify what evidence survives failure.</li>
+<li>All 132 protected evidence files are hash-verified, and an independent CPU script replays every comparison.</li>
+<li>Exact source, configuration, runtime and package versions are bound to each run.</li>
+</ul>
+
+<h2>Contents and links</h2>
+<ul>
+<li>Source repository: <a href="https://github.com/amitb-quantum/SpectraNS-3D">github.com/amitb-quantum/SpectraNS-3D</a></li>
+<li><a href="https://github.com/amitb-quantum/SpectraNS-3D/blob/main/docs/N768_THREE_GRID_COMPARISON_2026-10-13.md">Full three-grid report</a> and <a href="https://github.com/amitb-quantum/SpectraNS-3D/blob/main/docs/evidence/2026-10-13/n768_campaign_002/comparison.png">comparison figure</a></li>
+<li><a href="https://github.com/amitb-quantum/SpectraNS-3D/blob/main/docs/RESEARCH_CONTRIBUTION.md">Research contribution and claim boundaries</a></li>
+</ul>
+<p>Code and tests: Apache-2.0. Documentation, reports, figures and evidence under docs/: CC-BY-4.0.</p>
