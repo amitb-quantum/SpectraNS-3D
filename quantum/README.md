@@ -2,7 +2,9 @@
 
 A small, pre-registered hardware experiment. It runs the linear part of a SpectraNS-3D-style Fourier step (QFT, a modal phase, inverse QFT) on four qubits and asks which outputs survive real device noise: an integral-type centroid, a local peak, or a conservation check. Read [PREREGISTRATION.md](PREREGISTRATION.md) first; it fixes the circuits, budget and pass criteria before any submission.
 
-**First run:** [kingston_001 results](RESULTS_kingston_001.md). P1 and P3 passed; P2 and P4 failed, traced to a 28% readout fault on physical qubit 1 during the job.
+**Results:** [kingston_001 and its replication kingston_002](RESULTS_kingston_001_002.md).
+- **kingston_001:** P1 and P3 passed; P2 and P4 failed, traced to a 28% readout fault on physical qubit 1.
+- **kingston_002** (a clean path): P1, P2 and P3 passed; P4 failed again, for a different reason.
 
 This is not a quantum-advantage claim and does not bear on Navier–Stokes regularity. A laptop computes the exact answer.
 
@@ -12,7 +14,7 @@ Separate from the locked simulation environment. Tested offline with:
 
 ```bash
 python -m pip install -r quantum/requirements.txt
-python -m pytest -q quantum          # 21 offline tests; no IBM access
+python -m pytest -q quantum          # 28 offline tests; no IBM access
 ```
 
 ## Run
@@ -35,7 +37,8 @@ python quantum/run_qpu.py analyse --bundle quantum/runs/kingston_001
 - the manifest hash matches,
 - `PREREGISTRATION.md` is unchanged since prepare,
 - the bundle has never been executed,
-- the circuits touch only qubits 1, 2, 3 and 16,
+- the circuits touch only the qubits of the pre-registered path,
+- any pre-registration addendum is unchanged since prepare,
 - the time estimate is within 45 s.
 
 It writes `job.json` immediately after submission, then `counts.json` and `assessment.json`. Commit the whole bundle afterwards, whatever the outcome.
