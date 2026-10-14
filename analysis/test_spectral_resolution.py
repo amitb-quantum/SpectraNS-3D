@@ -91,9 +91,34 @@ def test_tampered_input_is_rejected(tmp_path):
         sr.verify_inputs(tmp_path)
 
 
+def assert_close(actual, expected, path="headline"):
+    """Exact match for structure, integers and None; tolerance for floats.
+
+    Least-squares strip fits are mildly ill-conditioned (condition number up
+    to ~2e5), so different NumPy/BLAS builds legitimately differ near 1e-11
+    relative. Reported values carry three to four significant figures.
+    """
+    if isinstance(expected, dict):
+        assert set(actual) == set(expected), path
+        for k in expected:
+            assert_close(actual[k], expected[k], f"{path}.{k}")
+    elif isinstance(expected, float):
+        assert actual == pytest.approx(expected, rel=1e-8, abs=1e-12), path
+    else:
+        assert actual == expected, path
+
+
 def test_analysis_matches_published_summary():
     result = sr.analyse()
     assert len(result["times"]) == 111
     assert max(result["times"]) == pytest.approx(1.10)
     published = json.loads((sr.ROOT / "docs/evidence/2026-10-14/spectral_resolution/summary.json").read_text())
-    assert sr.headline(result) == published["headline"]
+    assert_close(sr.headline(result), published["headline"])
+
+
+def test_assert_close_still_catches_real_changes():
+    with pytest.raises(AssertionError):
+        assert_close({"a": 0.0110}, {"a": 0.0111})
+    with pytest.raises(AssertionError):
+        assert_close({"k": 83}, {"k": 84})
+    assert_close({"a": 0.011 * (1 + 1e-11)}, {"a": 0.011})
