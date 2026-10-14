@@ -45,7 +45,7 @@ The distinction about forcing matters: Clay's existence statements A/B specify z
 
 A construction with forcing does not by itself predict the behavior of our unforced vortex tubes. Conversely, a well-behaved finite-grid trajectory cannot establish regularity of the continuum equations. Even the periodic domains overlap in class, so domain choice alone is not our distinction.
 
-We are not reimplementing OpenAI's proof, numerically reproducing its forced construction, or independently certifying its formalization. This README attributes the result as OpenAI's claim and does not make a judgment about independent acceptance or prize status. The project's value must come from its own reproducible methodology and evidence.
+We are not reimplementing OpenAI's proof, numerically reproducing its forced construction, or independently certifying its formalization. This README attributes the result as OpenAI's claim and does not make a judgment about independent acceptance or prize status. A separate [statement-fidelity audit](docs/LEAN_STATEMENT_AUDIT_2026-10-14.md) checks whether OpenAI's Lean theorems state Clay's (C) and (D) faithfully; it found no gap, and did not check the proofs themselves. The project's value must come from its own reproducible methodology and evidence.
 
 ## Equations and observables
 
