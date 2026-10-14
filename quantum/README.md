@@ -10,7 +10,7 @@ Separate from the locked simulation environment. Tested offline with:
 
 ```bash
 python -m pip install -r quantum/requirements.txt
-python -m pytest -q quantum          # 20 offline tests; no IBM access
+python -m pytest -q quantum          # 21 offline tests; no IBM access
 ```
 
 ## Run
@@ -21,6 +21,9 @@ python quantum/run_qpu.py prepare --backend ibm_kingston --out quantum/runs/king
 
 # 2. Submit one job (about 15-20 s of QPU time, hard cap 60 s)
 python quantum/run_qpu.py execute --bundle quantum/runs/kingston_001 --manifest-sha <printed by prepare>
+
+# If the waiting execute process is interrupted, the job keeps running on IBM's side:
+python quantum/run_qpu.py fetch --bundle quantum/runs/kingston_001
 
 # 3. Offline re-scoring at any time
 python quantum/run_qpu.py analyse --bundle quantum/runs/kingston_001

@@ -278,3 +278,20 @@ def test_execute_with_mock_sampler_sets_caps_and_writes_records(tmp_path, monkey
     assert (bundle / "assessment.json").exists()
     with pytest.raises(SystemExit, match="already has a submitted job"):
         rq.cmd_execute(execute_args(bundle, rq.sha256_file(bundle / "manifest.json")), sampler_factory=_Sampler)
+
+
+def test_fetch_recovers_results_without_submitting(tmp_path, monkeypatch):
+    bundle = tmp_path / "f"
+    rq.cmd_prepare(argparse.Namespace(fake=True, backend=None, instance=None, out=str(bundle), sim_seed=1))
+    args = argparse.Namespace(bundle=str(bundle), instance=None)
+    with pytest.raises(SystemExit, match="nothing was submitted"):
+        rq.cmd_fetch(args, job_loader=lambda i: None)
+    rq.write_json(bundle / "job.json", {"job_id": "mock-job", "manifest_sha256": rq.sha256_file(bundle / "manifest.json")})
+    logical, _ = sa.experiment()
+    job = _Job([counts_from(ideal_probs(qc), shots=sa.SHOTS) for qc in logical])
+    job.status = lambda: "DONE"
+    rq.cmd_fetch(args, job_loader=lambda i: job if i == "mock-job" else None)
+    assert json.loads((bundle / "counts.json").read_text())["job_id"] == "mock-job"
+    assert (bundle / "assessment.json").exists()
+    with pytest.raises(SystemExit, match="already exists"):
+        rq.cmd_fetch(args, job_loader=lambda i: job)
