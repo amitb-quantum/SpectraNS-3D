@@ -24,7 +24,7 @@ The new readiness snapshot retained 192 local tests, 188 packaged passes with fo
 
 ## October 13 completed three-grid release
 
-The [N768 report](../N768_THREE_GRID_COMPARISON_2026-10-13.md) and [147-file curated package](2026-10-13/n768_campaign_002/evidence_manifest.json) retain all132 original protected manifest entries, original phase CSVs, full spectra, checkpoint metadata/component hashes, source/runtime bindings, independent assessment, figure and sanitized financial/termination records. The corrected run passed239H200 tests and eight backend references; local temporal sensitivity passed. N640/N768 integral curves meet0.1%, while matched stable local peaks remain sensitive. No continuum error bound or turnover is claimed.
+The [N768 report](../N768_THREE_GRID_COMPARISON_2026-10-13.md) and [148-file curated package](2026-10-13/n768_campaign_002/evidence_manifest.json) retain all 132 original protected manifest entries, original phase CSVs, full spectra, checkpoint metadata/component hashes, source/runtime bindings, independent assessment, figure and sanitized financial/termination records. The corrected run passed 239 H200 tests and eight backend references; local temporal sensitivity passed. N640/N768 integral curves meet 0.1%, while matched stable local peaks remain sensitive. No continuum error bound or turnover is claimed.
 
 Reanalysis is CPU-only and makes no cloud request:
 

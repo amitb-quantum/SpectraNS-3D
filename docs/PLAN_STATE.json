@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
   "plan_version": "1.0",
-  "updated_at_pt": "2026-10-13T22:18:59.966965-07:00",
+  "updated_at_pt": "2026-10-13T22:23:57.402269-07:00",
   "project": "SpectraNS-3D",
   "scientific_milestone": "Original-IC N512/N640/N768 comparison through t=1.10 with local temporal checks and independently replayable evidence",
   "scientific_status": "completed_three_grid_finite_interval_assessment_local_peak_sensitivity_unresolved",
-  "current_task": "P22",
-  "next_action": "Commit and verify clean-checkout evidence replay and original Git blob hashes, push main, verify remote, pause automation, report results here.",
+  "current_task": null,
+  "next_action": "No authorized work remains. A new scientific study requires a separate specification, validation and spending approval.",
   "decision": "close_completed_finite_interval_release_no_additional_rental",
-  "automation_status": "ACTIVE",
+  "automation_status": "PAUSED",
   "new_billable_attempt_pending_decision": false,
-  "baseline_commit": "d258fcb556e69090454c437454cf7830d897029d",
+  "baseline_commit": "338f77879dd905d5ea9c5cafd9e3ffeb842c0ad0",
   "last_budget_snapshot": {
     "campaign_instance_id": 55858324,
     "posted_campaign_usd": 7.162,
@@ -235,9 +235,9 @@
     {
       "id": "P22",
       "title": "Protected three-grid assessment, closure and publication",
-      "status": "in_progress",
+      "status": "completed",
       "successor": null,
-      "result": "132 protected manifest entries verified; numerical/local-temporal checks passed; independent three-grid arithmetic replayed. Owned H200 absent and parent billing reconciled. Final report/figure prepared; Git/remote publication verification remains.",
+      "result": "Accepted original-IC N7680–1.10, local fine validation, independent three-grid classifications, verified owned absence/billing, clean-checkout byte-identical replay and remote main publication. Completion automation paused.",
       "evidence": [
         "docs/N768_THREE_GRID_COMPARISON_2026-10-13.md",
         "docs/evidence/2026-10-13/n768_campaign_002/evidence_manifest.json",
@@ -271,9 +271,9 @@
         {
           "id": "P22e",
           "title": "Publish evidence, figure, reconciled docs and results in this chat",
-          "status": "in_progress",
+          "status": "completed",
           "successor": null,
-          "result": "Final docs, evidence and figure prepared; original-byte/Git/clean-checkout/remote checks next."
+          "result": "Research release pushed as 0cfaf34763bb2dfc01467b90e9d396b1893d98f2; clean-checkout replay and original Git blobs verified; closure documentation finalized."
         }
       ]
     }
@@ -320,9 +320,9 @@
     "continuum_resolution_certified": false,
     "turnover_observed": false
   },
-  "phase_status": "completed_research_awaiting_final_publication_verification",
-  "publication_commit": "610df59a9b357be744a83a484b8f7d2aac8f31d7",
-  "published_evidence_hashes_verified": 161,
+  "phase_status": "closed_completed_three_grid_release",
+  "publication_commit": "0cfaf34763bb2dfc01467b90e9d396b1893d98f2",
+  "published_evidence_hashes_verified": 148,
   "final_financial_summary": {
     "campaign_instance_id": 55858324,
     "posted_campaign_usd": 7.162,
@@ -414,5 +414,9 @@
     "posted_project_usd": 21.444,
     "project_pending_upper_usd": 2.7979906062524065,
     "other_committed_project_usd": 0
-  }
+  },
+  "historical_N640_publication_commit": "610df59a9b357be744a83a484b8f7d2aac8f31d7",
+  "historical_N640_published_evidence_hashes_verified": 161,
+  "historical_N640_baseline_commit": "d258fcb556e69090454c437454cf7830d897029d",
+  "publication_commit_scope": "Research data/report commit; later documentation-only closeout may advance main."
 }

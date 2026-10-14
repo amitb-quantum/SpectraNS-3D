@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "research_data_commit": "0cfaf34763bb2dfc01467b90e9d396b1893d98f2",
+  "clean_checkout_analysis": "passed",
+  "assessment_byte_identical": true,
+  "independent_assessment_sha256": "eb6897d9d9280c4b434f12439b522048adc9b351b36bf5adaad08a341ab78971",
+  "protected_manifest_entries_verified": 132,
+  "credential_scan": "passed_no_values_printed",
+  "private_account_data_excluded": true,
+  "bound_source_unchanged": true,
+  "figure_visual_review": "passed",
+  "owned_instance_independently_absent": true,
+  "temporary_sleep_lease_released": true,
+  "completion_automation_status": "PAUSED"
+}

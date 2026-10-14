@@ -14,11 +14,11 @@ The workflow preserves exact inputs, source/runtime bindings, accepted and faili
 
 ## What the completed third grid adds
 
-The predeclared hypothesis was that derivative-sensitive N640/N768 discrepancies would shrink relative to N512/N640. The result is observable-specific. Maximum relative enstrophy difference shrank from0.05997% to0.01279%, and scaled net-production difference from0.18161% to0.08044%, meeting the0.1% criterion for the closest pair.
+The predeclared hypothesis was that derivative-sensitive N640/N768 discrepancies would shrink relative to N512/N640. The result is observable-specific. Maximum relative enstrophy difference shrank from 0.05997% to 0.01279%, and scaled net-production difference from 0.18161% to 0.08044%, meeting the 0.1% criterion for the closest pair.
 
-Stable local Fourier vorticity estimates did not follow that pattern. N640/N768 differences are1.53049% at1.00 and1.10622% at1.10. The earlier N512/N640 agreement of0.00911% at1.10 was therefore insufficient to establish convergence. The third grid supplied a concrete counterexample to treating close two-grid agreement or a passing energy-tail gate as a certificate for a local observable.
+Stable local Fourier vorticity estimates did not follow that pattern. N640/N768 differences are 1.53049% at 1.00 and 1.10622% at 1.10. The earlier N512/N640 agreement of 0.00911% at 1.10 was therefore insufficient to establish convergence. The third grid supplied a concrete counterexample to treating close two-grid agreement or a passing energy-tail gate as a certificate for a local observable.
 
-The own-anchor finer-timestep check passed with maximum specified difference1.64332e-8. It bounds local continuation sensitivity, not inherited prefix error. Stable local interpolation does not certify a global supremum. Unequal grid ratios and shrinking integral increments do not establish a continuum order/error bound. Enstrophy was still rising at1.10, so no turnover is claimed.
+The own-anchor finer-timestep check passed with maximum specified difference 1.64332e-8. It bounds local continuation sensitivity, not inherited prefix error. Stable local interpolation does not certify a global supremum. Unequal grid ratios and shrinking integral increments do not establish a continuum order/error bound. Enstrophy was still rising at 1.10, so no turnover is claimed.
 
 The [completed three-grid report](N768_THREE_GRID_COMPARISON_2026-10-13.md), complete protected small evidence and independent replay distinguish integral consistency, local-peak sensitivity, sampling and operational validity. This is a completed research release even though universal spatial certification remains unresolved.
 

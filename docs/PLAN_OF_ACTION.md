@@ -16,7 +16,7 @@ The N512/N640 assessment is preserved. The initial N768 preflight refusal and cl
 
 All132 protected entries were independently hash-verified and the three-grid analysis replayed from the public layout. N640/N768 meet the declared integral-curve criteria, while stable local peaks remain sensitive. Parent charges were reconciled with pending allowances retained; conservative project exposure is USD33.320349. The sleep lease released. No additional rental, later-time exploration or numerical-gate change is authorized.
 
-**Current task P22e:** finish original-byte/Git/clean-checkout/remote publication verification, pause the completion automation, and report results in this chat. The [final report](N768_THREE_GRID_COMPARISON_2026-10-13.md) states exact results and limits; PLAN_STATE.json records evidence and successor at each completed subtask. Historical N640 steps/criteria below remain preserved and explicitly historical.
+**All tasks complete:** original-byte and Git-blob checks passed, the independent analysis replayed byte-identically from a clean Git checkout, public main was verified, and the completion automation is paused. No authorized next task or billable job remains. The [final report](N768_THREE_GRID_COMPARISON_2026-10-13.md) states exact results and limits; PLAN_STATE.json records evidence and successor at each completed subtask. Historical N640 steps/criteria below remain preserved and explicitly historical.
 
 ## Historical position before completed N640 campaign
 

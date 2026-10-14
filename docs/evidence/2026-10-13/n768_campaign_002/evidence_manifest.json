@@ -149,9 +149,11 @@
     "protected/transfer_preflight.json": "e015cfed58b608d50e2c7f954dcc85ba86018501d6bac59eceb3de2bbaec3a7b",
     "protected/warmup_timing.json": "662d4b18c0504fefd596b510074df53c64c6d5bdb493db52a40f4ed57c74ed5c",
     "protected_receipt.json": "05a387e11e081685409cf42b09dab2af102a4a20a233781495b16f5def567474",
+    "publication_verification.json": "676210728550fa6c5db7b8b020dd55b101ca02d78f8cf6c5c46d5ec94f8e3417",
     "termination.json": "04f5aeaf9920660c86858bb2a96ebf6d2a7998a72d6f4f5b4e52b81fe5978b41"
   },
   "publication_scope": "Complete protected small evidence and independently replayable analysis; private account context, live ledger and credentials excluded.",
   "public_layout_independent_replay": "passed",
-  "figure_visual_review": "passed"
+  "figure_visual_review": "passed",
+  "public_curated_files_including_manifest": 148
 }
