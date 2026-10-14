@@ -1,0 +1,112 @@
+{
+  "backend": "ibm_kingston",
+  "budget": {
+    "budget_limit_s": 45.0,
+    "circuits": 10,
+    "estimated_qpu_seconds": 15.55408128,
+    "job_overhead_allowance_s": 5.0,
+    "max_circuit_duration_s": 9.947999999999995e-06,
+    "max_execution_time_s": 60,
+    "rep_delay_s": 0.00025,
+    "shots_per_circuit": 4096,
+    "total_shots": 40960
+  },
+  "calibration_at_prepare": "2026-10-14T10:27:28-07:00",
+  "circuits_qpy_sha256": "1e45ea1e915d91ca76f35344fe584b1802e55c777cf0c0b886c1fcbfe3e59c75",
+  "cz_counts": [
+    61,
+    80,
+    61,
+    80,
+    61,
+    80,
+    61,
+    80,
+    0,
+    0
+  ],
+  "depths": [
+    180,
+    232,
+    181,
+    233,
+    181,
+    233,
+    181,
+    233,
+    1,
+    2
+  ],
+  "experiment": "spectral_advection_v1",
+  "fake_backend": false,
+  "git_commit_at_prepare": "5b27f83882fc387a75f7ddf2b01348740adac7cb",
+  "meta": [
+    {
+      "kind": "position",
+      "shift": 0.0
+    },
+    {
+      "kind": "spectral",
+      "shift": 0.0
+    },
+    {
+      "kind": "position",
+      "shift": 1.5
+    },
+    {
+      "kind": "spectral",
+      "shift": 1.5
+    },
+    {
+      "kind": "position",
+      "shift": 3.5
+    },
+    {
+      "kind": "spectral",
+      "shift": 3.5
+    },
+    {
+      "kind": "position",
+      "shift": 5.5
+    },
+    {
+      "kind": "spectral",
+      "shift": 5.5
+    },
+    {
+      "kind": "readout_0000"
+    },
+    {
+      "kind": "readout_1111"
+    }
+  ],
+  "optimization_level": 2,
+  "path": [
+    1,
+    2,
+    3,
+    16
+  ],
+  "prepared_utc": "2026-10-14T18:03:23.920878+00:00",
+  "preregistration_sha256": "8e33a2bc28dba2eccc2a7bd1dfced67e737af800b3badb0c85a4db88e8b2469a",
+  "seed_transpiler": 7,
+  "settings": {
+    "dynamical_decoupling": false,
+    "kappa": 2.0,
+    "shifts": [
+      0.0,
+      1.5,
+      3.5,
+      5.5
+    ],
+    "shots": 4096,
+    "twirling": false
+  },
+  "versions": {
+    "numpy": "2.5.1",
+    "python": "3.12.13",
+    "qiskit": "2.4.2",
+    "qiskit_aer": "0.17.2",
+    "qiskit_ibm_runtime": "0.46.1"
+  }
+}
