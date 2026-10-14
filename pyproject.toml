@@ -4,10 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "spectrans-3d"
-version = "0.1.0"
+version = "1.0.0"
 description = "Validation-first pseudo-spectral 3D incompressible Navier-Stokes experiments"
 readme = "README.md"
 requires-python = ">=3.12"
+license = "Apache-2.0"
+license-files = ["LICENSE", "LICENSE-docs", "NOTICE"]
+authors = [{ name = "Amit Brahmbhatt", email = "amitb@quantum-clarity.com" }]
 dependencies = ["torch==2.13.0", "numpy==2.5.1"]
 
 [project.optional-dependencies]

@@ -217,6 +217,10 @@ Original sources, historical results and completed evidence are preserved. A Git
 
 The original supplied source families remain separately identifiable; audited code is retained and hash-bound. Low-storage RK4 coefficients are attributed in the audit to [Carpenter and Kennedy, NASA TM-109112](https://ntrs.nasa.gov/citations/19940028444). Links to OpenAI identify external mathematical work; there is no affiliation, endorsement or independently verified reproduction of that work implied here.
 
-No distribution license has been selected. This is a public research repository; a public repository is not itself a license grant. Scientific conclusions are bounded by the validated configurations and accepted intervals described above.
+Code and tests are licensed under [Apache-2.0](LICENSE). Documentation, reports, figures and published evidence under `docs/` are licensed under [CC-BY-4.0](LICENSE-docs). See [NOTICE](NOTICE). Scientific conclusions are bounded by the validated configurations and accepted intervals described above.
+
+## How to cite
+
+Citation metadata is in [CITATION.cff](CITATION.cff); GitHub's "Cite this repository" button uses it. Each tagged release is archived on Zenodo with a DOI.
 
 The [closeout procedure](docs/ACCOUNT_COEXISTENCE_AND_CLOSEOUT.md), [preflight-only outcome](docs/N640_CAMPAIGN_OUTCOME_2026-10-13.md) and [completed comparison](docs/N640_COMPARISON_2026-10-13.md) preserve the chronological record. The N640 and corrected N768 phases are closed with their finite-interval assessments and explicit sensitivity limits. The [plan state](docs/PLAN_STATE.json) records the release closeout. The broader mathematical question, continuum peak accuracy and a converged turnover remain open; none is claimed as a completed result.

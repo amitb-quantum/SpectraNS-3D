@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this software or its published evidence, please cite it as below."
+title: "SpectraNS-3D: a reproducible numerical methodology for unforced 3D incompressible Navier–Stokes vortex-tube studies"
+version: 1.0.0
+date-released: 2026-10-14
+type: software
+authors:
+  - family-names: Brahmbhatt
+    given-names: Amit
+    affiliation: Quantum-Clarity LLC
+    email: amitb@quantum-clarity.com
+repository-code: "https://github.com/amitb-quantum/spectrans-3d"
+license: Apache-2.0
+abstract: >-
+  Validation-first Fourier pseudo-spectral solver and campaign evidence for
+  unforced, positive-viscosity vortex tubes on the 2π-periodic cube. The release
+  contains the audited solver, independent numerical tests, operational
+  controllers, and a completed N512/N640/N768 study through t = 1.10 showing that
+  integral quantities agree within 0.1% between N640 and N768 while stable local
+  vorticity estimates remain resolution-sensitive at the 1–2% level. It is a
+  finite-interval numerical study; it does not establish regularity, blowup or an
+  enstrophy turnover. Documentation and figures are CC-BY-4.0.
+keywords:
+  - Navier–Stokes
+  - pseudo-spectral
+  - vortex tubes
+  - enstrophy
+  - numerical verification
+  - reproducibility
+  - GPU
