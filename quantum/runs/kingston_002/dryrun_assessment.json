@@ -1,0 +1,240 @@
+{
+  "bootstrap": {
+    "samples": 2000,
+    "seed": 20261014
+  },
+  "bootstrap_95ci": {
+    "epsilon_from_shift0_twin": [
+      0.23975529803556048,
+      0.2889964126650676
+    ],
+    "shifts": {
+      "0.0": {
+        "centroid_error_cells": [
+          0.014245557281564625,
+          0.15164464106033546
+        ],
+        "centroid_raw": [
+          8.011478174605642,
+          8.151644641060335
+        ],
+        "peak_raw": [
+          0.22412109375,
+          0.250244140625
+        ],
+        "peak_raw_rel": [
+          -0.2577040475910496,
+          -0.1711837132688735
+        ],
+        "position_tvd_raw": [
+          0.1765897904372359,
+          0.20223065957786088
+        ]
+      },
+      "1.5": {
+        "centroid_error_cells": [
+          0.0016880998420046645,
+          0.1024497364052331
+        ],
+        "centroid_raw": [
+          9.467398721842974,
+          9.602449736405234
+        ],
+        "peak_corrected": [
+          0.27630115466504457,
+          0.3113559188900721
+        ],
+        "peak_corrected_rel": [
+          -0.011774420853297543,
+          0.11360332040198208
+        ],
+        "peak_raw": [
+          0.214111328125,
+          0.23583984375
+        ],
+        "peak_raw_rel": [
+          -0.23420410061367547,
+          -0.15648935141711573
+        ],
+        "position_tvd_raw": [
+          0.1615862645442379,
+          0.1882115939760423
+        ]
+      },
+      "3.5": {
+        "centroid_error_cells": [
+          0.0023065689668579025,
+          0.10619755298288179
+        ],
+        "centroid_raw": [
+          11.474613519913948,
+          11.606197552982882
+        ],
+        "peak_corrected": [
+          0.28478714275421824,
+          0.32633315601871576
+        ],
+        "peak_corrected_rel": [
+          0.01857677512422922,
+          0.16717127907886237
+        ],
+        "peak_raw": [
+          0.21826171875,
+          0.243896484375
+        ],
+        "peak_raw_rel": [
+          -0.2193597103177033,
+          -0.12767377025434634
+        ],
+        "position_tvd_raw": [
+          0.15084407704423794,
+          0.17820772935920115
+        ]
+      },
+      "5.5": {
+        "centroid_error_cells": [
+          0.0031391451039850084,
+          0.12047682404911993
+        ],
+        "centroid_raw": [
+          13.37952317595088,
+          13.51387270327164
+        ],
+        "peak_corrected": [
+          0.2784294599201776,
+          0.31630440960912576
+        ],
+        "peak_corrected_rel": [
+          -0.004162271364076092,
+          0.13130221533663128
+        ],
+        "peak_raw": [
+          0.21533203125,
+          0.2392578125
+        ],
+        "peak_raw_rel": [
+          -0.2298381034678013,
+          -0.1442645594086681
+        ],
+        "position_tvd_raw": [
+          0.14889074953677178,
+          0.1769732274348629
+        ]
+      }
+    },
+    "spectral_max_pairwise_tvd": [
+      0.04052734375,
+      0.06884765625
+    ],
+    "spectral_min_tvd_vs_exact": [
+      0.2349100262272517,
+      0.26031285825850164
+    ]
+  },
+  "bootstrap_pass_fraction": {
+    "P1_integral_centroid_survives": 1.0,
+    "P2_local_peak_biased_low": 1.0,
+    "P3_consistent_but_inaccurate": 1.0,
+    "P4_twin_calibrated_peak_recovers": 0.2125
+  },
+  "point": {
+    "epsilon_from_shift0_twin": 0.2652558571579659,
+    "shifts": {
+      "0.0": {
+        "centroid_error_cells": 0.0799113588724154,
+        "centroid_exact": 8.0,
+        "centroid_raw": 8.079911358872415,
+        "peak_exact": 0.30192956464691295,
+        "peak_raw": 0.2373046875,
+        "peak_raw_rel": -0.21403957980228783,
+        "position_tvd_raw": 0.1897733841872359,
+        "spectral_tvd_vs_exact": 0.2590860516178767
+      },
+      "1.5": {
+        "centroid_error_cells": 0.03559623582380489,
+        "centroid_exact": 9.5,
+        "centroid_raw": 9.535596235823805,
+        "peak_corrected": 0.2910442190562107,
+        "peak_corrected_rel": 0.040955989788741265,
+        "peak_exact": 0.27959320270137183,
+        "peak_raw": 0.22314453125,
+        "peak_raw_rel": -0.20189572173420678,
+        "position_tvd_raw": 0.1740514377260423,
+        "spectral_tvd_vs_exact": 0.2715372234928766
+      },
+      "3.5": {
+        "centroid_error_cells": 0.03924936752829211,
+        "centroid_exact": 11.5,
+        "centroid_raw": 11.539249367528292,
+        "peak_corrected": 0.3051831710307761,
+        "peak_corrected_rel": 0.09152571694218326,
+        "peak_exact": 0.27959320270137183,
+        "peak_raw": 0.231201171875,
+        "peak_raw_rel": -0.1730801405714374,
+        "position_tvd_raw": 0.1637894311773968,
+        "spectral_tvd_vs_exact": 0.2493204266178767
+      },
+      "5.5": {
+        "centroid_error_cells": 0.05281436937847772,
+        "centroid_exact": 13.5,
+        "centroid_raw": 13.447185630621522,
+        "peak_corrected": 0.295022190873317,
+        "peak_corrected_rel": 0.05518370268974149,
+        "peak_exact": 0.27959320270137183,
+        "peak_raw": 0.22607421875,
+        "peak_raw_rel": -0.19141732858410887,
+        "position_tvd_raw": 0.16281286867739678,
+        "spectral_tvd_vs_exact": 0.2720255047428767
+      }
+    },
+    "spectral_max_pairwise_tvd": 0.0400390625,
+    "spectral_min_tvd_vs_exact": 0.2493204266178767
+  },
+  "readout_calibration": [
+    {
+      "logical_qubit": 0,
+      "p0_given_1": 0.016845703125,
+      "p1_given_0": 0.015869140625
+    },
+    {
+      "logical_qubit": 1,
+      "p0_given_1": 0.02392578125,
+      "p1_given_0": 0.024169921875
+    },
+    {
+      "logical_qubit": 2,
+      "p0_given_1": 0.0068359375,
+      "p1_given_0": 0.0068359375
+    },
+    {
+      "logical_qubit": 3,
+      "p0_given_1": 0.01025390625,
+      "p1_given_0": 0.0126953125
+    }
+  ],
+  "readout_flag_threshold": 0.1,
+  "readout_flagged_logical_qubits": [],
+  "verdicts": {
+    "P1_integral_centroid_survives": {
+      "pass": true,
+      "threshold": 0.25,
+      "value": 0.0799113588724154
+    },
+    "P2_local_peak_biased_low": {
+      "pass": true,
+      "threshold": -0.05,
+      "value": -0.1730801405714374
+    },
+    "P3_consistent_but_inaccurate": {
+      "inaccuracy_floor": 0.05,
+      "max_pairwise_tvd": 0.0400390625,
+      "min_tvd_vs_exact": 0.2493204266178767,
+      "pass": true
+    },
+    "P4_twin_calibrated_peak_recovers": {
+      "pass": false,
+      "threshold": 0.075,
+      "value": 0.09152571694218326
+    }
+  }
+}

@@ -39,7 +39,8 @@ def main(argv=None):
     a = ap.parse_args(argv)
     bundle = Path(a.bundle)
     counts = json.loads((bundle / "counts.json").read_text())["counts"]
-    meta = json.loads((bundle / "manifest.json").read_text())["meta"]
+    manifest = json.loads((bundle / "manifest.json").read_text())
+    meta, path = manifest["meta"], manifest.get("path", list(sa.PATH))
     pos, spec, Minv = sa.split_results(counts, meta)
     ideal = sa.ideal_distributions()
     cells = np.arange(sa.N)
@@ -86,7 +87,7 @@ def main(argv=None):
         ax.annotate(f"{v:.1f}%", (xi - 0.2, v), xytext=(0, 3), textcoords="offset points",
                     ha="center", fontsize=7.5, color=INK)
     ax.set_xticks(x)
-    ax.set_xticklabels([f"phys {p}" for p in sa.PATH])
+    ax.set_xticklabels([f"phys {p}" for p in path])
     ax.set_ylabel("readout error (%)", color=MUTED, fontsize=8.5)
     ax.set_title("In-job readout calibration", color=INK, fontsize=10, loc="left")
     ax.legend(frameon=False, fontsize=8, labelcolor=INK)
