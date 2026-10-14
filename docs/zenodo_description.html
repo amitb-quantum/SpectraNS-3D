@@ -38,6 +38,8 @@
 </table>
 <p>Grid-sampling bias at N768 (0.26% at t = 1.00, 0.04% at t = 1.10) is too small to explain these differences. At t = 1.10 enstrophy is still rising (Z = 1.947, dZ/dt = +1.725). A finer-timestep check from the t = 1.00 checkpoint agrees to 1.6×10⁻⁸.</p>
 
+<h2>New in v1.1.0: why integrals agree and local peaks do not</h2>
+<p>A post-hoc analysis of the published, hash-verified spectra locates the difference in wavenumber space. At t = 1.00, under 1% of enstrophy but about 24% of viscous enstrophy loss and 33% of a peak-vorticity proxy sit in shells where the N640 and N768 spectra differ by more than 1%; all three shares peak at t = 0.99, where the local-peak mismatch is largest. The conventional analyticity-strip fit proved too sensitive to its fitting window to certify resolution and is reported as a negative result. No new simulation was run.</p>
 <h2>Validation and reproducibility</h2>
 <ul>
 <li>239 tests passed on the H200, plus eight CPU/GPU reference comparisons.</li>
@@ -50,6 +52,7 @@
 <ul>
 <li>Source repository: <a href="https://github.com/amitb-quantum/SpectraNS-3D">github.com/amitb-quantum/SpectraNS-3D</a></li>
 <li><a href="https://github.com/amitb-quantum/SpectraNS-3D/blob/main/docs/N768_THREE_GRID_COMPARISON_2026-10-13.md">Full three-grid report</a> and <a href="https://github.com/amitb-quantum/SpectraNS-3D/blob/main/docs/evidence/2026-10-13/n768_campaign_002/comparison.png">comparison figure</a></li>
+<li><a href="https://github.com/amitb-quantum/SpectraNS-3D/blob/main/docs/SPECTRAL_RESOLUTION_ADDENDUM_2026-10-14.md">Spectral resolution addendum</a></li>
 <li><a href="https://github.com/amitb-quantum/SpectraNS-3D/blob/main/docs/RESEARCH_CONTRIBUTION.md">Research contribution and claim boundaries</a></li>
 </ul>
 <p>Code and tests: Apache-2.0. Documentation, reports, figures and evidence under docs/: CC-BY-4.0.</p>
