@@ -1,3 +1,5 @@
+> Outcome: the corrected N768 attempt completed the prescribed original-IC0–1.10 trajectory and local fine check, verified protected small evidence and owned termination. The [final three-grid report](N768_THREE_GRID_COMPARISON_2026-10-13.md) records integral consistency and local-peak sensitivity. The single corrected authorization is consumed; this preserved specification authorizes no new rental.
+
 ## Current correction — one explicitly authorized USD14 attempt
 
 The first USD15 attempt was destroyed after its cap-only predictor rejected legitimate CFL clipping; its immutable plan and results are preserved in [the preflight outcome](N768_PREFLIGHT_OUTCOME_2026-10-13.md). The user explicitly approved one correctedUSD14 attempt, with the sameUSD40 total ceiling and numerical gates. The only new directory is artifacts/cloud-preparation/2026-10-13/n768_campaign_002; maximum10800seconds andUSD4.50/hour remain.

@@ -10,9 +10,13 @@ The scientific milestone is complete only when the original-IC N640 trajectory, 
 
 A release can also close with an explicitly incomplete scientific milestone, if you choose that outcome. Such a release must identify what remains unknown. It must not imply regularity, blowup, a convergence order from two grids, or certification of OpenAI's proof claim.
 
-## Current phase — authorized third grid
+## Current phase — completed three-grid release
 
-N512/N640 and publication are complete. The user subsequently raised the project ceiling toUSD40 and authorized one N768/H200 follow-up capped atUSD15. Initial N768 preflight refused the inherited cap-only predictor and was destroyed. The user explicitly approved one correctedUSD14 attempt underUSD40 total. Current taskP21 is fresh offer/funding verification after239tests, complete CPU/CUDA SIGKILL proof and extracted235-test CPU validation; then measured preflight, protected N768 comparison, closure and publication. Follow [the new frozen specification](N768_THIRD_GRID_SPEC_2026-10-13.md) and PLAN_STATE.json. The historical N640 steps/criteria below remain preserved; their formerUSD30/H100/N640 authorization does not authorize another old campaign.
+The N512/N640 assessment is preserved. The initial N768 preflight refusal and closure are also preserved; it did not complete the spatial comparison. The separately authorized corrected USD14 attempt within the USD40 ceiling completed original-IC N7680–1.10 and its own-anchor fine1.00–1.10 check, protected all required small evidence, and closed the exact owned instance.
+
+All132 protected entries were independently hash-verified and the three-grid analysis replayed from the public layout. N640/N768 meet the declared integral-curve criteria, while stable local peaks remain sensitive. Parent charges were reconciled with pending allowances retained; conservative project exposure is USD33.320349. The sleep lease released. No additional rental, later-time exploration or numerical-gate change is authorized.
+
+**Current task P22e:** finish original-byte/Git/clean-checkout/remote publication verification, pause the completion automation, and report results in this chat. The [final report](N768_THREE_GRID_COMPARISON_2026-10-13.md) states exact results and limits; PLAN_STATE.json records evidence and successor at each completed subtask. Historical N640 steps/criteria below remain preserved and explicitly historical.
 
 ## Historical position before completed N640 campaign
 
@@ -23,7 +27,7 @@ N512/N640 and publication are complete. The user subsequently raised the project
 - The last budget snapshot has USD 20.778741 conservative project exposure, including pending allowances; USD 9.221259 remains below the USD 30 ceiling. These are dated project figures, not current shared account credit.
 - No new rental is authorized by this document alone. Fresh shared credit must cover the quote-specific lifetime cost, any separately attributed rental reserve and the USD 1 balance guard floor, independently of project headroom. If funding is insufficient, consult before provisioning. The previous single-attempt authorization is closed. A fresh single-attempt authorization was received; preparation and proof binding precede reactivation of its follow-up.
 
-**Historical decision received:** one additional USD5 attempt on an H100 at no more than USD2.25/hour. **Current task: P05 — verify the offer and financing.** The [additional-attempt specification](N640_RETRY_SPEC_2026-10-13.md) freezes the scope and discovery deadline; PLAN_STATE.json carries subsequent handoffs.
+**Historical decision received:** one additional USD5 attempt on an H100 at no more than USD2.25/hour. **Historical task at that point: P05 — verify the offer and financing.** The [additional-attempt specification](N640_RETRY_SPEC_2026-10-13.md) freezes the scope and discovery deadline; PLAN_STATE.json carries subsequent handoffs.
 
 ## Chronological tasks
 
@@ -48,7 +52,7 @@ N512/N640 and publication are complete. The user subsequently raised the project
 2. **One additional attempt with a USD 6 ceiling, retaining the USD 30 project ceiling.** This requires implementing and revalidating the new explicit spending authority, and sufficient fresh shared credit. At the existing hourly screening ceiling of USD 2.60, two hours plus USD 0.50 reserve is USD 5.70. Numerical gates and the 120-minute maximum stay fixed. Do not change the cap or provision until this option is selected and readiness passes.
 3. **Close this phase using the current findings.** No further rental. The release contains the validated methodology, N512 observations and N640 preflight, while explicitly leaving late-time spatial consistency and enstrophy turnover unresolved.
 
-## Frozen scientific acceptance specification
+## Historical N640 scientific acceptance specification
 
 These criteria are already declared; do not loosen them after inspecting new results.
 

@@ -1,0 +1,17 @@
+{
+  "scope": "Two independent fresh containers on the same H200 host/runtime; observed repeated original-IC preflight only, not a guarantee across arbitrary devices.",
+  "t": 0.05,
+  "core_sha256_equal": true,
+  "same_steps": true,
+  "component_hashes_first": {
+    "U0.npy": "31ed1351015ba9c3b36b4a6f08468a25978ed8632a360e2a71d3663d747a02b9",
+    "U1.npy": "e40aec7283b93a56d34bfea5b2b57237c79f4e49e4d23c8da6462db996012ba0",
+    "U2.npy": "43de55ebad9a3fa88a251a191e8755e5d47731a1624062879e26d42b366ec983"
+  },
+  "component_hashes_second": {
+    "U0.npy": "31ed1351015ba9c3b36b4a6f08468a25978ed8632a360e2a71d3663d747a02b9",
+    "U1.npy": "e40aec7283b93a56d34bfea5b2b57237c79f4e49e4d23c8da6462db996012ba0",
+    "U2.npy": "43de55ebad9a3fa88a251a191e8755e5d47731a1624062879e26d42b366ec983"
+  },
+  "all_component_hashes_equal": true
+}

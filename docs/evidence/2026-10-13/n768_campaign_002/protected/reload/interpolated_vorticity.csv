@@ -1,0 +1,3 @@
+t,sampled_wmax,fourier_refined_peak_estimate,sampling_bias_fraction,seed_expansion_relative_change,last_level_relative_increment,estimator_stable,refinement_performed
+0.05,25.10132736234541,25.1132378575216,0.00047427158711136225,0.0,0.0,True,True
+0.051,25.097904719930867,25.110165419000403,0.0004882763161830279,0.0,4.90627532864659e-08,True,True

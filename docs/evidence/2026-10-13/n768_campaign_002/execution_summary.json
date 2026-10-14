@@ -1,0 +1,23 @@
+{
+  "instance_id": 55858324,
+  "label": "SpectraNS-3D-v3-third-grid-3fb7879a281d",
+  "offer_id": 45315037,
+  "source_commit": "338f77879dd905d5ea9c5cafd9e3ffeb842c0ad0",
+  "payload_sha256": "af64c03a66aaff145175eed7716a14e19fe6e059ff07f1954b60ca3f8313b560",
+  "immutable_image": "vastai/base-image@sha256:82a53405a50901ab7e462a80ddde335a8f927a90bdab5cdea9006f02cb858a3e",
+  "started_epoch": 1791948913.0132117,
+  "deadline_epoch": 1791959653.0132117,
+  "termination_epoch": 1791954649.0377665,
+  "max_lifetime_seconds": 10800,
+  "campaign_cap_usd": 14,
+  "project_ceiling_usd": 40,
+  "hourly_gpu_plus_storage_usd": "4.417777777777777666666666667",
+  "transfer_bound_usd": "0.0686848958333333310",
+  "raw_field_arrays_recovered": false,
+  "exploration_performed": false,
+  "protected_validated": true,
+  "protected_manifest_sha256": "31c74dce9676deac8fd32af7932fbe6ddb5ac818c1cd12b716421fd4d021269a",
+  "sleep_lease_released": true,
+  "private_credit_telemetry_retained_locally": true,
+  "elapsed_seconds": 5736.024554729462
+}

@@ -1,0 +1,146 @@
+[
+  {
+    "path": "checkpoints/regular_t0.10000000",
+    "kind": "regular",
+    "t": 0.1,
+    "retained": false,
+    "metadata_sha256": "a81fe1b7f03a0fe2c8ffc2d2f6f45b8750e6b7f34d7cf475d9493edca1af3c0c",
+    "files": {
+      "U0.npy": "5b85f81fc2f4837b1bb65d00f6800bf1b9a3a49b10ab5d042d2e707a36795fe4",
+      "U1.npy": "88c04346a657e0000196f7356647641a145d0f3f90a5da25127915c074d609b5",
+      "U2.npy": "8a2c7dc5c99e155f1b9a6d5de2847bbb81170689c01fcef967331c790a624690"
+    }
+  },
+  {
+    "path": "checkpoints/regular_t0.20000000",
+    "kind": "regular",
+    "t": 0.2,
+    "retained": false,
+    "metadata_sha256": "56b439c4b619d463ff03cc4feec82ea8a2a693211aae5e9ce1271a0186eebcaa",
+    "files": {
+      "U0.npy": "b9c5802af470ec8135d53c6ff1e37c4fd1352886d3241f4b56ec7e6d442fc2a1",
+      "U1.npy": "85ad8d0be7fecf47270672c1903e601dc1493cdc8f69e4d3fc4bfbce981e24ec",
+      "U2.npy": "a6193786ea89980dda0a918f669f3b5a9351969126aaa368399fe35c663ca313"
+    }
+  },
+  {
+    "path": "checkpoints/regular_t0.30000000",
+    "kind": "regular",
+    "t": 0.3,
+    "retained": false,
+    "metadata_sha256": "6f40bcffb658ba650fabd1841f680a71901d435993a5f5b428039d2321c4c06b",
+    "files": {
+      "U0.npy": "97bea8c8dde7cdd88e8093ad7829c873f9ad8d34c4689c66e8d92c74e8aa1182",
+      "U1.npy": "8a7621f3c5cc5f5add3cfa66c0cb3c457db3c3fe47e92d30e2fad1e1fefa2736",
+      "U2.npy": "b4714ee4a2b3d5bdb693eb54bf4f23100d1b0827f37dd4a171fd8bf5bceafa4c"
+    }
+  },
+  {
+    "path": "checkpoints/regular_t0.40000000",
+    "kind": "regular",
+    "t": 0.4,
+    "retained": false,
+    "metadata_sha256": "be7eec08a600a568d191ec8eef54b7ff37931a4c3dc04307e3e865c1c6e7d57c",
+    "files": {
+      "U0.npy": "330da87372c99f4b72deabc2f1bcef57d7fe3765f4e903ce2ccaaf4fcbe70139",
+      "U1.npy": "624c7a9a73487a12fc39dec615e8ac209f2eeca64409885d644185bbc3be5afe",
+      "U2.npy": "fc416b682791f27713a2a923473c9b36f1473f7ecdefc79445f8845e58b73344"
+    }
+  },
+  {
+    "path": "checkpoints/regular_t0.50000000",
+    "kind": "regular",
+    "t": 0.5,
+    "retained": false,
+    "metadata_sha256": "6584c22b7d15c7c15d9d057a5d3113bc882f574f7a6d634b8a72717444405c91",
+    "files": {
+      "U0.npy": "212791000f7a3d62ede2a94699bc73bfa0acdc5b84f61ba262612b533431b387",
+      "U1.npy": "d3b76c8dc7fdc1d748d7296c79b7ba0224372de59878199525afa7f6994bc1da",
+      "U2.npy": "02d2f789eb4efca41e4de4f6b847d773180331cc480cc5b25772d68cd6d02fb4"
+    }
+  },
+  {
+    "path": "checkpoints/regular_t0.60000000",
+    "kind": "regular",
+    "t": 0.6,
+    "retained": false,
+    "metadata_sha256": "642da53499fe1fc0dec69e049aa844d020681c44c2b9c1e09acc7e6b26b643fd",
+    "files": {
+      "U0.npy": "042d9dc9227070d2c09b5ddf173a8f5da03304fd34e683968aa2a2592775f999",
+      "U1.npy": "6e93c861bcec4cfcaa83ff7f9a24b8a436befdc45e8283b16b280eec10816fc5",
+      "U2.npy": "48c1cc10e174e944b0d62a716be6660131d2a40f2998541ed735f10a773262c4"
+    }
+  },
+  {
+    "path": "checkpoints/regular_t0.70000000",
+    "kind": "regular",
+    "t": 0.7000000000000001,
+    "retained": false,
+    "metadata_sha256": "5d2c6ada4283c1f8451a4c028414ba33d070cf27110be6faa9b80d8e4f569393",
+    "files": {
+      "U0.npy": "bf7a0b3b292b01d3623b439c16d828208572a7d6bc8d73e1dfa6e4c562ab106d",
+      "U1.npy": "633cfa991e2c29020c9c4546494adacf16ca2652567c985cc645ba7630677e89",
+      "U2.npy": "51f986dc37b1c83db2c7daeca91f659662131f927b253d9b45691d00f959cfc6"
+    }
+  },
+  {
+    "path": "checkpoints/regular_t0.80000000",
+    "kind": "regular",
+    "t": 0.8,
+    "retained": false,
+    "metadata_sha256": "818cc6ea5c3a4f1a02f52972bc7545baf2e29f93d2d3dac035bdbb5f8e736183",
+    "files": {
+      "U0.npy": "f981b1a454399e4e48ed25adcb624aa13d49f2cd35bdf5b21217e3f1cf3cb724",
+      "U1.npy": "24ef0e0f76b6b4b27db3104bb468ac02b7c650f9b010d7285a777cdc877e3a2a",
+      "U2.npy": "908093caf3833714d6c9b072e716ef1ab0f744186f9d43b2e32e7a0ad05bea47"
+    }
+  },
+  {
+    "path": "checkpoints/regular_t0.90000000",
+    "kind": "regular",
+    "t": 0.9,
+    "retained": false,
+    "metadata_sha256": "afa7356b15564063ac79b114ac34e0fbc61a8544505650bdb7085871ecfd5832",
+    "files": {
+      "U0.npy": "058438bcf127641875863c4bc68d1abdda0a4e744abc54c26fa9fcd511dd07cd",
+      "U1.npy": "deeadfa4e4257c2eafce5846272a3026cc59fbfb621901678d621a9b884b6ff5",
+      "U2.npy": "3718d0ef44c53703917201cab1edb77d5df901bf6eb2f687a9bf87c85e72da68"
+    }
+  },
+  {
+    "path": "checkpoints/regular_t1.00000000",
+    "kind": "regular",
+    "t": 1.0,
+    "retained": true,
+    "metadata_sha256": "c4958d26b1e2c50d912e7422d23969a6a906ed2fbffad1d6140a43f497fc982c",
+    "files": {
+      "U0.npy": "fcc05764d1b839bde2ef38501b810088b8302e4a56569be60e83cf2a43569b52",
+      "U1.npy": "8ed652a46c8f582c2e91ee87dab59bd44052f25f2012165590f5345407d640de",
+      "U2.npy": "1bd9547110e016dc9fb6ae056259799c44f3cda3a6e79ca18dc21e8cb986850d"
+    }
+  },
+  {
+    "path": "checkpoints/regular_t1.10000000",
+    "kind": "regular",
+    "t": 1.1,
+    "retained": true,
+    "metadata_sha256": "f967878d9cf6f220ed301efc8e6707460934d3df765660c9fd3bf3ddcbc4b278",
+    "files": {
+      "U0.npy": "af7f36fa30665edb94cd8517a313c1d286f527c4777070d323ca7374538d7392",
+      "U1.npy": "130095bf8658e6dab4af9f64842f9cb6cbd8ee5ad0a0dd7e31d009823b7a7dcf",
+      "U2.npy": "d7fc830ed8fd70e3663f7ac06f51b28867453b6eb31fdba4ac37cdd1f71cb861"
+    }
+  },
+  {
+    "path": "checkpoints/terminal_t1.10000000",
+    "kind": "terminal",
+    "t": 1.1,
+    "retained": true,
+    "metadata_sha256": "f967878d9cf6f220ed301efc8e6707460934d3df765660c9fd3bf3ddcbc4b278",
+    "files": {
+      "U0.npy": "af7f36fa30665edb94cd8517a313c1d286f527c4777070d323ca7374538d7392",
+      "U1.npy": "130095bf8658e6dab4af9f64842f9cb6cbd8ee5ad0a0dd7e31d009823b7a7dcf",
+      "U2.npy": "d7fc830ed8fd70e3663f7ac06f51b28867453b6eb31fdba4ac37cdd1f71cb861"
+    }
+  }
+]

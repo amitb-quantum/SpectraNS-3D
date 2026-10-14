@@ -20,3 +20,14 @@ The CUDA rehearsal requires a compatible local GPU. The existing rehearsal finge
 The [N640 report](../N640_COMPARISON_2026-10-13.md) and [curated manifest](2026-10-13/n640_campaign_004/evidence_manifest.json) preserve the completed original-IC comparison through 1.10 and its fine 1.00–1.10 window. 192 H100 tests and eight backend references passed; the protected 131-file manifest and independent numerical/temporal/spatial arithmetic are replayable from the public data. Enstrophy met 0.1% agreement, while net-production curves showed intermediate sensitivity and the stable matched local peak at 1.00 was discretization-sensitive. Neither two-grid consistency nor a passing tail gate certifies continuum resolution.
 
 The new readiness snapshot retained 192 local tests, 188 packaged passes with four CUDA-only skips, and eleven CPU/CUDA rehearsals including seven real SIGKILL phases. Earlier dated 160/185-test and preflight-only snapshots remain historical evidence. Full N640 arrays were not downloaded; metadata/component hashes cannot replace a restart field. The only new rental is destroyed, billing reconciled and follow-up paused.
+
+
+## October 13 completed three-grid release
+
+The [N768 report](../N768_THREE_GRID_COMPARISON_2026-10-13.md) and [147-file curated package](2026-10-13/n768_campaign_002/evidence_manifest.json) retain all132 original protected manifest entries, original phase CSVs, full spectra, checkpoint metadata/component hashes, source/runtime bindings, independent assessment, figure and sanitized financial/termination records. The corrected run passed239H200 tests and eight backend references; local temporal sensitivity passed. N640/N768 integral curves meet0.1%, while matched stable local peaks remain sensitive. No continuum error bound or turnover is claimed.
+
+Reanalysis is CPU-only and makes no cloud request:
+
+    python docs/evidence/2026-10-13/n768_campaign_002/independent_analysis.py --campaign docs/evidence/2026-10-13/n768_campaign_002
+
+The raw N768/N640 arrays were not recovered. Metadata hashes are identity evidence, not restartable fields or independently repeatable field interpolation. All original histories remain preserved locally; credentials, private account attribution and the live ledger are excluded.

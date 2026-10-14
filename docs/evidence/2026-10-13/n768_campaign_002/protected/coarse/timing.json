@@ -1,0 +1,25 @@
+{
+  "seconds": {
+    "enstrophy_budget": 111.07160205952823,
+    "checkpoint_write_hash_prune": 274.82813601661474,
+    "integration": 3784.0400312929414,
+    "scalar_diagnostics_and_tail": 29.132345339283347,
+    "solver_setup": 0.22619292046874762,
+    "fourier_peak_refinement": 130.5333112385124,
+    "full_spectrum": 5.523236965760589,
+    "initial_condition_or_restart": 12.719943631906062
+  },
+  "calls": {
+    "enstrophy_budget": 112,
+    "checkpoint_write_hash_prune": 13,
+    "integration": 110,
+    "scalar_diagnostics_and_tail": 112,
+    "solver_setup": 2,
+    "fourier_peak_refinement": 112,
+    "full_spectrum": 112,
+    "initial_condition_or_restart": 2
+  },
+  "process_wall_s": 4348.997870838735,
+  "unattributed_wall_s": 0.923071373719722,
+  "convention": "Sum of two disjoint original-IC prefix/continuation processes; phase originals preserved."
+}

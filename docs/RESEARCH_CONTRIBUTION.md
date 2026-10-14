@@ -12,11 +12,15 @@ The workflow preserves exact inputs, source/runtime bindings, accepted and faili
 
 [Completed numerical report](N640_COMPARISON_2026-10-13.md).
 
-## What N768 will test
+## What the completed third grid adds
 
-The predeclared hypothesis is that the derivative-sensitive N640/N768 discrepancies shrink relative to N512/N640. Evidence against that hypothesis is equally useful. Compare the complete matched curves and stable endpoint estimates, not only a convenient maximum or final value. Unequal refinement ratios require explicit qualifications; three grids alone do not guarantee an asymptotic order.
+The predeclared hypothesis was that derivative-sensitive N640/N768 discrepancies would shrink relative to N512/N640. The result is observable-specific. Maximum relative enstrophy difference shrank from0.05997% to0.01279%, and scaled net-production difference from0.18161% to0.08044%, meeting the0.1% criterion for the closest pair.
 
-A successful attempt means verified numerical and local-temporal evidence plus an honest spatial classification. It does not require all observables to agree. An incomplete trajectory cannot be substituted for the planned comparison.
+Stable local Fourier vorticity estimates did not follow that pattern. N640/N768 differences are1.53049% at1.00 and1.10622% at1.10. The earlier N512/N640 agreement of0.00911% at1.10 was therefore insufficient to establish convergence. The third grid supplied a concrete counterexample to treating close two-grid agreement or a passing energy-tail gate as a certificate for a local observable.
+
+The own-anchor finer-timestep check passed with maximum specified difference1.64332e-8. It bounds local continuation sensitivity, not inherited prefix error. Stable local interpolation does not certify a global supremum. Unequal grid ratios and shrinking integral increments do not establish a continuum order/error bound. Enstrophy was still rising at1.10, so no turnover is claimed.
+
+The [completed three-grid report](N768_THREE_GRID_COMPARISON_2026-10-13.md), complete protected small evidence and independent replay distinguish integral consistency, local-peak sensitivity, sampling and operational validity. This is a completed research release even though universal spatial certification remains unresolved.
 
 ## Relationship to OpenAI's published claim
 

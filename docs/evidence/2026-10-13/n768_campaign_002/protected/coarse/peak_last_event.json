@@ -1,0 +1,171 @@
+{
+  "t": 1.1,
+  "refinement_performed": true,
+  "sampled_wmax": 79.84429095258852,
+  "fourier_refined_peak_estimate": 79.87242340874462,
+  "sampling_bias_fraction": 0.00035221738561923624,
+  "location": [
+    2.869566727204739,
+    3.0012973273644183,
+    4.4833145160604335
+  ],
+  "seed_expansion_relative_change": 0.0,
+  "last_level_relative_increment": 6.013792263425189e-08,
+  "estimator_stable": true,
+  "method": {
+    "name": "separable Fourier local search",
+    "seeds": 8,
+    "expanded_seeds": 16,
+    "patch_points": 5,
+    "initial_radius_grid_cells": 4,
+    "levels": 9,
+    "stability_tolerance": 1e-05,
+    "scope": "local peak estimate; seed and search sensitivity are not rigorous error bounds"
+  },
+  "candidates": [
+    {
+      "value": 79.87242340874462,
+      "location": [
+        2.869566727204739,
+        3.0012973273644183,
+        4.4833145160604335
+      ],
+      "last_level_relative_increment": 6.013792263425189e-08
+    },
+    {
+      "value": 79.87242340874458,
+      "location": [
+        2.869566727204739,
+        3.2818879798151674,
+        4.4833145160604335
+      ],
+      "last_level_relative_increment": 6.013792299009075e-08
+    },
+    {
+      "value": 79.8724234087446,
+      "location": [
+        0.2720259263850537,
+        3.0012973273644183,
+        4.4833145160604335
+      ],
+      "last_level_relative_increment": 6.013792299009074e-08
+    },
+    {
+      "value": 79.87242340874448,
+      "location": [
+        0.2720259263850537,
+        3.2818879798151674,
+        4.4833145160604335
+      ],
+      "last_level_relative_increment": 6.013792210049376e-08
+    },
+    {
+      "value": 79.85768994042395,
+      "location": [
+        2.8657317752350253,
+        3.0190020222912652,
+        4.487085552163986
+      ],
+      "last_level_relative_increment": 3.014094012333779e-06
+    },
+    {
+      "value": 79.85768994042398,
+      "location": [
+        0.27586087835476775,
+        3.0190020222912652,
+        4.487085552163986
+      ],
+      "last_level_relative_increment": 3.014094012689682e-06
+    },
+    {
+      "value": 79.85768994042392,
+      "location": [
+        2.8657317752350253,
+        3.2641832848883205,
+        4.487085552163986
+      ],
+      "last_level_relative_increment": 3.0140940105542574e-06
+    },
+    {
+      "value": 79.8576899404239,
+      "location": [
+        0.27586087835476775,
+        3.2641832848883205,
+        4.487085552163986
+      ],
+      "last_level_relative_increment": 3.01409401144402e-06
+    },
+    {
+      "value": 79.85010604355271,
+      "location": [
+        2.873401679174453,
+        3.2971638718278617,
+        4.479735227555367
+      ],
+      "last_level_relative_increment": 5.128391539523108e-06
+    },
+    {
+      "value": 79.85010604355277,
+      "location": [
+        2.873401679174453,
+        2.986021435351724,
+        4.479735227555367
+      ],
+      "last_level_relative_increment": 5.1283915395231045e-06
+    },
+    {
+      "value": 79.85010604355263,
+      "location": [
+        0.2681909744153396,
+        3.2971638718278617,
+        4.479735227555367
+      ],
+      "last_level_relative_increment": 5.128391540057021e-06
+    },
+    {
+      "value": 79.85010604355264,
+      "location": [
+        0.2681909744153396,
+        2.986021435351724,
+        4.479735227555367
+      ],
+      "last_level_relative_increment": 5.128391539345143e-06
+    },
+    {
+      "value": 79.75999548456333,
+      "location": [
+        0.28231638083711985,
+        3.0558175612005205,
+        4.493029727717043
+      ],
+      "last_level_relative_increment": 5.6348497340701225e-06
+    },
+    {
+      "value": 79.75999548456336,
+      "location": [
+        0.28231638083711985,
+        3.2273677459790653,
+        4.493029727717043
+      ],
+      "last_level_relative_increment": 5.634849734604632e-06
+    },
+    {
+      "value": 79.7599954845633,
+      "location": [
+        2.8592762727526733,
+        3.0558175612005205,
+        4.493029727717043
+      ],
+      "last_level_relative_increment": 5.634849734070125e-06
+    },
+    {
+      "value": 79.75999548456339,
+      "location": [
+        2.8592762727526733,
+        3.2273677459790653,
+        4.493029727717043
+      ],
+      "last_level_relative_increment": 5.63484973496097e-06
+    }
+  ]
+}

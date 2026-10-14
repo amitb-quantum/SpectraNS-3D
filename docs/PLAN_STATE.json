@@ -1,27 +1,33 @@
 {
   "schema_version": 1,
   "plan_version": "1.0",
-  "updated_at_pt": "2026-10-13T20:06:12.587395-07:00",
+  "updated_at_pt": "2026-10-13T22:18:59.966965-07:00",
   "project": "SpectraNS-3D",
-  "scientific_milestone": "Original-IC N512/N640 comparison through1.10 and local fine-window validation",
-  "scientific_status": "third_grid_comparison_incomplete_preflight_only",
+  "scientific_milestone": "Original-IC N512/N640/N768 comparison through t=1.10 with local temporal checks and independently replayable evidence",
+  "scientific_status": "completed_three_grid_finite_interval_assessment_local_peak_sensitivity_unresolved",
   "current_task": "P22",
-  "next_action": "Accepted N768 through1.10, then fine1.00\u20131.10, protect/independently assess, close/reconcile and publish.",
-  "decision": "one_more_5_usd_attempt_at_2_25_or_less_discovery_extended",
+  "next_action": "Commit and verify clean-checkout evidence replay and original Git blob hashes, push main, verify remote, pause automation, report results here.",
+  "decision": "close_completed_finite_interval_release_no_additional_rental",
   "automation_status": "ACTIVE",
   "new_billable_attempt_pending_decision": false,
   "baseline_commit": "d258fcb556e69090454c437454cf7830d897029d",
   "last_budget_snapshot": {
-    "conservative_exposure_usd": 24.241990606252408,
-    "headroom_usd": 5.758009393747593,
-    "total_ceiling_usd": 30,
-    "note": "Fresh postclose project-only reconciliation at2026-10-13T23:47:49 UTC; pending allowances retained. This is not shared account credit."
+    "campaign_instance_id": 55858324,
+    "posted_campaign_usd": 7.162,
+    "campaign_upper_usd": 7.539022725186525,
+    "campaign_cap_usd": 14,
+    "within_campaign_cap": true,
+    "posted_project_usd": 29.58,
+    "project_pending_upper_usd": 3.74034894046053,
+    "other_committed_project_usd": 0,
+    "total_project_ceiling_usd": 40,
+    "observed_at_utc": "2026-10-14T05:14:35.693309+00:00",
+    "owned_absence_verified": true,
+    "parent_charge_only": true,
+    "conservative_project_exposure_usd": 33.320348940460526,
+    "remaining_project_headroom_usd": 6.679651059539474
   },
-  "proposed_choices": [
-    "one_more_5_usd_attempt_at_2_25_or_less",
-    "one_more_6_usd_attempt_after_guard_revalidation",
-    "close_current_phase_incomplete"
-  ],
+  "proposed_choices": [],
   "tasks": [
     {
       "id": "P01",
@@ -96,7 +102,7 @@
       "status": "completed",
       "depends_on": "P06",
       "successor": "P08",
-      "result": "Accepted original-IC N6400\u20131.10 prefix assembled and verified; numerical gates passed through1.10. Same-grid preflight continuation preserved its original source/metadata hashes."
+      "result": "Accepted original-IC N6400–1.10 prefix assembled and verified; numerical gates passed through1.10. Same-grid preflight continuation preserved its original source/metadata hashes."
     },
     {
       "id": "P08",
@@ -104,7 +110,7 @@
       "status": "completed",
       "depends_on": "P07",
       "successor": "P09",
-      "result": "Local1.00\u20131.10 temporal check passed: eleven matched events,200 coarse versus400 fine steps, largest observed difference1.42533e-8."
+      "result": "Local1.00–1.10 temporal check passed: eleven matched events,200 coarse versus400 fine steps, largest observed difference1.42533e-8."
     },
     {
       "id": "P09",
@@ -199,8 +205,12 @@
     {
       "id": "P19",
       "title": "Publish final study and explicit limits",
-      "status": "pending",
-      "successor": null
+      "status": "completed_preflight_only",
+      "successor": "P20",
+      "result": "First N768 refusal and verified closure were published; required three-grid comparison explicitly remained incomplete and was transferred to separately authorized corrected attempt.",
+      "evidence": [
+        "docs/N768_PREFLIGHT_OUTCOME_2026-10-13.md"
+      ]
     },
     {
       "id": "P20",
@@ -227,7 +237,45 @@
       "title": "Protected three-grid assessment, closure and publication",
       "status": "in_progress",
       "successor": null,
-      "result": "Original-IC N768 continuing own0.05 state toward1.10, then local fine and protected assessment."
+      "result": "132 protected manifest entries verified; numerical/local-temporal checks passed; independent three-grid arithmetic replayed. Owned H200 absent and parent billing reconciled. Final report/figure prepared; Git/remote publication verification remains.",
+      "evidence": [
+        "docs/N768_THREE_GRID_COMPARISON_2026-10-13.md",
+        "docs/evidence/2026-10-13/n768_campaign_002/evidence_manifest.json",
+        "docs/evidence/2026-10-13/n768_campaign_002/financial_summary.json"
+      ],
+      "subtasks": [
+        {
+          "id": "P22a",
+          "title": "Assemble accepted original-IC N7680–1.10",
+          "status": "completed",
+          "successor": "P22b"
+        },
+        {
+          "id": "P22b",
+          "title": "Own-anchor finer-timestep check1.00–1.10",
+          "status": "completed",
+          "successor": "P22c"
+        },
+        {
+          "id": "P22c",
+          "title": "Protect evidence and independently assess three grids",
+          "status": "completed",
+          "successor": "P22d"
+        },
+        {
+          "id": "P22d",
+          "title": "Verify owned termination and reconcile charges",
+          "status": "completed",
+          "successor": "P22e"
+        },
+        {
+          "id": "P22e",
+          "title": "Publish evidence, figure, reconciled docs and results in this chat",
+          "status": "in_progress",
+          "successor": null,
+          "result": "Final docs, evidence and figure prepared; original-byte/Git/clean-checkout/remote checks next."
+        }
+      ]
     }
   ],
   "handoff_rule": "Complete task, record evidence/status, set successor, continue if authorized. If a decision blocks progress, consult immediately; never mark a runtime refusal as completed spatial validation.",
@@ -260,33 +308,36 @@
     }
   ],
   "result_summary": {
-    "protected_numerical_temporal": "passed",
-    "spatial_curve_classification": "intermediate_sensitivity",
-    "max_relative_Z_difference": 0.0005996963863549451,
-    "max_scaled_net_difference": 0.0018161374160758587,
-    "matched_fourier_peaks": [
-      {
-        "t": 1.0,
-        "relative_difference": 0.004839001869781032,
-        "status": "discretization_sensitive"
-      },
-      {
-        "t": 1.1,
-        "relative_difference": 9.106506848798756e-05,
-        "status": "consistent"
-      }
-    ]
+    "protected_numerical_local_temporal": "passed",
+    "accepted_N768_interval": [
+      0,
+      1.1
+    ],
+    "N640_N768_curves": "consistent_at_declared_tolerance",
+    "N512_N768_curves": "intermediate_sensitivity",
+    "matched_N640_N768_local_peaks": "discretization_sensitive_at_both_times",
+    "max_local_temporal_error": 1.6433180722594976e-08,
+    "continuum_resolution_certified": false,
+    "turnover_observed": false
   },
-  "phase_status": "corrected_third_grid_production",
+  "phase_status": "completed_research_awaiting_final_publication_verification",
   "publication_commit": "610df59a9b357be744a83a484b8f7d2aac8f31d7",
   "published_evidence_hashes_verified": 161,
   "final_financial_summary": {
-    "posted_campaign_usd": 2.895,
-    "campaign_upper_usd": 3.463249377494388,
-    "campaign_cap_usd": 5,
-    "posted_project_usd": 21.444,
-    "project_pending_upper_usd": 2.7979906062524065,
-    "other_committed_project_usd": 0
+    "campaign_instance_id": 55858324,
+    "posted_campaign_usd": 7.162,
+    "campaign_upper_usd": 7.539022725186525,
+    "campaign_cap_usd": 14,
+    "within_campaign_cap": true,
+    "posted_project_usd": 29.58,
+    "project_pending_upper_usd": 3.74034894046053,
+    "other_committed_project_usd": 0,
+    "total_project_ceiling_usd": 40,
+    "observed_at_utc": "2026-10-14T05:14:35.693309+00:00",
+    "owned_absence_verified": true,
+    "parent_charge_only": true,
+    "conservative_project_exposure_usd": 33.320348940460526,
+    "remaining_project_headroom_usd": 6.679651059539474
   },
   "previous_phase_status": "closed_completed_N512_N640",
   "total_project_ceiling_usd": 40,
@@ -312,13 +363,56 @@
     "total_ceiling_usd": 40,
     "maximum_lifetime_seconds": 10800,
     "max_hourly_usd": 4.5,
-    "status": "running_production",
+    "status": "closed_completed",
     "directory": "artifacts/cloud-preparation/2026-10-13/n768_campaign_002",
-    "source": "Explicit user reply: Yes\u2014one corrected $14 attempt, same $40 total and numerical gates.",
+    "source": "Explicit user reply: Yes—one corrected $14 attempt, same $40 total and numerical gates.",
     "instance_id": 55858324,
     "offer_id": 45315037,
     "billable_attempt_consumed": true,
     "guard_deadline_pt": "2026-10-13T23:34:13.013212-07:00",
-    "quoted_hourly_usd": "4.417777777777777666666666667"
+    "quoted_hourly_usd": "4.417777777777777666666666667",
+    "verified_termination": true,
+    "independent_absence_verified": true,
+    "authorization_exhausted": true
+  },
+  "dated_budget_history": [
+    {
+      "conservative_exposure_usd": 24.241990606252408,
+      "headroom_usd": 5.758009393747593,
+      "total_ceiling_usd": 30,
+      "note": "Fresh postclose project-only reconciliation at2026-10-13T23:47:49 UTC; pending allowances retained. This is not shared account credit."
+    }
+  ],
+  "historical_decisions": [
+    {
+      "decision": "one_more_5_usd_attempt_at_2_25_or_less_discovery_extended",
+      "scope": "completed N640 authorization"
+    }
+  ],
+  "historical_N640_result_summary": {
+    "protected_numerical_temporal": "passed",
+    "spatial_curve_classification": "intermediate_sensitivity",
+    "max_relative_Z_difference": 0.0005996963863549451,
+    "max_scaled_net_difference": 0.0018161374160758587,
+    "matched_fourier_peaks": [
+      {
+        "t": 1.0,
+        "relative_difference": 0.004839001869781032,
+        "status": "discretization_sensitive"
+      },
+      {
+        "t": 1.1,
+        "relative_difference": 9.106506848798756e-05,
+        "status": "consistent"
+      }
+    ]
+  },
+  "historical_N640_financial_summary": {
+    "posted_campaign_usd": 2.895,
+    "campaign_upper_usd": 3.463249377494388,
+    "campaign_cap_usd": 5,
+    "posted_project_usd": 21.444,
+    "project_pending_upper_usd": 2.7979906062524065,
+    "other_committed_project_usd": 0
   }
 }

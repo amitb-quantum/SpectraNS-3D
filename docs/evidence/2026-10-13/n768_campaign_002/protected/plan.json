@@ -1,0 +1,383 @@
+{
+  "schema_version": 4,
+  "status": "Corrected single USD14 attempt; full source-bound proof required.",
+  "configuration": {
+    "N": 768,
+    "case": "tubes",
+    "nu": 0.0005,
+    "scheme": "lsrk4",
+    "fp64": true,
+    "cfl": 0.2,
+    "max_dt": 0.0005,
+    "target_t": 1.1,
+    "log_dt": 0.01,
+    "checkpoint_dt": 0.1,
+    "spectrum_slab": 4,
+    "initial_condition": "Original analytic legacy tubes: gamma=5, a=.25, sep=.6, pert=.35; same audited projection, no N512 restart",
+    "domain": 6.283185307179586,
+    "dealias": "strict spherical |k|<N/3",
+    "mandatory_prefix_t": 1.1,
+    "optional_exploration_ceiling_t": 1.1,
+    "target_t_interpretation": "Required common interval only; no later-time exploration or turnover claim."
+  },
+  "spatial_acceptance": {
+    "common_window_max_t": 1.1,
+    "actual_end": "minimum of both last accepted diagnostic times",
+    "matched_events_only": true,
+    "relative_scalar_tolerance": 0.001,
+    "primary_curve_metrics": [
+      "max matched relative Z difference",
+      "max matched net-production difference scaled by production-plus-loss"
+    ],
+    "net_curve_difference": "absolute difference divided by maximum of both production-plus-viscous-loss magnitudes and 1e-14",
+    "net_curve_scaled_tolerance": 0.001,
+    "secondary_metrics": [
+      "E matched relative difference",
+      "full-shell L1/E difference",
+      "grid wmax and grid-based BKM, both sampling-sensitive"
+    ],
+    "disagreement_percent_level": 0.01,
+    "intermediate_band": "greater than 0.001 and less than 0.01: inconclusive sensitivity",
+    "interpretation": "Consistency of sampled observables on two discretizations, not proof of resolution or convergence order.",
+    "beyond_common_window": "single-grid exploratory observations only; no N512/N640 convergence claim",
+    "primary_peak_metrics": [],
+    "grid_sampled_wmax": {
+      "role": "secondary sensitivity screen, not primary acceptance",
+      "relative_tolerance": 0.01,
+      "measures": [
+        "matched curve",
+        "sampled maximum value",
+        "sampled time reported without a timing gate"
+      ],
+      "explanation": "Different grids sample different positions. No retrospective spectral interpolation of the N512 t=0.89 maximum is possible from the retained endpoint fields.",
+      "borderline_interpretation": "Sampling-inconclusive secondary screen; neither crossing 1% nor the retained N512 endpoint biases alone establishes discretization sensitivity. Integral curves and stable matched Fourier peak estimates determine their separately recorded primary classifications."
+    },
+    "secondary_tolerances": {
+      "E": 0.001,
+      "spectrum_L1_over_E": 0.001,
+      "grid_wmax": 0.01,
+      "grid_BKM": 0.01
+    },
+    "fitted_net_peak": {
+      "role": "supplementary only, never a protected-validation gate",
+      "search_domain": "each grid own accepted observed interval, separately labelled; no failing samples",
+      "required_bracket": "five uniform events centered on sampled maximum, with both sides accepted; also fit central three",
+      "fitted_quantity": "local quadratic vertex time and value",
+      "nominal_time_tolerance": 0.01,
+      "nominal_relative_value_tolerance": 0.001,
+      "uncertainty": "Report 3/5-point fit sensitivity, half-event spacing, residual/curvature scale; not a statistical confidence interval or rigorous bound.",
+      "classification": "within declared tolerances, separated estimates, or inconclusive after sensitivity envelopes",
+      "outside_common_interval": "Supplementary comparison of separately observed local peaks only. Does not extend N512 validated trajectory, establish a global maximum, or certify later N640 temporal error.",
+      "if_unbracketed": "inconclusive, not failure of protected curve result"
+    },
+    "primary_interpretation": "0.1% agreement of integral Z and scaled net-production curves on the common accepted interval. Percent-level discrepancy indicates discretization sensitivity; grid-maximum sampling does not control this label.",
+    "matched_fourier_wmax": {
+      "times": [
+        1.0,
+        1.1
+      ],
+      "relative_tolerance": 0.001,
+      "role": "primary matched local-peak observable, conditional on estimator stability on both grids",
+      "method": {
+        "name": "separable Fourier local search",
+        "seeds": 8,
+        "expanded_seeds": 16,
+        "patch_points": 5,
+        "initial_radius_grid_cells": 4,
+        "levels": 9,
+        "stability_tolerance": 1e-05,
+        "scope": "local peak estimate; seed and search sensitivity are not rigorous error bounds"
+      },
+      "estimator_sha256": "e29ad95b72cafc45b9dd0948758ccdea042c3c00c5227e7c20fbdf4f3dbbacff",
+      "qualification": "Fourier local peak estimate, not certified global supremum. Unstable estimates are explicitly inconclusive.",
+      "per_event_N640": false,
+      "reference": "configs/n512_interpolated_peak_reference.json",
+      "historical_t0p89": "No full N512 field; sampled maximum remains secondary.",
+      "schedule": {
+        "coarse_period": 0.05,
+        "coarse_peak_window": [
+          0.86,
+          0.94
+        ],
+        "peak_window_spacing": 0.01,
+        "fine_times": [
+          1.0,
+          1.1
+        ],
+        "coarse_total_refined_events": 31,
+        "fine_refined_events": 2,
+        "remaining_after_preflight": 31,
+        "sampled_wmax_every_event": true,
+        "unselected_estimates": "empty with refinement_performed=false; never imputed"
+      }
+    }
+  },
+  "numerical_gates": {
+    "existing_gate": {
+      "schema_version": 1,
+      "allowed_smoke_grids": [
+        128,
+        256
+      ],
+      "reference_grid": 32,
+      "smoke_target_t": 0.05,
+      "smoke_nu": 0.0005,
+      "smoke_max_dt": 0.002,
+      "smoke_fp64": true,
+      "smoke_log_dt": 0.01,
+      "scheme_scalar_relative_tolerance": 0.0005,
+      "energy_interval_rise_fraction_E0": 1e-05,
+      "energy_initial_rise_fraction_E0": 0.0001,
+      "energy_fd_budget_relative_tolerance": 0.01,
+      "divergence_absolute_max": 0.0001,
+      "tail_ratio_max": 1e-06,
+      "parseval_relative_tolerance": 2e-06,
+      "memory_fraction_max": 0.8,
+      "smoke_peak_reserved_GB_max": 8.0,
+      "reference": {
+        "float32": {
+          "velocity_relative_l2": 2e-05,
+          "velocity_max_absolute": 1e-05,
+          "scalar_relative": 2e-05,
+          "energy_rhs_absolute_fraction_E": 2e-06,
+          "energy_rhs_relative_fraction_dissipation": 2e-05
+        },
+        "float64": {
+          "velocity_relative_l2": 2e-11,
+          "velocity_max_absolute": 2e-12,
+          "scalar_relative": 2e-11,
+          "energy_rhs_absolute_fraction_E": 1e-11,
+          "energy_rhs_relative_fraction_dissipation": 2e-10
+        },
+        "repeat_shell_absolute_fraction_E": 2e-12
+      },
+      "notes": [
+        "Finite diagnostics and exact matched output times are mandatory.",
+        "Tail cutoff is a heuristic; passing smoke does not establish high-Re grid convergence.",
+        "N32 reference is backend equivalence only; do not use its tail to certify spatial resolution.",
+        "Energy FD residual is interval-quadrature consistency, separate from instantaneous RHS identity.",
+        "Float64 smoke state is required: local float32 SSPRK3 TGV failed the 1% interval dissipation gate; the gate was retained.",
+        "Thresholds are fixed before H100 data; changes require a new recorded plan and review."
+      ]
+    },
+    "instantaneous_enstrophy_identity_relative_tolerance": 1e-08,
+    "driver_used_fraction_max": 0.8,
+    "allocator_peak_fraction_max": 0.8,
+    "finite_positive_dt": true,
+    "diagnostic_time_spacing": 0.01,
+    "retain_first_failing_sample": true,
+    "no_retroactive_tail_threshold_change": true
+  },
+  "spectral_diagnostics": {
+    "absolute_loss_kmin": 128,
+    "relative_loss_kmin": 192,
+    "note": "Preserve fixed k>=128 and N768-quarter k>=192 rounded-shell loss fractions/bounds at every event. Fractions are diagnostic, not a post-hoc gate."
+  },
+  "temporal_validation": {
+    "fine_max_dt": 0.00025,
+    "window_width": 0.1,
+    "anchor": "fixed N768 coarse checkpoint at t=1.00",
+    "agreement_tolerance": 1e-05,
+    "metrics": [
+      "E",
+      "Z",
+      "wmax",
+      "BKM",
+      "full-spectrum L1/E",
+      "net difference scaled by production-plus-loss"
+    ],
+    "scope": "Local continuation from the same N768 checkpoint; inherited time error is common. This does not certify accumulated N768 error at earlier peaks.",
+    "minimum_window": 0.1,
+    "if_unavailable": "planned protected validation incomplete; preserve evidence and do not explore",
+    "steps_forecast": 400,
+    "verify_meaningful_step_sizes": true,
+    "start_t": 1.0,
+    "end_t": 1.1,
+    "execution_phase": "Immediately after accepted coarse prefix reaches1.10.",
+    "resume_exploration": "disabled",
+    "beyond_1p1": "Not part of this authorized experiment."
+  },
+  "checkpoint_collection": {
+    "regular_retained_on_gpu": 2,
+    "temporary_terminal_retained": true,
+    "arrays_to_collect": "none by default; preserve all checkpoint metadata/component hashes and small evidence",
+    "final_metadata_rule": "archive exact checkpoint.json for every checkpoint before deleting any arrays; retain all per-component SHA256 values",
+    "failing_terminal": "diagnostics, spectra and exact metadata/hashes retained; arrays excluded from collection",
+    "prune_rule": "only new campaign fields; after successful fine-window validation and metadata archive; preserve prior campaign arrays",
+    "full_state_bytes": 10899947904,
+    "three_states_bytes": 32699843712,
+    "collection": "lossless gzip level 1, verified SHA256 of decompressed files, all diagnostic/config/timing files first",
+    "egress_upper_GB": 8.25,
+    "checkpoint_time_note": "The protected checkpoint is exactly t=1.10; exploratory fields have separate metadata/hash records.",
+    "protected_small_artifacts": "all prefix/fine diagnostics, full spectra, configs, source/runtime/timing/GPU records, checkpoint metadata/hash history, assessment; verified in WSL before exploration",
+    "optional_checkpoint_priority": "Production full-field archive/download disabled; local rehearsals cover optional transfer failures.",
+    "probe_egress_GB_upper": 0.15,
+    "memory_rule": "Separate coarse/fine/exploration processes. Wait for process exit before the next load; do not retain two full trajectories on GPU.",
+    "protected_checkpoint_pin": true,
+    "overlap": {
+      "joint_forecast": "1.25 * max(transfer/compression/verification allowance, exploration allowance) + 120s cleanup",
+      "transfer_allowance": "1.5*(actual compressed bytes/slowest probe + compression time + max(60s,2*remote verification time))",
+      "fallback": "sequential collection and shortened/skipped exploration; protected snapshot stays immutable",
+      "pin": "fixed coarse t=1.10 gzip archive; exploration writes a separate directory"
+    },
+    "maximum_coarse_and_exploration_raw_states": 6,
+    "full_field_download_enabled": false,
+    "preflight_anchor_disk_note": "Anchor plus up to three coarse states coexist; anchor released before fine/exploration. Existing six-state disk bound stays conservative; free-space gate after retention.",
+    "scope": "Metadata and component hashes mandatory; no full N768 fields downloaded."
+  },
+  "budget": {
+    "total_project_cap_usd": 40,
+    "new_all_in_cap_usd": 14,
+    "noncompute_reserve_usd": 0.5,
+    "maximum_lifetime_seconds": 10800,
+    "max_hourly_gpu_plus_120GB_disk_usd": 4.5,
+    "fresh_complete_billing_and_quote_required": true,
+    "no_automatic_retry": true,
+    "independent_owned_instance_destroy_guard": true,
+    "provider_guard_deadline": "60s before 10800s lifetime; measured phase includes cleanup/collection reserves.",
+    "transfer_quote_rule": "14GB ingress and8.25GB conservative egress must fitUSD0.50 reserve; no raw-field download."
+  },
+  "preflight": {
+    "N": 768,
+    "target_t": 0.05,
+    "reload_t": 0.051,
+    "steps_if_cap_limited": 100,
+    "discard_warmup_steps": 20,
+    "required_CPU_H200_reference": true,
+    "same_host_N512_benchmark": {
+      "warmup_steps": 5,
+      "timed_steps": 20,
+      "sequential": true
+    },
+    "retained_prefix": {
+      "original_analytic_IC": true,
+      "continuation_t": 0.05,
+      "never_use_reload_state": true,
+      "release_only_after_verified_assembly": true
+    },
+    "runtime_gate": "Ordinary measured dt planning floor0.9*minimum excluding event-limited remainders; ceil(remaining time/floor)+one extra alignment step/event;400fine steps,117diagnostic events,31refined calls,12checkpoints;1.25compute margin+180s collection. Per-event remaining-phase guard unchanged.",
+    "reforecast_every_diagnostic": true,
+    "CFL_rule": "Preserve CFL0.2 and actual recorded limits; legitimate clipping increases projected step count. Tiny/nonfinite/invalid steps fail closed. This is an operational forecast correction, not a numerical-gate relaxation.",
+    "disk_requirement": {
+      "requested_GB": 120,
+      "raw_states_max": 6,
+      "raw_state_bytes": 10899947904,
+      "compressed_archive_upper_bytes": 10910000000,
+      "small_artifact_reserve_bytes": 2000000000,
+      "required_free_margin": 1.2
+    },
+    "transfer_probe": {
+      "trials": 2,
+      "bytes_each": 67108864,
+      "actual_SCP_checksum_verified": true
+    },
+    "memory_between_phases": "Sequential solver processes; driver and allocator fractions each<0.8.",
+    "step_regression_reference": {
+      "docs/evidence/2026-10-13/n768_preflight/work/preflight/steps.csv": "b3e8bac5d4d9975107cf7b1d24c60da30187f89cf4789713bf09297c366f550d"
+    }
+  },
+  "source_sha256": {
+    "ns_fast_v3.py": "ab9eebda2750c7be019d3c2f54fe7aa5f2be98a0276a55260e35a81989b34842",
+    "ns_fast_v2.py": "6f01107b931b80231e27336faeae94b51916d91861473f46e85aedbba0bdaf5d"
+  },
+  "execution_note": "Only scripts/run_vast_third_grid.py --execute with complete exact proof/bootstrap/reference/payload/live offer/funding bindings.",
+  "scientific_goal": "Original-IC N768 accepted0\u20131.10 plus same-grid fine1.00\u20131.10 and separately classified N512/N768, N640/N768 and signed three-grid trends.",
+  "higher_grid_scope": "Only N768; no N1024. Old N640/H100 launchers and audited solver remain unchanged.",
+  "revision": "CFL-aware count forecast; initial cap-only attempt preserved in published evidence.",
+  "phase_order": [
+    {
+      "name": "preflight",
+      "required": true
+    },
+    {
+      "name": "coarse_prefix",
+      "required": true,
+      "start_t": 0.05,
+      "end_t": 1.1,
+      "max_dt": 0.0005,
+      "checkpoint_requirements": [
+        1.0,
+        1.1
+      ]
+    },
+    {
+      "name": "fine_prefix_window",
+      "required": true,
+      "start_t": 1.0,
+      "end_t": 1.1,
+      "max_dt": 0.00025,
+      "restart": "Own N768 coarse1.00 anchor"
+    },
+    {
+      "name": "protected_assessment_and_collection",
+      "required": true,
+      "all_small_hashes_verified_locally": true
+    },
+    {
+      "name": "closure",
+      "required": true,
+      "destroy_owned_and_verify_absence": true,
+      "fresh_billing": true
+    }
+  ],
+  "status_labels": {
+    "protected_numerical_temporal": "Requires complete accepted prefix through 1.10, the exact 1.00-1.10 fine check, and verified small artifacts in WSL.",
+    "two_grid_consistency": "Pairwise classifications and signed refinement trends; no automatic convergence order.",
+    "exploration": "Disabled in production; generic legacy transfer/exploration fault branches are exercised only in local rehearsal.",
+    "checkpoint_collection": "Separate collected/incomplete/skipped status; missing optional arrays never silently reported as recovered.",
+    "early_gate_trip": "Preserve accepted prefix and first failed sample; planned full comparison remains incomplete, no exploration.",
+    "late_exploratory_gate_or_deadline": "Preserve protected classification; report exploratory stop separately."
+  },
+  "controller_rehearsal": {
+    "required_profiles": [
+      "N64 CPU TGV compressed timeline",
+      "N256 local CUDA tubes compressed timeline"
+    ],
+    "faults": [
+      "preflight",
+      "coarse",
+      "prefix_assembly",
+      "fine",
+      "protected_collection",
+      "checkpoint_collection",
+      "exploration"
+    ],
+    "method": "independent SIGKILL of actual controller and owned process groups; partial transfers never promoted",
+    "source_config_bound": true,
+    "cloud_calls": 0
+  },
+  "offer_watch": {
+    "mode": "read-only until all proof/live quote bindings pass",
+    "automatic_billable_retry": false
+  },
+  "measured_prior_preflight": "Published N640 campaign004; scaling estimates only, not N768 admission.",
+  "next_scientific_question": "Do the N512/N640 derivative-sensitive discrepancies shrink at N768? Classify each pair and signed refinement trends; no automatic convergence-order or regularity certificate.",
+  "N640_reference": "configs/n768_baseline_reference.json",
+  "financial_authority": {
+    "total_ceiling_usd": 40,
+    "single_attempt_cap_usd": 14,
+    "max_hourly_usd": 4.5,
+    "max_lifetime_seconds": 10800,
+    "reserve_usd": 0.5,
+    "account_floor_usd": 1,
+    "fixed_attempt": "artifacts/cloud-preparation/2026-10-13/n768_campaign_002",
+    "source": "Explicit user approval: Yes\u2014one corrected $14 attempt, same $40 total and numerical gates."
+  },
+  "execution_hardware": {
+    "name_contains": "H200",
+    "num_gpus": 1,
+    "minimum_gpu_ram_MB": 140000,
+    "cuda_max_good_min": 13,
+    "verified": true,
+    "reliability_min": 0.99,
+    "requested_disk_GB": 120,
+    "memory_fraction_max": 0.8
+  },
+  "runtime_planning": {
+    "maximum_lifetime_seconds": 10800,
+    "protected_compute_safety_factor": 1.25,
+    "small_collection_reserve_s": 180,
+    "preflight": "Measure N768 ordinary-step, scalar/budget/spectrum/refinement/checkpoint costs; refuse production unless complete protected result fits remaining lifetime. A refusal consumes the sole billable attempt."
+  },
+  "prior_attempt_outcome": "docs/N768_PREFLIGHT_OUTCOME_2026-10-13.md"
+}

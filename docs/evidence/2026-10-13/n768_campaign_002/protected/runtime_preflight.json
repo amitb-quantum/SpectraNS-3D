@@ -1,0 +1,40 @@
+{
+  "forecast_seconds": 7570.234934310764,
+  "remaining_lifetime_seconds": 9811.887093782425,
+  "fits": true,
+  "compute_uninflated_seconds": 5912.187947448611,
+  "coarse_start_t": 0.05,
+  "remaining_coarse_steps": 2809,
+  "fine_steps": 400,
+  "diagnostic_events": 117,
+  "refinement_events": 31,
+  "refinement_seconds_per_call": 6.169539862545207,
+  "checkpoint_events": 12,
+  "measured_step_plan": {
+    "ordinary_min_dt": 0.0004315345212859038,
+    "planning_dt_floor": 0.00038838106915731343,
+    "dt_floor_factor": 0.9,
+    "limiter_counts": {
+      "cfl": 113,
+      "event": 5
+    },
+    "event_truncated_steps_observed": 5,
+    "remaining_coarse_steps": 2809,
+    "event_alignment_step_allowance": 105,
+    "cap_only_remaining_steps": 2100,
+    "qualification": "Planning allowance, not a future CFL bound; per-event measured remaining-phase refusal stays active."
+  },
+  "step_seconds": 1.5307610695589713,
+  "diagnostic_seconds": 1.1528623561995726,
+  "checkpoint_seconds": 56.15292031830177,
+  "achieved_dt_min": 3.4624200723535475e-05,
+  "fine_reserve_seconds": 976.6562418335928,
+  "refinement_counts": {
+    "coarse": 29,
+    "fine": 2,
+    "total": 31,
+    "coarse_diagnostic_events": 106,
+    "fine_diagnostic_events": 11
+  },
+  "note": "verified original-IC prefix reused; sampled maxima/budgets/spectra every event; only declared Fourier estimates timed separately"
+}

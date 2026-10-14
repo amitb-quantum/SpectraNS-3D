@@ -1,0 +1,16 @@
+{
+  "campaign_instance_id": 55858324,
+  "posted_campaign_usd": 7.162,
+  "campaign_upper_usd": 7.539022725186525,
+  "campaign_cap_usd": 14,
+  "within_campaign_cap": true,
+  "posted_project_usd": 29.58,
+  "project_pending_upper_usd": 3.74034894046053,
+  "other_committed_project_usd": 0,
+  "total_project_ceiling_usd": 40,
+  "observed_at_utc": "2026-10-14T05:14:35.693309+00:00",
+  "owned_absence_verified": true,
+  "parent_charge_only": true,
+  "conservative_project_exposure_usd": 33.320348940460526,
+  "remaining_project_headroom_usd": 6.679651059539474
+}

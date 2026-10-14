@@ -1,0 +1,13 @@
+{
+  "requested_disk_GB": 120,
+  "full_state_bytes": 10899947904,
+  "maximum_raw_states": 6,
+  "runtime_bytes_upper": 78309687424,
+  "required_free_bytes": 93971624909,
+  "free_space_margin": 1.2,
+  "scope": "Available space after setup; image and installed packages already occupy disk.",
+  "path": "/opt/spectrans-3d/project/artifacts/third_grid_run",
+  "available_bytes": 123497701376,
+  "filesystem_total_bytes": 128849018880,
+  "fits": true
+}
