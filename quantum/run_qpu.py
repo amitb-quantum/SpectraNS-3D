@@ -138,10 +138,26 @@ def budget(circuits, backend, shots: int) -> dict:
             "budget_limit_s": sa.BUDGET_LIMIT_S, "max_execution_time_s": sa.MAX_EXECUTION_TIME_S}
 
 
-def guard(circuits, bud: dict) -> None:
-    extra = active_qubits(circuits) - set(sa.PATH)
+def parse_path(text: str | None) -> list[int]:
+    if text is None:
+        return list(sa.PATH)
+    path = [int(q) for q in text.split(",")]
+    if len(path) != sa.N_QUBITS or len(set(path)) != sa.N_QUBITS:
+        raise SystemExit(f"REFUSED: --path needs {sa.N_QUBITS} distinct physical qubits")
+    return path
+
+
+def check_chain(backend, path: list[int]) -> None:
+    edges = {tuple(sorted(e)) for e in backend.coupling_map.get_edges()}
+    missing = [(a, b) for a, b in zip(path, path[1:]) if tuple(sorted((a, b))) not in edges]
+    if missing:
+        raise SystemExit(f"REFUSED: path {path} is not a connected chain on {backend.name}; missing {missing}")
+
+
+def guard(circuits, bud: dict, path=sa.PATH) -> None:
+    extra = active_qubits(circuits) - set(path)
     if extra:
-        raise SystemExit(f"REFUSED: circuits touch qubits outside the pre-registered path: {sorted(extra)}")
+        raise SystemExit(f"REFUSED: circuits touch qubits outside the pre-registered path {list(path)}: {sorted(extra)}")
     if bud["estimated_qpu_seconds"] > sa.BUDGET_LIMIT_S:
         raise SystemExit(f"REFUSED: estimated {bud['estimated_qpu_seconds']:.1f} s exceeds {sa.BUDGET_LIMIT_S} s budget")
 
@@ -175,11 +191,25 @@ def cmd_prepare(args) -> int:
         raise SystemExit(f"REFUSED: {out} is not empty; use a new directory for each bundle")
     out.mkdir(parents=True, exist_ok=True)
     backend = get_backend(args)
+    path = parse_path(getattr(args, "path", None))
+    check_chain(backend, path)
+    addendum = getattr(args, "addendum", None)
+    if path != list(sa.PATH) and not addendum:
+        raise SystemExit("REFUSED: a path other than the pre-registered one needs --addendum naming it")
+    if addendum:
+        add_path = Path(addendum).resolve()
+        if not add_path.is_file():
+            raise SystemExit(f"REFUSED: addendum {addendum} not found")
+        if not add_path.is_relative_to(HERE.parent):
+            raise SystemExit("REFUSED: the addendum must live inside this repository")
+        named = f"[{', '.join(map(str, path))}]"          # e.g. "[100, 101, 102, 103]"
+        if named not in add_path.read_text():
+            raise SystemExit(f"REFUSED: addendum does not name the path {named}")
     logical, meta = sa.experiment()
-    circuits = transpile(logical, backend=backend, initial_layout=list(sa.PATH),
+    circuits = transpile(logical, backend=backend, initial_layout=path,
                          optimization_level=sa.OPTIMIZATION_LEVEL, seed_transpiler=sa.SEED_TRANSPILER)
     bud = budget(circuits, backend, sa.SHOTS)
-    guard(circuits, bud)
+    guard(circuits, bud, path)
     with open(out / "circuits.qpy", "wb") as f:
         qpy.dump(circuits, f)
     manifest = {
@@ -189,7 +219,10 @@ def cmd_prepare(args) -> int:
         "prepared_utc": datetime.now(timezone.utc).isoformat(),
         "backend": backend.name, "fake_backend": bool(args.fake),
         "calibration_at_prepare": calibration_stamp(backend),
-        "path": list(sa.PATH), "optimization_level": sa.OPTIMIZATION_LEVEL,
+        "path": path, "optimization_level": sa.OPTIMIZATION_LEVEL,
+        "addendum": None if not addendum else {
+            "path": str(Path(addendum).resolve().relative_to(HERE.parent)),
+            "sha256": sha256_file(Path(addendum))},
         "seed_transpiler": sa.SEED_TRANSPILER, "meta": meta,
         "cz_counts": [qc.count_ops().get("cz", 0) for qc in circuits],
         "depths": [qc.depth() for qc in circuits],
@@ -232,7 +265,11 @@ def cmd_execute(args, sampler_factory=None) -> int:
         raise SystemExit("REFUSED: bundle was prepared against a fake backend")
     if manifest["preregistration_sha256"] != sha256_file(PREREG):
         raise SystemExit("REFUSED: PREREGISTRATION.md changed since this bundle was prepared")
-    guard(circuits, manifest["budget"])
+    if manifest.get("addendum"):
+        add = HERE.parent / manifest["addendum"]["path"]
+        if not add.is_file() or sha256_file(add) != manifest["addendum"]["sha256"]:
+            raise SystemExit("REFUSED: the pre-registration addendum is missing or changed since prepare")
+    guard(circuits, manifest["budget"], manifest.get("path", sa.PATH))
 
     backend = get_backend(argparse.Namespace(fake=False, instance=args.instance, backend=manifest["backend"]))
     cal_now = calibration_stamp(backend)
@@ -322,6 +359,8 @@ def main(argv=None) -> int:
     p.add_argument("--instance")
     p.add_argument("--out", required=True)
     p.add_argument("--sim-seed", type=int, default=20261014)
+    p.add_argument("--path", help="comma-separated physical qubits; default is the pre-registered 1,2,3,16")
+    p.add_argument("--addendum", help="pre-registration addendum that names --path; bound into the manifest")
     e = sub.add_parser("execute")
     e.add_argument("--bundle", required=True)
     e.add_argument("--manifest-sha", required=True)

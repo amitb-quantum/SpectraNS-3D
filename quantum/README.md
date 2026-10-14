@@ -41,3 +41,14 @@ python quantum/run_qpu.py analyse --bundle quantum/runs/kingston_001
 It writes `job.json` immediately after submission, then `counts.json` and `assessment.json`. Commit the whole bundle afterwards, whatever the outcome.
 
 Use `prepare --fake` to rehearse offline against the FakeKingston snapshot.
+
+## Replication on another path
+
+A different path needs a committed pre-registration addendum that names it; `prepare` refuses otherwise, and `execute` refuses if the addendum changes afterwards. For [kingston_002](PREREGISTRATION_ADDENDUM_kingston_002.md):
+
+```bash
+python quantum/run_qpu.py prepare --backend ibm_kingston --path 100,101,102,103 \
+  --addendum quantum/PREREGISTRATION_ADDENDUM_kingston_002.md --out quantum/runs/kingston_002
+```
+
+Assessments also record each qubit's in-job readout error and flag any above 10%.
