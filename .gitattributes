@@ -28,3 +28,6 @@ docs/evidence/2026-10-13/n768_preflight/** -text whitespace=cr-at-eol
 docs/evidence/2026-10-13/n768_campaign_002/** -text whitespace=cr-at-eol
 
 docs/evidence/2026-10-13/n768_campaign_002/comparison.svg -text -whitespace
+
+# Frozen QPU circuit bundles
+*.qpy binary
