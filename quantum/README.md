@@ -2,6 +2,8 @@
 
 A small, pre-registered hardware experiment. It runs the linear part of a SpectraNS-3D-style Fourier step (QFT, a modal phase, inverse QFT) on four qubits and asks which outputs survive real device noise: an integral-type centroid, a local peak, or a conservation check. Read [PREREGISTRATION.md](PREREGISTRATION.md) first; it fixes the circuits, budget and pass criteria before any submission.
 
+**First run:** [kingston_001 results](RESULTS_kingston_001.md). P1 and P3 passed; P2 and P4 failed, traced to a 28% readout fault on physical qubit 1 during the job.
+
 This is not a quantum-advantage claim and does not bear on Navier–Stokes regularity. A laptop computes the exact answer.
 
 ## Environment
