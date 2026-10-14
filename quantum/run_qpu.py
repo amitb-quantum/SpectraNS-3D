@@ -9,6 +9,8 @@
               --manifest-sha matches the frozen bundle, the circuits use only
               the pre-registered qubits, and the time estimate is within the
               budget. The job carries a hard max_execution_time cap.
+    fetch     Retrieves results of the job recorded in job.json, if the
+              waiting execute process was interrupted. Never submits.
     analyse   Offline. Scores counts against exact references and the
               pre-registered predictions P1-P4.
 
@@ -254,6 +256,11 @@ def cmd_execute(args, sampler_factory=None) -> int:
     write_json(bundle / "job.json", record)
     print(f"Submitted job {record['job_id']} on {backend.name}; waiting for results...")
 
+    return collect(bundle, manifest, job, record["job_id"])
+
+
+def collect(bundle: Path, manifest: dict, job, job_id: str) -> int:
+    """Wait for a submitted job, then write counts.json and assessment.json."""
     result = job.result()
     counts = [dict(pub.data.meas.get_counts()) for pub in result]
     usage = None
@@ -261,7 +268,7 @@ def cmd_execute(args, sampler_factory=None) -> int:
         usage = job.metrics().get("usage")
     except Exception:
         pass
-    write_json(bundle / "counts.json", {"simulated": False, "job_id": record["job_id"], "usage": usage,
+    write_json(bundle / "counts.json", {"simulated": False, "job_id": job_id, "usage": usage,
                                         "completed_utc": datetime.now(timezone.utc).isoformat(), "counts": counts})
     assessment = sa.analyse_counts(counts, manifest["meta"])
     write_json(bundle / "assessment.json", assessment)
@@ -269,6 +276,26 @@ def cmd_execute(args, sampler_factory=None) -> int:
     for name, v in assessment["verdicts"].items():
         print(f"  {name}: {'PASS' if v['pass'] else 'FAIL'}")
     return 0
+
+
+def cmd_fetch(args, job_loader=None) -> int:
+    """Retrieve results for the job recorded in job.json; never submits anything."""
+    bundle = Path(args.bundle)
+    if not (bundle / "job.json").exists():
+        raise SystemExit("REFUSED: no job.json in this bundle; nothing was submitted")
+    if (bundle / "counts.json").exists():
+        raise SystemExit("REFUSED: counts.json already exists; use analyse to re-score")
+    record = json.loads((bundle / "job.json").read_text())
+    manifest, _ = load_bundle(bundle)
+    if record["manifest_sha256"] != sha256_file(bundle / "manifest.json"):
+        raise SystemExit("REFUSED: manifest changed since submission")
+    if job_loader is None:
+        from qiskit_ibm_runtime import QiskitRuntimeService
+        service = QiskitRuntimeService(instance=args.instance) if args.instance else QiskitRuntimeService()
+        job_loader = service.job
+    job = job_loader(record["job_id"])
+    print(f"Job {record['job_id']} status: {job.status()}; waiting for results...")
+    return collect(bundle, manifest, job, record["job_id"])
 
 
 def cmd_analyse(args) -> int:
@@ -299,10 +326,14 @@ def main(argv=None) -> int:
     e.add_argument("--bundle", required=True)
     e.add_argument("--manifest-sha", required=True)
     e.add_argument("--instance")
+    f = sub.add_parser("fetch", help="retrieve results of an already submitted job")
+    f.add_argument("--bundle", required=True)
+    f.add_argument("--instance")
     a = sub.add_parser("analyse")
     a.add_argument("--bundle", required=True)
     args = ap.parse_args(argv)
-    return {"prepare": cmd_prepare, "execute": cmd_execute, "analyse": cmd_analyse}[args.cmd](args)
+    return {"prepare": cmd_prepare, "execute": cmd_execute, "fetch": cmd_fetch,
+            "analyse": cmd_analyse}[args.cmd](args)
 
 
 if __name__ == "__main__":
