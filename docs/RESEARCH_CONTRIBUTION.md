@@ -30,7 +30,7 @@ The [October 14 addendum](SPECTRAL_RESOLUTION_ADDENDUM_2026-10-14.md) locates th
 
 OpenAI's September2026 announcement claims an analytical and Lean-formalized finite-time singularity construction for an initially resting fluid with smooth forcing and finite energy. SpectraNS-3D evolves prescribed smooth unforced tubes and studies finite-grid reliability. The equation class overlaps, but initial conditions, forcing and evidence differ. [OpenAI primary announcement](https://openai.com/index/navier-stokes-solution/).
 
-We can say that this project supplies a separate empirical methodology and quantified numerical sensitivity for its own experiment. We cannot say that it surpasses an analytical proof, independently certifies OpenAI's formalization, establishes unforced Navier–Stokes blowup/regularity, or discovers a new physical mechanism from these scalars. Claiming broader scientific novelty requires comparison with the numerical literature; it has not yet been established.
+We can say that this project supplies a separate empirical methodology and quantified numerical sensitivity for its own experiment. Separately, a [statement-fidelity audit](LEAN_STATEMENT_AUDIT_2026-10-14.md) and an independent Comparator run found OpenAI's Lean statements faithful to Clay's (C) and (D) and its proofs accepted by two kernels; that checks OpenAI's result rather than adding to it. We cannot say that this project surpasses an analytical proof, establishes unforced Navier–Stokes blowup/regularity, or discovers a new physical mechanism from these scalars. Claiming broader scientific novelty requires comparison with the numerical literature; it has not yet been established.
 
 ## Finite release definition
 

@@ -1,8 +1,8 @@
 # Statement-fidelity audit of OpenAI's Lean Navier–Stokes formalization
 
-October 14, 2026. An independent check of one narrow question: **do the theorems OpenAI's Lean formalization proves say what Clay's breakdown alternatives (C) and (D) say?** It does not check that the proofs are correct (that is the Lean kernel's job, see "Not verified"), and it does not judge prize eligibility, which is the Clay Mathematics Institute's decision. OpenAI has stated it will not claim the prize.
+October 14, 2026. An independent check of one narrow question: **do the theorems OpenAI's Lean formalization proves say what Clay's breakdown alternatives (C) and (D) say?** A separate [Comparator run](#proof-check-comparator-run) then checked that the proofs are accepted. Neither judges prize eligibility, which is the Clay Mathematics Institute's decision. OpenAI has stated it will not claim the prize.
 
-**Finding: no fidelity gap.** The formal statement of (C) matches Clay's (C) clause by clause. The formal (D) matches Clay's (D) as amended by Clay's published errata. One placement subtlety in that errata is recorded below; it does not change the result.
+**Finding: no fidelity gap, and the proofs check.** The formal statement of (C) matches Clay's (C) clause by clause. The formal (D) matches Clay's (D) as amended by Clay's published errata. One placement subtlety in that errata is recorded below; it does not change the result. Comparator, run independently on October 14 with its real sandbox, accepted both theorems: the same statements as the challenge, only the three standard axioms, and accepted by both the Lean kernel and the independent nanoda kernel.
 
 ## Sources (pinned)
 
@@ -65,11 +65,30 @@ The subtlety is placement. In (D), equation (8) governs the data (u° and f), wh
 - **Gradient.** `gradient f x` is the Riesz representative of `fderiv f x`, the usual gradient.
 - **Junk values.** Lean's `fderiv` returns 0 where a function is not differentiable. Every candidate solution is required to be C^∞ on ℝ³×[0,∞), so no junk value can enter the PDE.
 
-## Not verified here
+## Proof check: Comparator run
 
-- **The proofs.** This audit did not build the project or run Comparator; [COMPARATOR_GUIDE.md](evidence/2026-10-14/lean_audit/COMPARATOR_GUIDE.md) gives the steps. That requires the Lean 4.34.0-rc2 toolchain and the Mathlib cache (several GB), with `lake exe comparator ComparatorChallenges/NavierStokes.json`. Statement fidelity is meaningful only together with a passing Comparator run.
-- **Comparator's own guarantees.** The audit relies on Comparator checking that the solution's theorem types match the challenge's, including all definitions they reference. The textual identity of the definitions is consistent with that but does not replace it.
-- **The Euler result.** Out of scope.
+Run by AB on October 14, 2026 (19:27 UTC start), following [COMPARATOR_GUIDE.md](evidence/2026-10-14/lean_audit/COMPARATOR_GUIDE.md) in a fresh clone that had never built the solution. The unedited [log](evidence/2026-10-14/lean_audit/comparator_run/comparator_navier_stokes.log) (SHA256 `c6fa89c248e9c50f…`) records:
+
+| Item | Recorded value |
+|---|---|
+| OpenAI repository | `f9e8bc5`, the audited commit |
+| Lean | 4.34.0-rc2 (commit `6a10ac8`) |
+| Kernel and sandbox | WSL2 6.18.33.2; active security modules include `landlock`; landrun `811cfff`; run under `systemd-run` as an ordinary user |
+| Second kernel | nanoda `e0d76f5` (`enable_nanoda: true` in the challenge config) |
+| Challenge build | 8763 jobs; both (C) and (D) stubs use `sorry`, as intended |
+| Solution build | 9371 jobs; both theorems depend on axioms `[propext, Classical.choice, Quot.sound]` |
+| Kernels | "nanoda kernel accepts the solution"; "Lean default kernel accepts the solution" |
+| Result | "Your solution is okay!", exit status 0 |
+
+By Comparator's documented guarantees, both `navier_stokes_breakdown_R3` and `navier_stokes_breakdown_periodic` in OpenAI's solution prove the same statements as the challenge, use no axioms beyond the permitted three, and are accepted by both kernels. Combined with the statement audit above, the formal (C) and (D), which this audit found faithful to Clay's text with its errata, are machine-checked theorems.
+
+**What this still rests on**, as with any such check:
+- at least one of the Lean kernel and nanoda being correct (both had to accept);
+- the integrity of the Mathlib cache, downloaded before the run as Comparator's README permits;
+- the landrun sandbox and the operating system;
+- this audit's reading of Clay's text.
+
+It is not a judgment on prize eligibility, and it does not address the Euler result, which is out of scope.
 
 ## What remains open
 
