@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "baseline_commit": "d18d2ce50c76913b486cbbdd40170769a484e32e",
+  "N640_directory": "docs/evidence/2026-10-13/n640_campaign_004/protected/coarse",
+  "files": {
+    "docs/evidence/2026-10-13/n640_campaign_004/protected/coarse/diagnostics.csv": "ad851bec27a729afc67ac88d5153738e1edfc8159adc0aed380f740888cbdaac",
+    "docs/evidence/2026-10-13/n640_campaign_004/protected/coarse/enstrophy.csv": "2ddaaf1d78c37a4e45c51e15aa6d059daf90b3915519e83adeb87ad1f56a2d14",
+    "docs/evidence/2026-10-13/n640_campaign_004/protected/coarse/spectra.csv": "131959a4a6d1f57d3bd63e7d958f4abfa7350233c5db4dc3016839afdb190c7e",
+    "docs/evidence/2026-10-13/n640_campaign_004/protected/coarse/run.json": "aa50323c3c32b56ae4cddd8b4308b954617c66487d8106db18675a77e29bd7c0",
+    "docs/evidence/2026-10-13/n640_campaign_004/protected/coarse/interpolated_vorticity.csv": "012430abd1ac9cd26e02154a4d06000ba97b9d9a5a33e8e893a58cc070cfa07d"
+  },
+  "accepted_end_t": 1.1,
+  "scope": "Exact previously published accepted original-IC N640 records; no field restart."
+}

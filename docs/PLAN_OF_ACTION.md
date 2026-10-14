@@ -10,7 +10,11 @@ The scientific milestone is complete only when the original-IC N640 trajectory, 
 
 A release can also close with an explicitly incomplete scientific milestone, if you choose that outcome. Such a release must identify what remains unknown. It must not imply regularity, blowup, a convergence order from two grids, or certification of OpenAI's proof claim.
 
-## Current position
+## Current phase — authorized third grid
+
+N512/N640 and publication are complete. The user subsequently raised the project ceiling toUSD40 and authorized one N768/H200 follow-up capped atUSD15. Current taskP13 is implementation/proof binding; its successor is fresh offer/funding verification, then measured preflight, protected N768 comparison, closure and publication. Follow [the new frozen specification](N768_THIRD_GRID_SPEC_2026-10-13.md) and PLAN_STATE.json. The historical N640 steps/criteria below remain preserved; their formerUSD30/H100/N640 authorization does not authorize another old campaign.
+
+## Historical position before completed N640 campaign
 
 - Audit, CPU/H100 backend equivalence, N512 timestep study and bounded N512 extension are complete.
 - The latest H100 passed 185 tests and 8 backend checks. The N640 preflight and checkpoint reload passed their short-interval numerical/memory checks.
@@ -19,7 +23,7 @@ A release can also close with an explicitly incomplete scientific milestone, if 
 - The last budget snapshot has USD 20.778741 conservative project exposure, including pending allowances; USD 9.221259 remains below the USD 30 ceiling. These are dated project figures, not current shared account credit.
 - No new rental is authorized by this document alone. Fresh shared credit must cover the quote-specific lifetime cost, any separately attributed rental reserve and the USD 1 balance guard floor, independently of project headroom. If funding is insufficient, consult before provisioning. The previous single-attempt authorization is closed. A fresh single-attempt authorization was received; preparation and proof binding precede reactivation of its follow-up.
 
-**Decision received:** one additional USD5 attempt on an H100 at no more than USD2.25/hour. **Current task: P05 — verify the offer and financing.** The [additional-attempt specification](N640_RETRY_SPEC_2026-10-13.md) freezes the scope and discovery deadline; PLAN_STATE.json carries subsequent handoffs.
+**Historical decision received:** one additional USD5 attempt on an H100 at no more than USD2.25/hour. **Current task: P05 — verify the offer and financing.** The [additional-attempt specification](N640_RETRY_SPEC_2026-10-13.md) freezes the scope and discovery deadline; PLAN_STATE.json carries subsequent handoffs.
 
 ## Chronological tasks
 

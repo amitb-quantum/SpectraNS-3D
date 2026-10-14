@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "plan_version": "1.0",
-  "updated_at_pt": "2026-10-13T17:05:47.144488-07:00",
+  "updated_at_pt": "2026-10-13T19:59:36.595532-07:00",
   "project": "SpectraNS-3D",
   "scientific_milestone": "Original-IC N512/N640 comparison through1.10 and local fine-window validation",
-  "scientific_status": "two_grid_assessment_complete_resolution_not_certified",
-  "current_task": "P12",
-  "next_action": "None: this authorized phase is closed. Any further scientific campaign requires a separate specification and approval.",
+  "scientific_status": "two_grid_assessment_complete_third_grid_pending",
+  "current_task": "P14",
+  "next_action": "Fresh private billing/live H200 quote, verified bootstrap and final transport binding; then one guarded create.",
   "decision": "one_more_5_usd_attempt_at_2_25_or_less_discovery_extended",
   "automation_status": "PAUSED",
   "new_billable_attempt_pending_decision": false,
@@ -148,6 +148,53 @@
         "docs/N640_COMPARISON_2026-10-13.md",
         "docs/evidence/2026-10-13/n640_campaign_004/evidence_manifest.json"
       ]
+    },
+    {
+      "id": "P13",
+      "title": "Bind third-grid specification and execution proof",
+      "status": "completed",
+      "successor": "P14",
+      "evidence": [
+        "docs/evidence/2026-10-13/n768_readiness/rehearsal.json",
+        "docs/evidence/2026-10-13/n768_readiness/local_tests_proof.json"
+      ],
+      "result": "229 local tests, eleven CPU/CUDA cases including seven real SIGKILLs, extracted225passed/4CUDA-onlyskips; exact audited core and both baseline references verified."
+    },
+    {
+      "id": "P14",
+      "title": "Reconcile fresh funding and choose live H200",
+      "status": "in_progress",
+      "successor": "P15"
+    },
+    {
+      "id": "P15",
+      "title": "One owned H200 create and measured admission",
+      "status": "pending",
+      "successor": "P16"
+    },
+    {
+      "id": "P16",
+      "title": "Original-IC N768 through1.10 and local fine check",
+      "status": "pending",
+      "successor": "P17"
+    },
+    {
+      "id": "P17",
+      "title": "Protect evidence and assess all three grids",
+      "status": "pending",
+      "successor": "P18"
+    },
+    {
+      "id": "P18",
+      "title": "Verify termination and reconcile charges",
+      "status": "pending",
+      "successor": "P19"
+    },
+    {
+      "id": "P19",
+      "title": "Publish final study and explicit limits",
+      "status": "pending",
+      "successor": null
     }
   ],
   "handoff_rule": "Complete task, record evidence/status, set successor, continue if authorized. If a decision blocks progress, consult immediately; never mark a runtime refusal as completed spatial validation.",
@@ -197,7 +244,7 @@
       }
     ]
   },
-  "phase_status": "closed",
+  "phase_status": "third_grid_preparation",
   "publication_commit": "610df59a9b357be744a83a484b8f7d2aac8f31d7",
   "published_evidence_hashes_verified": 161,
   "final_financial_summary": {
@@ -207,5 +254,16 @@
     "posted_project_usd": 21.444,
     "project_pending_upper_usd": 2.7979906062524065,
     "other_committed_project_usd": 0
+  },
+  "previous_phase_status": "closed_completed_N512_N640",
+  "total_project_ceiling_usd": 40,
+  "third_grid_authorization": {
+    "quantity": 1,
+    "cap_usd": 15,
+    "total_ceiling_usd": 40,
+    "maximum_lifetime_seconds": 10800,
+    "max_hourly_usd": 4.5,
+    "status": "preparing",
+    "directory": "artifacts/cloud-preparation/2026-10-13/n768_campaign_001"
   }
 }

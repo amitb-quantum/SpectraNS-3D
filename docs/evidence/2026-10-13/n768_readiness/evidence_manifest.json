@@ -1,0 +1,11 @@
+{
+  "files": {
+    "local_tests_proof.json": "e7b1d650d115b8b854543b39bdb2ceaf36bb5f795c6a8f1dd4bb004c2edd01f0",
+    "proof_payload_validation.json": "5307e35d16e576c5f7047aff562de991dc0e838597fd9a1c9f40e7f2eba7ced2",
+    "extracted_tests.txt": "276a596939717b8f48c1b3c71b681894672a3dd9254bc13367ea8841b878af63",
+    "rehearsal.json": "ef77ca554f0c85fae0588305a638f74699219aecf6400f0072935c9b9c015608",
+    "local_tests.txt": "a97db8ffe98562adb487875c5015ab3cf919eb18fd648a83865d77b3c347a9c8"
+  },
+  "provider_calls": 0,
+  "scope": "Local readiness only; no N768 production result."
+}
