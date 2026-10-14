@@ -22,6 +22,10 @@ The own-anchor finer-timestep check passed with maximum specified difference 1.6
 
 The [completed three-grid report](N768_THREE_GRID_COMPARISON_2026-10-13.md), complete protected small evidence and independent replay distinguish integral consistency, local-peak sensitivity, sampling and operational validity. This is a completed research release even though universal spatial certification remains unresolved.
 
+## What the spectral resolution addendum adds
+
+The [October 14 addendum](SPECTRAL_RESOLUTION_ADDENDUM_2026-10-14.md) locates the integral/local split in wavenumber space using only the published spectra. Between N640 and N768, under 1% of enstrophy but 24% of viscous loss and 33% of a peak-vorticity proxy sit in shells whose energy differs by more than 1% at t = 1.00, and all three shares peak at t = 0.99. This gives a mechanism-level account of why one diagnostic converged and another did not. It also records a negative result: the conventional analyticity-strip fit is too window-sensitive on these spectra to certify resolution.
+
 ## Relationship to OpenAI's published claim
 
 OpenAI's September2026 announcement claims an analytical and Lean-formalized finite-time singularity construction for an initially resting fluid with smooth forcing and finite energy. SpectraNS-3D evolves prescribed smooth unforced tubes and studies finite-grid reliability. The equation class overlaps, but initial conditions, forcing and evidence differ. [OpenAI primary announcement](https://openai.com/index/navier-stokes-solution/).

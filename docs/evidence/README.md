@@ -31,3 +31,12 @@ Reanalysis is CPU-only and makes no cloud request:
     python docs/evidence/2026-10-13/n768_campaign_002/independent_analysis.py --campaign docs/evidence/2026-10-13/n768_campaign_002
 
 The raw N768/N640 arrays were not recovered. Metadata hashes are identity evidence, not restartable fields or independently repeatable field interpolation. All original histories remain preserved locally; credentials, private account attribution and the live ledger are excluded.
+
+
+## October 14 spectral resolution addendum
+
+[The addendum](../SPECTRAL_RESOLUTION_ADDENDUM_2026-10-14.md) is a post-hoc analysis of the three accepted coarse spectra already published here; it runs no simulation and modifies no campaign evidence. Its outputs under [2026-10-14/spectral_resolution/](2026-10-14/spectral_resolution/) are `grid_disagreement.csv`, `strip_fit.csv`, `summary.json` and the figure. The script verifies every input hash before use:
+
+    python analysis/spectral_resolution.py --output docs/evidence/2026-10-14/spectral_resolution
+    python -m pytest -q analysis
+
