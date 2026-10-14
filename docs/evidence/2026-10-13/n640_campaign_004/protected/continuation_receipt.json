@@ -1,0 +1,18 @@
+{
+  "verified": true,
+  "prefix_end_t": 0.05,
+  "target_t": 1.1,
+  "boundary_relative_errors": {
+    "E": 0.0,
+    "Z": 0.0,
+    "eps": 0.0,
+    "wmax": 0.0,
+    "bkm": 0.0,
+    "tail_ratio": 2.0045735325691467e-37
+  },
+  "preflight_manifest_sha256": "ee2902a02133b7ac64c993a447a74c253ecaecb3ea5c3cad915edb845855cbc5",
+  "original_continuation_manifest_sha256": "18ba03b300a82632535379f014249dbe8e3b5404365c4b2867944c3e13054f50",
+  "combined_manifest_sha256": "aa50323c3c32b56ae4cddd8b4308b954617c66487d8106db18675a77e29bd7c0",
+  "merged_diagnostic_events": 111,
+  "integrated_steps": 2200
+}

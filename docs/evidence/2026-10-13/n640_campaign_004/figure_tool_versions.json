@@ -1,0 +1,6 @@
+{
+  "python": "3.12.13",
+  "matplotlib": "3.11.2",
+  "numpy": "2.5.4",
+  "scope": "Isolated CPU-only presentation tools. Validated solver environment remains unchanged; no trajectories recomputed."
+}

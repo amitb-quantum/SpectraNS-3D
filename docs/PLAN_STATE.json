@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
   "plan_version": "1.0",
-  "updated_at_pt": "2026-10-13T16:43:20.012856-07:00",
+  "updated_at_pt": "2026-10-13T16:56:29.963462-07:00",
   "project": "SpectraNS-3D",
   "scientific_milestone": "Original-IC N512/N640 comparison through1.10 and local fine-window validation",
   "scientific_status": "two_grid_assessment_complete_resolution_not_certified",
-  "current_task": "P10",
-  "next_action": "Finish or bound optional exploration, destroy only owned instance55821344, verify absence and reconcile billing; then publish final scientific interpretation and evidence.",
+  "current_task": "P12",
+  "next_action": "Commit and push report/README/sanitized evidence, verify published hashes and remote main, then record final closeout.",
   "decision": "one_more_5_usd_attempt_at_2_25_or_less_discovery_extended",
-  "automation_status": "ACTIVE",
+  "automation_status": "PAUSED",
   "new_billable_attempt_pending_decision": false,
   "baseline_commit": "d258fcb556e69090454c437454cf7830d897029d",
   "last_budget_snapshot": {
@@ -117,27 +117,33 @@
     {
       "id": "P10",
       "title": "Close and reconcile the rental",
-      "status": "in_progress",
+      "status": "completed",
       "depends_on": "P09",
       "successor": "P11",
-      "result": "Protected evidence is local and immutable. Optional single-grid exploration is running; verified owned-instance closure and billing pending."
+      "result": "Owned instance55821344 destruction and fresh absence verified; fresh complete billing reconciled, commitment released. Optional runtime refusal accepted no sample after1.10."
     },
     {
       "id": "P11",
       "title": "Interpret results",
-      "status": "pending",
+      "status": "completed",
       "successor": "P12",
       "depends_on_any": [
         "P10",
         "P02:close_current_phase"
+      ],
+      "result": "Final report and visually verified scientific figure record accepted window, temporal pass, intermediate net sensitivity, matched-peak classifications, optional runtime refusal and financial limits.",
+      "evidence": [
+        "docs/N640_COMPARISON_2026-10-13.md",
+        "docs/evidence/2026-10-13/n640_campaign_004/independent_assessment.json"
       ]
     },
     {
       "id": "P12",
       "title": "Publish and close phase",
-      "status": "pending",
+      "status": "in_progress",
       "depends_on": "P11",
-      "successor": null
+      "successor": null,
+      "result": "Public dataset replay and all131 protected hashes verified; final curated publication pending Git-blob/remote verification."
     }
   ],
   "handoff_rule": "Complete task, record evidence/status, set successor, continue if authorized. If a decision blocks progress, consult immediately; never mark a runtime refusal as completed spatial validation.",
@@ -147,7 +153,7 @@
     "max_hourly_usd": "2.25",
     "maximum_lifetime_seconds": 7200,
     "discovery_deadline_pt": "2026-10-13T15:29:11-07:00",
-    "status": "protected_verified_optional_exploration",
+    "status": "closed_protected_comparison_completed",
     "directory": "artifacts/cloud-preparation/2026-10-13/n640_campaign_004",
     "discovery_started_at_pt": "2026-10-13T14:29:11-07:00",
     "discovery_extension_count": 1,
@@ -157,7 +163,8 @@
     "started_at_pt": "2026-10-13T15:17:07.342437-07:00",
     "guard_deadline_pt": "2026-10-13T17:16:07.342437-07:00",
     "quoted_hourly_usd": "2.093333333333333397777777778",
-    "lifetime_cost_bound_usd": "4.686666666666666795555555556"
+    "lifetime_cost_bound_usd": "4.686666666666666795555555556",
+    "verified_termination": true
   },
   "blocker": null,
   "discovery_history": [

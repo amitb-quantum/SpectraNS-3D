@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "allowed_smoke_grids": [
+    128,
+    256
+  ],
+  "reference_grid": 32,
+  "smoke_target_t": 0.05,
+  "smoke_nu": 0.0005,
+  "smoke_max_dt": 0.002,
+  "smoke_fp64": true,
+  "smoke_log_dt": 0.01,
+  "scheme_scalar_relative_tolerance": 0.0005,
+  "energy_interval_rise_fraction_E0": 1e-05,
+  "energy_initial_rise_fraction_E0": 0.0001,
+  "energy_fd_budget_relative_tolerance": 0.01,
+  "divergence_absolute_max": 0.0001,
+  "tail_ratio_max": 1e-06,
+  "parseval_relative_tolerance": 2e-06,
+  "memory_fraction_max": 0.8,
+  "smoke_peak_reserved_GB_max": 8.0,
+  "reference": {
+    "float32": {
+      "velocity_relative_l2": 2e-05,
+      "velocity_max_absolute": 1e-05,
+      "scalar_relative": 2e-05,
+      "energy_rhs_absolute_fraction_E": 2e-06,
+      "energy_rhs_relative_fraction_dissipation": 2e-05
+    },
+    "float64": {
+      "velocity_relative_l2": 2e-11,
+      "velocity_max_absolute": 2e-12,
+      "scalar_relative": 2e-11,
+      "energy_rhs_absolute_fraction_E": 1e-11,
+      "energy_rhs_relative_fraction_dissipation": 2e-10
+    },
+    "repeat_shell_absolute_fraction_E": 2e-12
+  },
+  "notes": [
+    "Finite diagnostics and exact matched output times are mandatory.",
+    "Tail cutoff is a heuristic; passing smoke does not establish high-Re grid convergence.",
+    "N32 reference is backend equivalence only; do not use its tail to certify spatial resolution.",
+    "Energy FD residual is interval-quadrature consistency, separate from instantaneous RHS identity.",
+    "Float64 smoke state is required: local float32 SSPRK3 TGV failed the 1% interval dissipation gate; the gate was retained.",
+    "Thresholds are fixed before H100 data; changes require a new recorded plan and review."
+  ]
+}

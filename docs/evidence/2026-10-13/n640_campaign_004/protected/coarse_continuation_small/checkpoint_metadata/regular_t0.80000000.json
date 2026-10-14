@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "physics": {
+    "N": 640,
+    "nu": 0.0005,
+    "case": "tubes",
+    "scheme": "lsrk4",
+    "fp64": true,
+    "domain": 6.283185307179586,
+    "dealias": "strict spherical |k|<N/3",
+    "legacy_tube_parameters": {
+      "gamma": 5.0,
+      "a": 0.25,
+      "sep": 0.6,
+      "pert": 0.35
+    }
+  },
+  "t": 0.8,
+  "step": 1600,
+  "bkm": 35.52509578378651,
+  "E0": 0.06633336245320777,
+  "source_sha256": {
+    "ns_fast_v3.py": "ab9eebda2750c7be019d3c2f54fe7aa5f2be98a0276a55260e35a81989b34842",
+    "ns_fast_v2.py": "6f01107b931b80231e27336faeae94b51916d91861473f46e85aedbba0bdaf5d"
+  },
+  "checkpoint_driver_sha256": "06da638cad9330e6f646d76de304568f3731d4b409523ad9f3e6f16b156d2adc",
+  "torch": "2.13.0+cu130",
+  "cuda": "13.0",
+  "numpy": "2.5.1",
+  "axes": "component,kx,ky,kz_rfft",
+  "normalization": "unnormalized torch rfftn coefficients",
+  "residual_restart": "LSRK4 first stage has coefficient zero; residual can be reset",
+  "files": {
+    "U0.npy": "d489a933d50ac4c9a294141d0f240e8c0d1d71a1059092eb2f9d4ea29bb794ee",
+    "U1.npy": "a0ab92b704456b4931b3e0df63dde0278c01e7e8ffa8992e2be4805ca6351cc7",
+    "U2.npy": "035e60e4eb3841d410dd38cad91bd42cbc6371ee8a4afbbbd6b054dbc4724817"
+  }
+}

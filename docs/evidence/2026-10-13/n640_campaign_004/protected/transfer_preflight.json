@@ -1,0 +1,28 @@
+{
+  "trials": [
+    {
+      "bytes": 67108864,
+      "seconds": 15.458980501978658,
+      "bytes_per_second": 4341092.479637352,
+      "sha256": "8a3b0d70ab9b25682156e75e8e06ef718c06f3d5c0206760eace5371a4a9a61e"
+    },
+    {
+      "bytes": 67108864,
+      "seconds": 14.404748018016107,
+      "bytes_per_second": 4658801.661512338,
+      "sha256": "78210d242c093622410663b51c6fc248880d2b119f7d6583938e95401b72b350"
+    }
+  ],
+  "compression": {
+    "bytes": 985445705,
+    "seconds": 30.034415796864778,
+    "sha256": "b2935f2645f12c248f36f24702dd8dee1835d45641275829928f876fcbfdfff4",
+    "files": {
+      "U0.npy": "41e3d0f180dae1ad06fa5a2f9b936da660ff5c1ba33a095445a4daa1c0e84e50",
+      "U1.npy": "9235fcbe45f8e241531f06cdc625e9b193df55a58d60264dc544adb4a9b9546b",
+      "U2.npy": "1be86cde7cd31346c792129f36faf90a3e20f9377aa33733c387dda25c378b3b",
+      "checkpoint.json": "cf101711b4c1ecdaafa1b6d298a654c9258b8cbca0f8d599376d215c4e221abe"
+    }
+  },
+  "slowest_bytes_per_second": 4341092.479637352
+}

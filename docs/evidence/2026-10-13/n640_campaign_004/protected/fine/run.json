@@ -1,0 +1,147 @@
+{
+  "status": "bounded_complete",
+  "start_t": 1.0,
+  "t": 1.1,
+  "steps": 2400,
+  "initial_step": 2000,
+  "source_sha256": {
+    "ns_fast_v3.py": "ab9eebda2750c7be019d3c2f54fe7aa5f2be98a0276a55260e35a81989b34842",
+    "ns_fast_v2.py": "6f01107b931b80231e27336faeae94b51916d91861473f46e85aedbba0bdaf5d"
+  },
+  "driver_sha256": "b831bd53eceebddf69c83cdf7967cbcf6373f73e5c90965b94f8e7261b560546",
+  "parameters": {
+    "N": 640,
+    "nu": 0.0005,
+    "device": "cuda:0",
+    "case": "tubes",
+    "scheme": "lsrk4",
+    "fp64": true,
+    "cfl": 0.2,
+    "max_dt": 0.00025,
+    "target_t": 1.1,
+    "log_dt": 0.01,
+    "checkpoint_dt": 0.1,
+    "checkpoint_enabled": false,
+    "turnover_enabled": false,
+    "high_shell_min_k": 128
+  },
+  "restart": {
+    "path": "/opt/spectrans-3d/project/artifacts/refinement_run/coarse/checkpoints/regular_t1.00000000",
+    "metadata": {
+      "schema_version": 1,
+      "physics": {
+        "N": 640,
+        "nu": 0.0005,
+        "case": "tubes",
+        "scheme": "lsrk4",
+        "fp64": true,
+        "domain": 6.283185307179586,
+        "dealias": "strict spherical |k|<N/3",
+        "legacy_tube_parameters": {
+          "gamma": 5.0,
+          "a": 0.25,
+          "sep": 0.6,
+          "pert": 0.35
+        }
+      },
+      "t": 1.0,
+      "step": 2000,
+      "bkm": 54.47048185132732,
+      "E0": 0.06633336245320777,
+      "source_sha256": {
+        "ns_fast_v3.py": "ab9eebda2750c7be019d3c2f54fe7aa5f2be98a0276a55260e35a81989b34842",
+        "ns_fast_v2.py": "6f01107b931b80231e27336faeae94b51916d91861473f46e85aedbba0bdaf5d"
+      },
+      "checkpoint_driver_sha256": "06da638cad9330e6f646d76de304568f3731d4b409523ad9f3e6f16b156d2adc",
+      "torch": "2.13.0+cu130",
+      "cuda": "13.0",
+      "numpy": "2.5.1",
+      "axes": "component,kx,ky,kz_rfft",
+      "normalization": "unnormalized torch rfftn coefficients",
+      "residual_restart": "LSRK4 first stage has coefficient zero; residual can be reset",
+      "files": {
+        "U0.npy": "ee5c1e0431a0742599fadeb4bd33e00f30069f291708c19e8d90974a9c233ba4",
+        "U1.npy": "14e9c11dc047f0c7f5a46d609dcf7dd75d4a79b8aac6b3d189454337956d2583",
+        "U2.npy": "028bbff1ec338777022109eb110dd3a743f99e310616c8868fd54410fa4559e1"
+      }
+    },
+    "metadata_sha256": "c7cfdfc6f42366227e49f694cc47861b771c45929a17e719f025923852e4d5e4"
+  },
+  "torch": "2.13.0+cu130",
+  "cuda": "13.0",
+  "numpy": "2.5.1",
+  "python": "3.12.13 | packaged by conda-forge | (main, Mar  5 2026, 16:50:00) [GCC 14.3.0]",
+  "physical_conventions": {
+    "domain": 6.283185307179586,
+    "dealias": "strict spherical |k|<N/3",
+    "initial_tubes": {
+      "gamma": 5.0,
+      "a": 0.25,
+      "sep": 0.6,
+      "pert": 0.35
+    }
+  },
+  "last_accepted": {
+    "step": 2400,
+    "t": 1.1,
+    "dt": 0.0002499999999967528,
+    "E": 0.06493468811208572,
+    "Z": 1.9474022161877496,
+    "eps": 0.0019474022161877495,
+    "dEdt_fd": -0.0019387431616266198,
+    "budget_resid_rel": -3.157945565019362e-06,
+    "wmax": 80.72958399849686,
+    "bkm": 62.939407873377405,
+    "tail_ratio": 1.3987007468370758e-07,
+    "div_max": 2.0333787311673428e-14,
+    "wall_s": 637.0008276891895,
+    "peak_mem_GB": 47.432884224
+  },
+  "turnover": null,
+  "stop_reason": "max_simulated_time",
+  "wall_s": 640.8557221591473,
+  "memory": {
+    "peak_allocated_GB": 47.432884224,
+    "peak_reserved_GB": 49.578770432,
+    "free_GB": 34.714353664,
+    "total_GB": 85.019590656,
+    "gpu": "NVIDIA H100 80GB HBM3"
+  },
+  "checkpoint_history": [],
+  "achieved_steps": 400,
+  "clock_snapping": {
+    "events": 0,
+    "max_abs_adjustment": 0.0,
+    "signed_total_adjustment": 0.0,
+    "rule": "min(32 ulps at event clock scale, 1e-9 of actual dt)"
+  },
+  "dt_statistics": {
+    "min": 0.0002499999999967528,
+    "max": 0.00025,
+    "cfl_limited_steps": 0,
+    "event_limited_steps": 0
+  },
+  "timing": {
+    "process_wall_s": 641.0493129650131,
+    "seconds": {
+      "solver_setup": 0.08270794618874788,
+      "initial_condition_or_restart": 5.079779443331063,
+      "scalar_diagnostics_and_tail": 2.479461324866861,
+      "enstrophy_budget": 9.968387807253748,
+      "full_spectrum": 0.4553217375651002,
+      "fourier_peak_refinement": 7.662025390192866,
+      "integration": 615.1737279212102
+    },
+    "calls": {
+      "solver_setup": 1,
+      "initial_condition_or_restart": 1,
+      "scalar_diagnostics_and_tail": 11,
+      "enstrophy_budget": 11,
+      "full_spectrum": 11,
+      "fourier_peak_refinement": 11,
+      "integration": 10
+    },
+    "unattributed_wall_s": 0.14790139440447092,
+    "convention": "Disjoint synchronized wall stages; integration includes per-step CSV writes. Unattributed includes event control, diagnostic CSV, manifest I/O and timer boundary waits."
+  }
+}

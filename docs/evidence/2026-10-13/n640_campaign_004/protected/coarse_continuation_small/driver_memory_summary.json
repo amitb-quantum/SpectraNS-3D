@@ -1,0 +1,5 @@
+{
+  "peak_driver_used_fraction": 0.5882244755330497,
+  "sampling_interval_s": 0.25,
+  "limitation": "periodic samples do not bound transients between samples"
+}

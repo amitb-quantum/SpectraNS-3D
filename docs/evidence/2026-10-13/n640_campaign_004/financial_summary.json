@@ -1,0 +1,18 @@
+{
+  "as_of_utc": "2026-10-13T23:47:49.418120+00:00",
+  "posted_campaign_usd": "2.895",
+  "campaign_upper_usd": "3.463249377494388222706780789",
+  "posting_pending": true,
+  "campaign_cap_usd": 5,
+  "hourly_gpu_storage_bound_usd": "2.093333333333333397777777778",
+  "transfer_upper_usd": "0.0686848958333333310",
+  "lifetime_limit_seconds": 7200,
+  "posted_project_usd": "21.444",
+  "project_pending_upper_usd": "2.7979906062524065",
+  "project_other_commitment_usd": "0",
+  "project_conservative_exposure_usd": "24.2419906062524065",
+  "project_headroom_usd": "5.7580093937475935",
+  "project_total_ceiling_usd": 30,
+  "owned_instance_absence_independently_verified": true,
+  "scope": "Project financial summary only; excludes shared account credit, credentials and separate-job attribution. Pending allowances remain until charges are settled."
+}

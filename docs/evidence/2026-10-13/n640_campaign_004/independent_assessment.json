@@ -1,0 +1,362 @@
+{
+  "numerical": {
+    "coarse": {
+      "status": "passed",
+      "events": 111,
+      "metrics": {
+        "max_tail": 1.3987006205597152e-07,
+        "max_divergence": 2.524376339568628e-14,
+        "max_parseval_relative": 4.2718439964314695e-16,
+        "max_energy_fd_residual": 2.482349968820682e-05,
+        "max_enstrophy_identity_relative": 1.2178312169042363e-14,
+        "max_eps_identity_relative": 0.0,
+        "allocator_peak_allocated_fraction": 0.5579053469678469,
+        "allocator_peak_reserved_fraction": 0.5831452498119164,
+        "sampled_driver_peak_fraction": 0.5882244755330497
+      },
+      "driver_sampling_limitation": "Periodic samples cannot bound unobserved transients."
+    },
+    "fine": {
+      "status": "passed",
+      "events": 11,
+      "metrics": {
+        "max_tail": 1.3987007468370758e-07,
+        "max_divergence": 2.2992431611954173e-14,
+        "max_parseval_relative": 4.270592531965413e-16,
+        "max_energy_fd_residual": 7.653210340801052e-06,
+        "max_enstrophy_identity_relative": 6.390869936627145e-16,
+        "max_eps_identity_relative": 0.0,
+        "allocator_peak_allocated_fraction": 0.5579053469678469,
+        "allocator_peak_reserved_fraction": 0.5831452498119164,
+        "sampled_driver_peak_fraction": 0.5882244755330497
+      },
+      "driver_sampling_limitation": "Periodic samples cannot bound unobserved transients."
+    }
+  },
+  "status": "completed_independent_assessment",
+  "protected_manifest_verified_files": 131,
+  "analysis_sha256": "3348a9b54c7313f8d451d35346978bd686ca946a28e5f620c2bcb107d0289aa8",
+  "spatial": {
+    "start_t": 0.0,
+    "end_t": 1.1,
+    "matched_events": 111,
+    "maxima": {
+      "E": {
+        "relative_difference": 3.3999947239378007e-06,
+        "at_t": 1.1
+      },
+      "Z": {
+        "relative_difference": 0.0005996963863549451,
+        "at_t": 1.05
+      },
+      "wmax": {
+        "relative_difference": 0.025984586607070193,
+        "at_t": 0.89
+      },
+      "bkm": {
+        "relative_difference": 0.006307174938827171,
+        "at_t": 0.95
+      },
+      "net_scaled": {
+        "relative_difference": 0.0018161374160758587,
+        "at_t": 1.01
+      },
+      "spectrum_L1_over_E": {
+        "relative_difference": 2.6635735602123056e-05,
+        "at_t": 1.1
+      }
+    },
+    "left_steps": 2260,
+    "right_steps": 2200,
+    "step_ratio": 0.9734513274336283,
+    "classification": "intermediate_sensitivity"
+  },
+  "local_temporal": {
+    "start_t": 1.0,
+    "end_t": 1.1,
+    "matched_events": 11,
+    "maxima": {
+      "E": {
+        "relative_difference": 1.7512148992037405e-12,
+        "at_t": 1.1
+      },
+      "Z": {
+        "relative_difference": 4.294072819349477e-10,
+        "at_t": 1.07
+      },
+      "wmax": {
+        "relative_difference": 1.4253286445544572e-08,
+        "at_t": 1.1
+      },
+      "bkm": {
+        "relative_difference": 8.999854625722361e-10,
+        "at_t": 1.1
+      },
+      "net_scaled": {
+        "relative_difference": 2.1519776236492173e-09,
+        "at_t": 1.07
+      },
+      "spectrum_L1_over_E": {
+        "relative_difference": 2.5511674145701375e-12,
+        "at_t": 1.1
+      }
+    },
+    "left_steps": 200,
+    "right_steps": 400,
+    "step_ratio": 2.0,
+    "status": "passed"
+  },
+  "matched_fourier_peaks": [
+    {
+      "t": 1.0,
+      "N512": 89.74488311828893,
+      "N640": 89.31060746107624,
+      "relative_difference": 0.004839001869781032,
+      "estimator_stable": true,
+      "status": "discretization_sensitive",
+      "N512_sampling_bias": 0.009274201270797044,
+      "N640_sampling_bias": 0.0023902492218298077
+    },
+    {
+      "t": 1.1,
+      "N512": 80.75851307043025,
+      "N640": 80.76586801973296,
+      "relative_difference": 9.106506848798756e-05,
+      "estimator_stable": true,
+      "status": "consistent",
+      "N512_sampling_bias": 0.0014957769548110567,
+      "N640_sampling_bias": 0.0004492351963001599
+    }
+  ],
+  "N512": {
+    "accepted_end_t": 1.1,
+    "stop_reason": "tail_ratio",
+    "sampled_wmax_peak": {
+      "t": 0.89,
+      "value": 99.60383637580676
+    },
+    "sampled_Z_peak": {
+      "t": 1.1,
+      "value": 1.9485521793944034
+    },
+    "sampled_net_peak": {
+      "t": 1.08,
+      "value": 1.7391462026723574
+    },
+    "endpoint": {
+      "t": 1.1,
+      "E": 0.06493446733460245,
+      "Z": 1.9485521793944034,
+      "wmax": 80.6377163476747,
+      "tail_ratio": 9.365160241563829e-07,
+      "net_production": 1.734723426030559
+    },
+    "first_excluded_row": {
+      "step": "2281",
+      "t": "1.11",
+      "dt": "1.1102230246251565e-15",
+      "E": "0.06491489518355846",
+      "Z": "1.965865680106891",
+      "eps": "0.001965865680106891",
+      "dEdt_fd": "-0.001957215104399222",
+      "budget_resid_rel": "-3.154823422630949e-06",
+      "wmax": "79.50399461217036",
+      "bkm": "64.09088618654701",
+      "tail_ratio": "1.0173452870273713e-06",
+      "div_max": "2.3459888534058287e-14",
+      "wall_s": "1522.213750084862",
+      "peak_mem_GB": "23.201061376"
+    },
+    "memory": {
+      "peak_allocated_GB": 23.201061376,
+      "peak_reserved_GB": 24.308088832,
+      "free_GB": 60.05424128,
+      "total_GB": 85.019590656,
+      "gpu": "NVIDIA H100 80GB HBM3"
+    },
+    "dt_statistics": {
+      "min": 9.992007221626409e-16,
+      "max": 0.0005,
+      "cfl_limited_steps": 0,
+      "event_limited_steps": 61
+    },
+    "clock_snapping": {
+      "recorded": false
+    },
+    "driver": null
+  },
+  "N640_coarse": {
+    "accepted_end_t": 1.1,
+    "stop_reason": "max_simulated_time",
+    "sampled_wmax_peak": {
+      "t": 0.86,
+      "value": 97.22295770152965
+    },
+    "sampled_Z_peak": {
+      "t": 1.1,
+      "value": 1.947402216964208
+    },
+    "sampled_net_peak": {
+      "t": 1.08,
+      "value": 1.7393979447101482
+    },
+    "endpoint": {
+      "t": 1.1,
+      "E": 0.06493468811219943,
+      "Z": 1.947402216964208,
+      "wmax": 80.72958514915877,
+      "tail_ratio": 1.3987006205597152e-07,
+      "net_production": 1.7289829075022833
+    },
+    "first_excluded_row": null,
+    "memory": {
+      "peak_allocated_GB": 47.432884224,
+      "peak_reserved_GB": 49.578770432,
+      "free_GB": 34.714353664,
+      "total_GB": 85.019590656,
+      "gpu": "NVIDIA H100 80GB HBM3"
+    },
+    "dt_statistics": {
+      "min": 0.0004999999999999449,
+      "max": 0.0005,
+      "cfl_limited_steps": 0,
+      "event_limited_steps": 0
+    },
+    "clock_snapping": {
+      "events": 60,
+      "max_abs_adjustment": 1.1102230246251565e-15,
+      "signed_total_adjustment": 6.616929226765933e-14,
+      "rule": "min(32 ulps at event clock scale, 1e-9 of actual dt)"
+    },
+    "driver": {
+      "peak_driver_used_fraction": 0.5882244755330497,
+      "sampling_interval_s": 0.25,
+      "limitation": "periodic samples do not bound transients between samples"
+    }
+  },
+  "N640_fine": {
+    "accepted_end_t": 1.1,
+    "stop_reason": "max_simulated_time",
+    "sampled_wmax_peak": {
+      "t": 1.0,
+      "value": 89.09713285109126
+    },
+    "sampled_Z_peak": {
+      "t": 1.1,
+      "value": 1.9474022161877496
+    },
+    "sampled_net_peak": {
+      "t": 1.08,
+      "value": 1.739397953542992
+    },
+    "endpoint": {
+      "t": 1.1,
+      "E": 0.06493468811208572,
+      "Z": 1.9474022161877496,
+      "wmax": 80.72958399849686,
+      "tail_ratio": 1.3987007468370758e-07,
+      "net_production": 1.7289829098275844
+    },
+    "first_excluded_row": null,
+    "memory": {
+      "peak_allocated_GB": 47.432884224,
+      "peak_reserved_GB": 49.578770432,
+      "free_GB": 34.714353664,
+      "total_GB": 85.019590656,
+      "gpu": "NVIDIA H100 80GB HBM3"
+    },
+    "dt_statistics": {
+      "min": 0.0002499999999967528,
+      "max": 0.00025,
+      "cfl_limited_steps": 0,
+      "event_limited_steps": 0
+    },
+    "clock_snapping": {
+      "events": 0,
+      "max_abs_adjustment": 0.0,
+      "signed_total_adjustment": 0.0,
+      "rule": "min(32 ulps at event clock scale, 1e-9 of actual dt)"
+    },
+    "driver": {
+      "peak_driver_used_fraction": 0.5882244755330497,
+      "sampling_interval_s": 0.25,
+      "limitation": "periodic samples do not bound transients between samples"
+    }
+  },
+  "scope": "Two-grid finite-interval observable consistency; local temporal continuation only. No convergence-order or continuum regularity/blowup certificate.",
+  "input_sha256": {
+    "artifacts/cloud-preparation/2026-10-10/enstrophy_extension_002/results/coarse/diagnostics.csv": "0d4ec78b5d14ef0e13725632c894148b03f8062702e18d4342d6be1da3f06d0c",
+    "artifacts/cloud-preparation/2026-10-10/enstrophy_extension_002/results/coarse/enstrophy.csv": "6b8b28fa9bd23073ef85aa275e40a3467dc0a6732f19f078fa1d334b8938dc1b",
+    "artifacts/cloud-preparation/2026-10-10/enstrophy_extension_002/results/coarse/spectra.csv": "bf2f56e8d9799aa966d615ce0587f3ffd29b7872b869c3660fd3ca700047c1c5",
+    "docs/evidence/2026-10-13/n640_campaign_004/protected/coarse/diagnostics.csv": "ad851bec27a729afc67ac88d5153738e1edfc8159adc0aed380f740888cbdaac",
+    "docs/evidence/2026-10-13/n640_campaign_004/protected/coarse/enstrophy.csv": "2ddaaf1d78c37a4e45c51e15aa6d059daf90b3915519e83adeb87ad1f56a2d14",
+    "docs/evidence/2026-10-13/n640_campaign_004/protected/coarse/spectra.csv": "131959a4a6d1f57d3bd63e7d958f4abfa7350233c5db4dc3016839afdb190c7e",
+    "docs/evidence/2026-10-13/n640_campaign_004/protected/fine/diagnostics.csv": "1f99232746d1315f8ed3fee65b9ac06254ca1f5f66a66534be0012737da84cef",
+    "docs/evidence/2026-10-13/n640_campaign_004/protected/fine/enstrophy.csv": "e20fd36806affea6184f34e0b76752e35692b42874fb8e2edf1bafbd42700c0d",
+    "docs/evidence/2026-10-13/n640_campaign_004/protected/fine/spectra.csv": "3770b287bfdcca4dc6bbc8deb13a9b805d2a897c0401645db2769e2ec7b32db2"
+  },
+  "N640_exploration": {
+    "accepted_end_t": 1.1,
+    "stop_reason": null,
+    "sampled_wmax_peak": {
+      "t": 1.1,
+      "value": 80.72958514915877
+    },
+    "sampled_Z_peak": {
+      "t": 1.1,
+      "value": 1.947402216964208
+    },
+    "sampled_net_peak": {
+      "t": 1.1,
+      "value": 1.7289829075022833
+    },
+    "endpoint": {
+      "t": 1.1,
+      "E": 0.06493468811219943,
+      "Z": 1.947402216964208,
+      "wmax": 80.72958514915877,
+      "tail_ratio": 1.398700620559715e-07,
+      "net_production": 1.7289829075022833
+    },
+    "first_excluded_row": {
+      "step": "2220",
+      "t": "1.11",
+      "dt": "0.0005",
+      "E": "0.06491512782109246",
+      "Z": "1.964636024010814",
+      "eps": "0.0019646360240108142",
+      "dEdt_fd": "-0.0019560291106973642",
+      "budget_resid_rel": "-5.107419323415909e-06",
+      "wmax": "79.95928844408517",
+      "bkm": "63.74285229798818",
+      "tail_ratio": "1.520992481928636e-07",
+      "div_max": "2.518977351796728e-14",
+      "wall_s": "49.72563346195966",
+      "peak_mem_GB": "47.432884224"
+    },
+    "memory": {
+      "peak_allocated_GB": 47.432884224,
+      "peak_reserved_GB": 49.578770432,
+      "free_GB": 34.714353664,
+      "total_GB": 85.019590656,
+      "gpu": "NVIDIA H100 80GB HBM3"
+    },
+    "dt_statistics": {
+      "min": 0.0005,
+      "max": 0.0005,
+      "cfl_limited_steps": 0,
+      "event_limited_steps": 0
+    },
+    "clock_snapping": {
+      "events": 1,
+      "max_abs_adjustment": 1.1102230246251565e-15,
+      "signed_total_adjustment": 1.1102230246251565e-15,
+      "rule": "min(32 ulps at event clock scale, 1e-9 of actual dt)"
+    },
+    "driver": {
+      "peak_driver_used_fraction": 0.5882244755330497,
+      "sampling_interval_s": 0.25,
+      "limitation": "periodic samples do not bound transients between samples"
+    }
+  }
+}

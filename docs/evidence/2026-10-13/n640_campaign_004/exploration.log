@@ -1,0 +1,4 @@
+Welcome to vast.ai. If authentication fails, try again after a few seconds, and double check your ssh key.
+Have fun!
+EVENT t=1.100000 Z=1.94740222 net=1.72898291 tail=1.3987e-07
+TimeoutError: measured remaining phase no longer fits protected lifetime

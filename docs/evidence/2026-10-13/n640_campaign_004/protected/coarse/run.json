@@ -1,0 +1,356 @@
+{
+  "status": "bounded_complete",
+  "start_t": 0.0,
+  "t": 1.1,
+  "steps": 2200,
+  "initial_step": 0,
+  "source_sha256": {
+    "ns_fast_v3.py": "ab9eebda2750c7be019d3c2f54fe7aa5f2be98a0276a55260e35a81989b34842",
+    "ns_fast_v2.py": "6f01107b931b80231e27336faeae94b51916d91861473f46e85aedbba0bdaf5d"
+  },
+  "driver_sha256": "b831bd53eceebddf69c83cdf7967cbcf6373f73e5c90965b94f8e7261b560546",
+  "parameters": {
+    "N": 640,
+    "nu": 0.0005,
+    "device": "cuda:0",
+    "case": "tubes",
+    "scheme": "lsrk4",
+    "fp64": true,
+    "cfl": 0.2,
+    "max_dt": 0.0005,
+    "target_t": 1.1,
+    "log_dt": 0.01,
+    "checkpoint_dt": 0.1,
+    "checkpoint_enabled": true,
+    "turnover_enabled": false,
+    "high_shell_min_k": 128
+  },
+  "restart": null,
+  "torch": "2.13.0+cu130",
+  "cuda": "13.0",
+  "numpy": "2.5.1",
+  "python": "3.12.13 | packaged by conda-forge | (main, Mar  5 2026, 16:50:00) [GCC 14.3.0]",
+  "physical_conventions": {
+    "domain": 6.283185307179586,
+    "dealias": "strict spherical |k|<N/3",
+    "initial_tubes": {
+      "gamma": 5.0,
+      "a": 0.25,
+      "sep": 0.6,
+      "pert": 0.35
+    }
+  },
+  "last_accepted": {
+    "step": 2200,
+    "t": 1.1,
+    "dt": 0.0005,
+    "E": 0.06493468811219943,
+    "Z": 1.947402216964208,
+    "eps": 0.001947402216964208,
+    "dEdt_fd": -0.0019387431603859456,
+    "budget_resid_rel": -3.1568997515766476e-06,
+    "wmax": 80.72958514915877,
+    "bkm": 62.93940793002196,
+    "tail_ratio": 1.3987006205597152e-07,
+    "div_max": 2.524376339568628e-14,
+    "wall_s": 3727.3108130684122,
+    "peak_mem_GB": 47.432884224
+  },
+  "turnover": null,
+  "stop_reason": "max_simulated_time",
+  "terminal_checkpoint": {
+    "path": "checkpoints/terminal_t1.10000000",
+    "kind": "terminal",
+    "t": 1.1,
+    "retained": true,
+    "metadata_sha256": "26258a85f82c69aa0b1048f89dd536c1ba24d61c1cd8a8fa1c3864d0b77a1746",
+    "files": {
+      "U0.npy": "4b66c0f0385c55c06bda85d04cdbf390c07b05f813f393ad2eb11534441d8365",
+      "U1.npy": "7dee45efb4630f6d5749d391680c06f1b99ee739e2116dec6a7779ce80719d69",
+      "U2.npy": "a0a84873e792988630e0a340450a2b6a25ccec8956e34859c05cdce2774a3062"
+    }
+  },
+  "wall_s": 3746.945851970464,
+  "memory": {
+    "peak_allocated_GB": 47.432884224,
+    "peak_reserved_GB": 49.578770432,
+    "free_GB": 34.714353664,
+    "total_GB": 85.019590656,
+    "gpu": "NVIDIA H100 80GB HBM3"
+  },
+  "checkpoint_history": [
+    {
+      "path": "../preflight/checkpoints/terminal_t0.05000000",
+      "kind": "terminal",
+      "t": 0.05,
+      "retained": false,
+      "metadata_sha256": "cf101711b4c1ecdaafa1b6d298a654c9258b8cbca0f8d599376d215c4e221abe",
+      "files": {
+        "U0.npy": "41e3d0f180dae1ad06fa5a2f9b936da660ff5c1ba33a095445a4daa1c0e84e50",
+        "U1.npy": "9235fcbe45f8e241531f06cdc625e9b193df55a58d60264dc544adb4a9b9546b",
+        "U2.npy": "1be86cde7cd31346c792129f36faf90a3e20f9377aa33733c387dda25c378b3b"
+      }
+    },
+    {
+      "path": "checkpoints/regular_t0.10000000",
+      "kind": "regular",
+      "t": 0.1,
+      "retained": false,
+      "metadata_sha256": "fd39a0cc2b4f0e5b6ac0f203aaebe9d16ccdbdbad55ec874b757c97292e046aa",
+      "files": {
+        "U0.npy": "f22d6fecf3cb339646f0e5c1d3f6689bcd8bd73340bdf3da303b11fd7c577296",
+        "U1.npy": "9e20cca7ae580be6e4d4fdedb4f2f2eba2a44aa8a5709d54e28047e07b0a87be",
+        "U2.npy": "b8d2c81b92df77516e8e7d984930ad3f08bc3e20bd6a4c616f96359dffa8d810"
+      }
+    },
+    {
+      "path": "checkpoints/regular_t0.20000000",
+      "kind": "regular",
+      "t": 0.2,
+      "retained": false,
+      "metadata_sha256": "d29c6add9bc6de32f9a4f96a1afc429cfd07d6076e9d2b74618134f822efdbe1",
+      "files": {
+        "U0.npy": "ecb0d4ca3f1e7469ebb8e1e977134a1448e90b5e3faa2bf16f5a8161aa14cd17",
+        "U1.npy": "5ae856071a4b516891ba196c4bd992f88361866df34004225f124e786debb6d0",
+        "U2.npy": "adb3e715bc553ebe93cd122329734f5e3eb867f94ac44c482eab1720490dbf61"
+      }
+    },
+    {
+      "path": "checkpoints/regular_t0.30000000",
+      "kind": "regular",
+      "t": 0.3,
+      "retained": false,
+      "metadata_sha256": "6679aaeffd547b5151bbe3a19c013df40c4582adab3d2b55440df368c969eff6",
+      "files": {
+        "U0.npy": "40e77c06e8a6ea4211d6b424acfd702b21cdeecbb4c67888bcf204c09f66fca7",
+        "U1.npy": "22d36aff23e6aa347182c98f3d92b60f471fc14bc6f9e3b6bbd1591c10a295e6",
+        "U2.npy": "71b1b9cc2f7241aecb0cec2a11e1a86937b25a4d4080d168a40d53c4b6ab1be8"
+      }
+    },
+    {
+      "path": "checkpoints/regular_t0.40000000",
+      "kind": "regular",
+      "t": 0.4,
+      "retained": false,
+      "metadata_sha256": "a26eac6393640f528bdf2999f822b4092ecdbcb3a14ca5033c0743758df0a8b3",
+      "files": {
+        "U0.npy": "0b05f0f277d5e8ef211c1e658266ad852b3a5f2ff11ec01fcc7fa62a712ce6b1",
+        "U1.npy": "c394203bdd887682868fdc0ce642ddfb4f9bc6605008144d8323af9f31f1e4cc",
+        "U2.npy": "2148ccafc2a3f7c3fb40c4af22bb516c5efeb73338111f88dd535b75fafb2951"
+      }
+    },
+    {
+      "path": "checkpoints/regular_t0.50000000",
+      "kind": "regular",
+      "t": 0.5,
+      "retained": false,
+      "metadata_sha256": "7c3f0c7f144bc0282f591a9b7536d3b06a1bd6e5af54984c31c89896b0b44e46",
+      "files": {
+        "U0.npy": "f14d8aff380df3f679afada28778da0a7fcfb37a5b858ba2eb43001d6470f657",
+        "U1.npy": "c9e754cf5127f57404ca1865bcb817a5a0eb3392ba2ea429207e929daceaa705",
+        "U2.npy": "fd74d82ccce698328808cdd273805e3d26f65b0351aa6d42125a28ce150750bf"
+      }
+    },
+    {
+      "path": "checkpoints/regular_t0.60000000",
+      "kind": "regular",
+      "t": 0.6,
+      "retained": false,
+      "metadata_sha256": "64a393e60423a0b74ccb18aa668d8d068c09a45a06c7926536cda84965b50b50",
+      "files": {
+        "U0.npy": "7fc517bee897d088701ea1041fd9dc8b820b6c72182ad821b5f43a4106cc48ad",
+        "U1.npy": "270819da479ea9f2e165962ab8796b488a547700f078195b0c8984fde0cc0b89",
+        "U2.npy": "7590b929a0ccddefbc45b9cc938d934d0fe5bae122f12b1869d450682f036839"
+      }
+    },
+    {
+      "path": "checkpoints/regular_t0.70000000",
+      "kind": "regular",
+      "t": 0.7000000000000001,
+      "retained": false,
+      "metadata_sha256": "c2428d0d35d1b2d9a864277fd06246fecf26a85bb94b975c50bc78708eb1ecf0",
+      "files": {
+        "U0.npy": "c2b3cff254f17462563c3238671ac51c00a1b34a9a3b154d8be4e9d41ae7ff38",
+        "U1.npy": "cb72c9d7b07778d2d986beb5cf7ef5d1d8d64e14315090fcca0b240ec2f38e90",
+        "U2.npy": "3bf649840f6b1f6d9ce66e7eacfa11123c83e3aef12ec160ac3f8727bcc84bf2"
+      }
+    },
+    {
+      "path": "checkpoints/regular_t0.80000000",
+      "kind": "regular",
+      "t": 0.8,
+      "retained": false,
+      "metadata_sha256": "68ef5f331d0658d92403551c9e15032cd9a6377d4a4b1919925bcef636149b78",
+      "files": {
+        "U0.npy": "d489a933d50ac4c9a294141d0f240e8c0d1d71a1059092eb2f9d4ea29bb794ee",
+        "U1.npy": "a0ab92b704456b4931b3e0df63dde0278c01e7e8ffa8992e2be4805ca6351cc7",
+        "U2.npy": "035e60e4eb3841d410dd38cad91bd42cbc6371ee8a4afbbbd6b054dbc4724817"
+      }
+    },
+    {
+      "path": "checkpoints/regular_t0.90000000",
+      "kind": "regular",
+      "t": 0.9,
+      "retained": false,
+      "metadata_sha256": "1b12979f92234b106a8276e6096bfbc5f41a30999cf18aadfd7c376a1dabd804",
+      "files": {
+        "U0.npy": "8ae1f7aac702491cb5f9084ed0f4fc19845cea9c23151e43df487acc79519b86",
+        "U1.npy": "e52bbf2e3f6b47564773b49dcb3ef2a0e46f95a26a286db2cfd8d5595ccfbe3f",
+        "U2.npy": "5e007b5d8ce58af82fa66c1efbb8c9a1f30096c02f101bcd278e46efe1ed0ad2"
+      }
+    },
+    {
+      "path": "checkpoints/regular_t1.00000000",
+      "kind": "regular",
+      "t": 1.0,
+      "retained": true,
+      "metadata_sha256": "c7cfdfc6f42366227e49f694cc47861b771c45929a17e719f025923852e4d5e4",
+      "files": {
+        "U0.npy": "ee5c1e0431a0742599fadeb4bd33e00f30069f291708c19e8d90974a9c233ba4",
+        "U1.npy": "14e9c11dc047f0c7f5a46d609dcf7dd75d4a79b8aac6b3d189454337956d2583",
+        "U2.npy": "028bbff1ec338777022109eb110dd3a743f99e310616c8868fd54410fa4559e1"
+      }
+    },
+    {
+      "path": "checkpoints/regular_t1.10000000",
+      "kind": "regular",
+      "t": 1.1,
+      "retained": true,
+      "metadata_sha256": "26258a85f82c69aa0b1048f89dd536c1ba24d61c1cd8a8fa1c3864d0b77a1746",
+      "files": {
+        "U0.npy": "4b66c0f0385c55c06bda85d04cdbf390c07b05f813f393ad2eb11534441d8365",
+        "U1.npy": "7dee45efb4630f6d5749d391680c06f1b99ee739e2116dec6a7779ce80719d69",
+        "U2.npy": "a0a84873e792988630e0a340450a2b6a25ccec8956e34859c05cdce2774a3062"
+      }
+    },
+    {
+      "path": "checkpoints/terminal_t1.10000000",
+      "kind": "terminal",
+      "t": 1.1,
+      "retained": true,
+      "metadata_sha256": "26258a85f82c69aa0b1048f89dd536c1ba24d61c1cd8a8fa1c3864d0b77a1746",
+      "files": {
+        "U0.npy": "4b66c0f0385c55c06bda85d04cdbf390c07b05f813f393ad2eb11534441d8365",
+        "U1.npy": "7dee45efb4630f6d5749d391680c06f1b99ee739e2116dec6a7779ce80719d69",
+        "U2.npy": "a0a84873e792988630e0a340450a2b6a25ccec8956e34859c05cdce2774a3062"
+      }
+    }
+  ],
+  "achieved_steps": 2200,
+  "clock_snapping": {
+    "events": 60,
+    "max_abs_adjustment": 1.1102230246251565e-15,
+    "signed_total_adjustment": 6.616929226765933e-14,
+    "rule": "min(32 ulps at event clock scale, 1e-9 of actual dt)"
+  },
+  "dt_statistics": {
+    "min": 0.0004999999999999449,
+    "max": 0.0005,
+    "cfl_limited_steps": 0,
+    "event_limited_steps": 0
+  },
+  "timing": {
+    "seconds": {
+      "initial_condition_or_restart": 5.597837646026164,
+      "checkpoint_write_hash_prune": 113.49105706671253,
+      "scalar_diagnostics_and_tail": 25.000330141745508,
+      "fourier_peak_refinement": 122.20624403143302,
+      "solver_setup": 0.1651102975010872,
+      "full_spectrum": 4.651645906735212,
+      "enstrophy_budget": 100.90500136464834,
+      "integration": 3374.7063559582457
+    },
+    "calls": {
+      "initial_condition_or_restart": 2,
+      "checkpoint_write_hash_prune": 13,
+      "scalar_diagnostics_and_tail": 112,
+      "fourier_peak_refinement": 112,
+      "solver_setup": 2,
+      "full_spectrum": 112,
+      "enstrophy_budget": 112,
+      "integration": 110
+    },
+    "process_wall_s": 3747.3284889026545,
+    "unattributed_wall_s": 0.6049064896069467,
+    "convention": "Sum of two disjoint original-IC prefix/continuation processes; phase originals preserved."
+  },
+  "continuation_restart": {
+    "path": "/opt/spectrans-3d/project/artifacts/refinement_run/preflight/checkpoints/terminal_t0.05000000",
+    "metadata": {
+      "schema_version": 1,
+      "physics": {
+        "N": 640,
+        "nu": 0.0005,
+        "case": "tubes",
+        "scheme": "lsrk4",
+        "fp64": true,
+        "domain": 6.283185307179586,
+        "dealias": "strict spherical |k|<N/3",
+        "legacy_tube_parameters": {
+          "gamma": 5.0,
+          "a": 0.25,
+          "sep": 0.6,
+          "pert": 0.35
+        }
+      },
+      "t": 0.05,
+      "step": 100,
+      "bkm": 1.2581266311783648,
+      "E0": 0.06633336245320777,
+      "source_sha256": {
+        "ns_fast_v3.py": "ab9eebda2750c7be019d3c2f54fe7aa5f2be98a0276a55260e35a81989b34842",
+        "ns_fast_v2.py": "6f01107b931b80231e27336faeae94b51916d91861473f46e85aedbba0bdaf5d"
+      },
+      "checkpoint_driver_sha256": "06da638cad9330e6f646d76de304568f3731d4b409523ad9f3e6f16b156d2adc",
+      "torch": "2.13.0+cu130",
+      "cuda": "13.0",
+      "numpy": "2.5.1",
+      "axes": "component,kx,ky,kz_rfft",
+      "normalization": "unnormalized torch rfftn coefficients",
+      "residual_restart": "LSRK4 first stage has coefficient zero; residual can be reset",
+      "files": {
+        "U0.npy": "41e3d0f180dae1ad06fa5a2f9b936da660ff5c1ba33a095445a4daa1c0e84e50",
+        "U1.npy": "9235fcbe45f8e241531f06cdc625e9b193df55a58d60264dc544adb4a9b9546b",
+        "U2.npy": "1be86cde7cd31346c792129f36faf90a3e20f9377aa33733c387dda25c378b3b"
+      }
+    },
+    "metadata_sha256": "cf101711b4c1ecdaafa1b6d298a654c9258b8cbca0f8d599376d215c4e221abe"
+  },
+  "prefix_assembly": {
+    "preflight_manifest_sha256": "ee2902a02133b7ac64c993a447a74c253ecaecb3ea5c3cad915edb845855cbc5",
+    "continuation_manifest_sha256": "18ba03b300a82632535379f014249dbe8e3b5404365c4b2867944c3e13054f50",
+    "checkpoint_metadata_sha256": "cf101711b4c1ecdaafa1b6d298a654c9258b8cbca0f8d599376d215c4e221abe",
+    "boundary_relative_errors": {
+      "E": 0.0,
+      "Z": 0.0,
+      "eps": 0.0,
+      "wmax": 0.0,
+      "bkm": 0.0,
+      "tail_ratio": 2.0045735325691467e-37
+    },
+    "source_csv_sha256": {
+      "diagnostics.csv": {
+        "preflight": "ae50fe5d3c7bd319ba8556141ed52566a6123c93936bad792435d6ba1dbeb5d2",
+        "continuation": "e03dd87de6a10deef1ae9bf0da62264a92e06300b6bc3a4b7c88dd25d40c79b0"
+      },
+      "enstrophy.csv": {
+        "preflight": "4d04b435a732607e59d8c5f7bfdf250b3b4f45240777de59586898bcd668cd9e",
+        "continuation": "f15d34689f2e74c2014d5ecbee7035c8060b028b8ed90efb706206a1d4e1ee00"
+      },
+      "spectra.csv": {
+        "preflight": "cfeb1e2022acdb312a8b87ebbd27ab11b46da5a78e31295a4a7a3c8057a08a4a",
+        "continuation": "d1e12d40668d640bffeaa3b50347260bf25129ffa3d189c27a4164fb28374fa6"
+      },
+      "interpolated_vorticity.csv": {
+        "preflight": "ea9efd43d8b58dbbfe68f0be363253ebcc57b17e11fe7c97e10bcf5474a79d47",
+        "continuation": "dbb1a61959ef3366f96475706a97a7bdeda0760261191b8d9a043b6de92c50a4"
+      },
+      "dissipation_shares.csv": {
+        "preflight": "a2ac91aee5323d2a14d4e2e6d0ddaa069016c403a99351ea2b0cf5a50b4515b2",
+        "continuation": "704ac54629a08e5e6e3bcec05adbb2f454ca71f47bf6f3c77a021ecadcfd915c"
+      }
+    },
+    "continuation_start_t": 0.05,
+    "scope": "same N/grid/physics/step cap; original analytic IC through retained preflight state"
+  }
+}

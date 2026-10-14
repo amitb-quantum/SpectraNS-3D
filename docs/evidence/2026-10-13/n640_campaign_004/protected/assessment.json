@@ -1,0 +1,147 @@
+{
+  "temporal": {
+    "start_t": 1.0,
+    "end_t": 1.1,
+    "matched_events": 11,
+    "errors": {
+      "E": 1.7512148992037405e-12,
+      "Z": 4.294072819349477e-10,
+      "wmax": 1.4253286445544572e-08,
+      "bkm": 8.999854625722361e-10,
+      "net_scaled": 2.1519776236492173e-09,
+      "spectrum_L1_over_E": 2.5511674145701375e-12
+    },
+    "effective_step_ratio": 2.0,
+    "status": "passed",
+    "scope": "local continuation only; inherited prefix time error is common"
+  },
+  "spatial": {
+    "start_t": 0.0,
+    "end_t": 1.1,
+    "matched_events": 111,
+    "errors": {
+      "E": 3.3999947239378007e-06,
+      "Z": 0.0005996963863549451,
+      "wmax": 0.025984586607070193,
+      "bkm": 0.006307174938827171,
+      "net_scaled": 0.0018161374160758587,
+      "spectrum_L1_over_E": 2.6635735602123056e-05
+    },
+    "status": "intermediate_sensitivity",
+    "scope": "two-grid observable comparison; no resolution certificate or convergence order",
+    "fitted_net_peak": {
+      "left": {
+        "sampled_t": 1.08,
+        "sampled_value": 1.7391462026723574,
+        "accepted_range": [
+          0.0,
+          1.1
+        ],
+        "scope": "Observed local episode only; no global maximum or confidence-interval certification.",
+        "status": "estimated",
+        "fits": [
+          {
+            "points": 3,
+            "t": 1.0817862584330868,
+            "value": 1.739181982669055,
+            "curvature": -22.427543490747983,
+            "residual_max": 4.440892098500626e-16,
+            "spacing": 0.010000000000000009,
+            "residual_time_scale": 6.2930220670283484e-09
+          },
+          {
+            "points": 5,
+            "t": 1.0806456995863547,
+            "value": 1.7391697034254556,
+            "curvature": -23.050727052179106,
+            "residual_max": 0.00026423910893869085,
+            "spacing": 0.010000000000000009,
+            "residual_time_scale": 0.004788188418065882
+          }
+        ],
+        "fitted_t": 1.0806456995863547,
+        "fitted_value": 1.7391697034254556,
+        "time_sensitivity_radius": 0.0050000000000000044,
+        "value_sensitivity_radius": 0.0002765183525381687,
+        "uncertainty_convention": "Maximum of half-event spacing, 3/5-point vertex shift and residual/curvature time scale; value uses window shift plus max residual. Heuristic fit sensitivity only."
+      },
+      "right": {
+        "sampled_t": 1.08,
+        "sampled_value": 1.7393979447101482,
+        "accepted_range": [
+          0.0,
+          1.1
+        ],
+        "scope": "Observed local episode only; no global maximum or confidence-interval certification.",
+        "status": "estimated",
+        "fits": [
+          {
+            "points": 3,
+            "t": 1.0768594366215636,
+            "value": 1.7395834366112142,
+            "curvature": -37.61316019006617,
+            "residual_max": 4.440892098500626e-16,
+            "spacing": 0.010000000000000009,
+            "residual_time_scale": 4.859372555839741e-09
+          },
+          {
+            "points": 5,
+            "t": 1.0762650776187912,
+            "value": 1.7396562918896907,
+            "curvature": -37.505034178669746,
+            "residual_max": 0.0002216813014455088,
+            "spacing": 0.010000000000000009,
+            "residual_time_scale": 0.0034382285817819956
+          }
+        ],
+        "fitted_t": 1.0762650776187912,
+        "fitted_value": 1.7396562918896907,
+        "time_sensitivity_radius": 0.0050000000000000044,
+        "value_sensitivity_radius": 0.0002945365799220667,
+        "uncertainty_convention": "Maximum of half-event spacing, 3/5-point vertex shift and residual/curvature time scale; value uses window shift plus max residual. Heuristic fit sensitivity only."
+      },
+      "controls_protected_validation": false,
+      "status": "inconclusive",
+      "time_difference": 0.004380621967563503,
+      "value_relative_difference": 0.00027970379350426237
+    },
+    "secondary_screens": {
+      "E": true,
+      "spectrum_L1_over_E": true,
+      "wmax": false,
+      "bkm": true
+    },
+    "matched_fourier_peaks": {
+      "points": [
+        {
+          "t": 1.0,
+          "N512": 89.74488311828893,
+          "N640": 89.31060746107624,
+          "relative_difference": 0.004839001869781032,
+          "status": "discretization_sensitive",
+          "N512_sampling_bias": 0.009274201270797044,
+          "N640_sampling_bias": 0.0023902492218298077
+        },
+        {
+          "t": 1.1,
+          "N512": 80.75851307043025,
+          "N640": 80.76586801973296,
+          "relative_difference": 9.106506848798756e-05,
+          "status": "consistent",
+          "N512_sampling_bias": 0.0014957769548110567,
+          "N640_sampling_bias": 0.0004492351963001599
+        }
+      ],
+      "tolerance": 0.001,
+      "scope": "matched Fourier local peak estimates with declared seed/search checks; not a certified global supremum"
+    },
+    "baseline_files_sha256": {
+      "diagnostics.csv": "0d4ec78b5d14ef0e13725632c894148b03f8062702e18d4342d6be1da3f06d0c",
+      "enstrophy.csv": "6b8b28fa9bd23073ef85aa275e40a3467dc0a6732f19f078fa1d334b8938dc1b",
+      "spectra.csv": "bf2f56e8d9799aa966d615ce0587f3ffd29b7872b869c3660fd3ca700047c1c5",
+      "run.json": "2dddec18a0254cb36996eb6f6d6a68c1fb63f07b1b8e5a4f32d8190c0ca0c4a0"
+    }
+  },
+  "prefix_numerical_gates_passed": true,
+  "local_temporal_window_passed": true
+}

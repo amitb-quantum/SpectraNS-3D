@@ -1,0 +1,14 @@
+[
+  {
+    "path": "checkpoints/regular_t1.10000000",
+    "kind": "regular",
+    "t": 1.1,
+    "retained": true,
+    "metadata_sha256": "26258a85f82c69aa0b1048f89dd536c1ba24d61c1cd8a8fa1c3864d0b77a1746",
+    "files": {
+      "U0.npy": "4b66c0f0385c55c06bda85d04cdbf390c07b05f813f393ad2eb11534441d8365",
+      "U1.npy": "7dee45efb4630f6d5749d391680c06f1b99ee739e2116dec6a7779ce80719d69",
+      "U2.npy": "a0a84873e792988630e0a340450a2b6a25ccec8956e34859c05cdce2774a3062"
+    }
+  }
+]

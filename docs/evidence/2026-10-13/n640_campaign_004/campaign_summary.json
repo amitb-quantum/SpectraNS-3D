@@ -1,0 +1,45 @@
+{
+  "status": "completed",
+  "protected_validated": true,
+  "instance_id": 55821344,
+  "offer_id": 49864346,
+  "started_epoch": 1791929827.3424368,
+  "ended_epoch": 1791934923.376398,
+  "elapsed_seconds": 5096.0339612960815,
+  "verified_termination": true,
+  "source_sha256": {
+    "ns_fast_v3.py": "ab9eebda2750c7be019d3c2f54fe7aa5f2be98a0276a55260e35a81989b34842",
+    "ns_fast_v2.py": "6f01107b931b80231e27336faeae94b51916d91861473f46e85aedbba0bdaf5d"
+  },
+  "protected_manifest_sha256": "18c008b4aae2de8c04d3da2974d8851b8110749e039ca43b01ea0bb54a897f2c",
+  "exploration": "runtime_admission_refused_after20_steps_no_accepted_sample_beyond1.10",
+  "exploration_runtime": {
+    "t": 1.11,
+    "remaining_seconds": 2064.2652604579926,
+    "projected_phase_seconds": 1930.0827445898883,
+    "reserve_seconds": 180.0,
+    "achieved_last_dt": 0.0005
+  },
+  "checkpoint_collection": "disabled_predeclared_no_N640_arrays_downloaded",
+  "image": "vastai/base-image@sha256:82a53405a50901ab7e462a80ddde335a8f927a90bdab5cdea9006f02cb858a3e",
+  "environment_sha256": "65d31aba3992bdd0493583367c88fde5b5a0f146a2658d2c42f393b48f690583",
+  "payload_sha256": "96a2340e2ae1c3d94c00c9cea41956978f0704770f3f30b11ae4949002a24d63",
+  "preflight_continuation": {
+    "verified": true,
+    "prefix_end_t": 0.05,
+    "target_t": 1.1,
+    "boundary_relative_errors": {
+      "E": 0.0,
+      "Z": 0.0,
+      "eps": 0.0,
+      "wmax": 0.0,
+      "bkm": 0.0,
+      "tail_ratio": 2.0045735325691467e-37
+    },
+    "preflight_manifest_sha256": "ee2902a02133b7ac64c993a447a74c253ecaecb3ea5c3cad915edb845855cbc5",
+    "original_continuation_manifest_sha256": "18ba03b300a82632535379f014249dbe8e3b5404365c4b2867944c3e13054f50",
+    "combined_manifest_sha256": "aa50323c3c32b56ae4cddd8b4308b954617c66487d8106db18675a77e29bd7c0",
+    "merged_diagnostic_events": 111,
+    "integrated_steps": 2200
+  }
+}
